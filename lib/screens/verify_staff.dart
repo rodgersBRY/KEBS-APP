@@ -23,20 +23,22 @@ class _VerifyStaffPageState extends State<VerifyStaffPage> {
       child: Scaffold(
         body: Column(
           children: [
-            SizedBox(
-              height: 300,
-              width: double.maxFinite,
-              child: Stack(
-                children: [
-                  Carousel(),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 15.0),
-                    child: CustomToolbar(
-                      onPressed: () {},
-                      title: '',
+            Flexible(
+              child: SizedBox(
+                height: 300,
+                width: double.maxFinite,
+                child: Stack(
+                  children: [
+                    Carousel(),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 15.0),
+                      child: CustomToolbar(
+                        onPressed: () {},
+                        title: '',
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
             Gap(50),
@@ -57,6 +59,8 @@ class _VerifyStaffPageState extends State<VerifyStaffPage> {
                 focusNode: staffNoFocusNode,
               ),
             ),
+            Gap(50),
+            VerifyButton()
           ],
         ),
       ),
