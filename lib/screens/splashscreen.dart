@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
 
     Timer(Duration(seconds: 3), () {
-      Get.offNamed('/verify-staff');
+      Get.offNamed('/home');
     });
   }
 

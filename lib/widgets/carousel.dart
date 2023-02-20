@@ -10,10 +10,10 @@ class Carousel extends StatefulWidget {
 
 class _CarouselState extends State<Carousel> {
   List<String> images = [
-    "https://images.unsplash.com/photo-1676616072916-e151e76b3b2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxOHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=60",
-    "https://images.unsplash.com/photo-1676412952811-64e55af5ba3a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyMHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=60",
-    "https://images.unsplash.com/photo-1676583821205-b9f79e3ca783?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyMXx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=60",
-    "https://images.unsplash.com/photo-1676620172449-142ce7d209bb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyM3x8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=60",
+    "assets/home_bg_2.jpeg",
+    "assets/home_bg_3.jpeg",
+    "assets/home_bg_4.jpeg",
+    "assets/kebs_bg_1.webp",
   ];
 
   @override
@@ -25,10 +25,11 @@ class _CarouselState extends State<Carousel> {
             height: 400,
             enableInfiniteScroll: true,
             autoPlay: true,
+            autoPlayInterval: Duration(seconds: 5),
           ),
           items: images.map((i) {
             return Builder(builder: (context) {
-              return Image.network(
+              return Image.asset(
                 i,
                 fit: BoxFit.cover,
               );
