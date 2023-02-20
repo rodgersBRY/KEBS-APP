@@ -35,18 +35,33 @@ class MyApp extends StatelessWidget {
     GetPage(
       name: '/home',
       page: () => Homepage(),
-      transition: Transition.rightToLeft,
+      transition: Transition.fadeIn,
     ),
     GetPage(
       name: '/std-page',
       page: () => StdMarksPage(),
-      transition: Transition.rightToLeft,
+      transition: Transition.downToUp,
       binding: MyBindings(),
     ),
     GetPage(
       name: '/verify-staff',
       page: () => VerifyStaffPage(),
-      transition: Transition.rightToLeft,
+      transition: Transition.downToUp,
+    ),
+    GetPage(
+      name: '/fortification-mark',
+      page: () => FortificationPage(),
+      transition: Transition.downToUp,
+    ),
+    GetPage(
+      name: '/companies',
+      page: () => CompaniesPage(),
+      transition: Transition.downToUp,
+    ),
+    GetPage(
+      name: '/diamond-page',
+      page: () => DiamondMarkPage(),
+      transition: Transition.downToUp
     ),
   ];
 }

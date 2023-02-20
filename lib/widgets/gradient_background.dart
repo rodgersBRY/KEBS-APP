@@ -3,6 +3,7 @@ import 'package:kebs_app/utils/app_colors.dart';
 import 'package:kebs_app/widgets/widgets.dart';
 
 class GradientBackground extends StatelessWidget {
+  
   const GradientBackground({super.key});
 
   @override

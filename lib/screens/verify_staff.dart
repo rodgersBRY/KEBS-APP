@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 
 import '../widgets/widgets.dart';
 
@@ -33,7 +34,9 @@ class _VerifyStaffPageState extends State<VerifyStaffPage> {
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 15.0),
                       child: CustomToolbar(
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.offNamed('/home');
+                        },
                         title: '',
                       ),
                     ),
