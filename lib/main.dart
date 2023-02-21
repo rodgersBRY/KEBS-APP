@@ -36,6 +36,7 @@ class MyApp extends StatelessWidget {
       name: '/home',
       page: () => Homepage(),
       transition: Transition.fadeIn,
+      binding: MyBindings(),
     ),
     GetPage(
       name: '/std-page',
@@ -52,16 +53,19 @@ class MyApp extends StatelessWidget {
       name: '/fortification-mark',
       page: () => FortificationPage(),
       transition: Transition.downToUp,
+      binding: MyBindings(),
     ),
     GetPage(
       name: '/companies',
       page: () => CompaniesPage(),
       transition: Transition.downToUp,
+      binding: MyBindings(),
     ),
     GetPage(
       name: '/diamond-page',
       page: () => DiamondMarkPage(),
-      transition: Transition.downToUp
+      transition: Transition.downToUp,
+      binding: MyBindings(),
     ),
   ];
 }

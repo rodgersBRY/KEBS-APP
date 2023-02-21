@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:kebs_app/utils/app_colors.dart';
-import 'package:kebs_app/widgets/widgets.dart';
+
+import '../utils/app_colors.dart';
+import '../widgets/widgets.dart';
 
 class GradientBackground extends StatelessWidget {
-  
   const GradientBackground({super.key});
 
   @override
@@ -14,7 +14,14 @@ class GradientBackground extends StatelessWidget {
       child: Stack(
         fit: StackFit.expand,
         children: [
-          Carousel(),
+          Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/home_bg_3.jpeg'),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
           Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -28,13 +35,22 @@ class GradientBackground extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: 50,
-            left: 20,
+            top: 40,
+            left: 30,
             child: Container(
-              width: 60,
               child: Image(
                 image: AssetImage('assets/logo.png'),
+                width: 60,
               ),
+            ),
+          ),
+          Positioned(
+            top: 40,
+            left: 50,
+            child: Container(
+              width: 300,
+              height: 300,
+              child: Carousel(),
             ),
           ),
         ],

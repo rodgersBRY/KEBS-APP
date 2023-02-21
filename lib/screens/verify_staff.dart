@@ -35,7 +35,7 @@ class _VerifyStaffPageState extends State<VerifyStaffPage> {
                       padding: const EdgeInsets.symmetric(vertical: 15.0),
                       child: CustomToolbar(
                         onPressed: () {
-                          Get.offNamed('/home');
+                          Get.offAllNamed('/home');
                         },
                         title: '',
                       ),
@@ -55,7 +55,7 @@ class _VerifyStaffPageState extends State<VerifyStaffPage> {
             Gap(40),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: CustomSearchField(
+              child: CustomTextField(
                 hintText: 'Staff No or ID Number',
                 icon: Icons.verified_user,
                 textController: staffNoController,

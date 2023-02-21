@@ -55,7 +55,7 @@ class _StdMarksPageState extends State<StdMarksPage> {
               Padding(
                 padding:
                     const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10),
-                child: CustomSearchField(
+                child: CustomTextField(
                   hintText: 'Search...',
                   icon: Icons.search,
                   textController: searchController,
@@ -72,7 +72,7 @@ class _StdMarksPageState extends State<StdMarksPage> {
                         showDialog(
                             context: context,
                             builder: (context) {
-                              return CustomAlertDialog(
+                              return StdAlertDialog(
                                 permitNo: stdList[index].permitNo,
                                 title: stdList[index].title,
                                 expiryDate: stdList[index].expiryDate,

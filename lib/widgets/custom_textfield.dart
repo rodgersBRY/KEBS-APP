@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 import '../utils/app_colors.dart';
 
-class CustomSearchField extends StatelessWidget {
+class CustomTextField extends StatelessWidget {
   final TextEditingController textController;
   final FocusNode focusNode;
   final String hintText;
   final IconData icon;
 
-  CustomSearchField({
+  CustomTextField({
     super.key,
     required this.textController,
     required this.focusNode,
@@ -21,7 +21,7 @@ class CustomSearchField extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: AppColors.primaryBlueColor.withOpacity(.2),
+        color: AppColors.primaryBlueColor.withOpacity(.1),
         borderRadius: BorderRadius.circular(15),
       ),
       child: TextField(
