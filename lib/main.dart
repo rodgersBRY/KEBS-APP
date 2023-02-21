@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
     ),
     GetPage(
       name: '/std-page',
-      page: () => StdMarksPage(),
+      page: () => SMarksPage(),
       transition: Transition.downToUp,
       binding: MyBindings(),
     ),

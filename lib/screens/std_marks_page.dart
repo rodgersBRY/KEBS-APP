@@ -3,25 +3,25 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:kebs_app/models/s_mark_model.dart';
 
-import '../controllers/std_mark_controller.dart';
-import '../models/std_mark_model.dart';
+import '../controllers/s_mark_controller.dart';
 import '../utils/app_colors.dart';
 import '../widgets/widgets.dart';
 
-class StdMarksPage extends StatefulWidget {
-  StdMarksPage({super.key});
+class SMarksPage extends StatefulWidget {
+  SMarksPage({super.key});
 
   @override
-  State<StdMarksPage> createState() => _StdMarksPageState();
+  State<SMarksPage> createState() => _SMarksPageState();
 }
 
-class _StdMarksPageState extends State<StdMarksPage> {
+class _SMarksPageState extends State<SMarksPage> {
   // dependency injection
-  StdMarkController stdMarksController = Get.find();
+  SMarkController stdMarksController = Get.find();
 
   // to be assigned upon page load
-  late Future<List<StdMark>> stdMrkBuilder;
+  late Future<List<SMark>> stdMrkBuilder;
 
   // controller and focus node for the textfield widget
   TextEditingController searchController = TextEditingController();
@@ -32,7 +32,7 @@ class _StdMarksPageState extends State<StdMarksPage> {
   @override
   void initState() {
     super.initState();
-    stdMrkBuilder = stdMarksController.fetchStdMarks();
+    stdMrkBuilder = stdMarksController.fetchSMarks();
   }
 
   @override
@@ -78,11 +78,8 @@ class _StdMarksPageState extends State<StdMarksPage> {
                   ),
               Gap(20),
               Expanded(
-                child: FutureBuilder<List<StdMark>>(
-                    future: Future.delayed(
-                      Duration(seconds: 3),
-                      () => stdMrkBuilder,
-                    ),
+                child: FutureBuilder<List<SMark>>(
+                    future: stdMrkBuilder,
                     builder: (context, snapshot) {
                       switch (snapshot.connectionState) {
                         case ConnectionState.none:
@@ -92,11 +89,11 @@ class _StdMarksPageState extends State<StdMarksPage> {
                           if (snapshot.hasError) {
                             return new Text('Error: ${snapshot.error}');
                           } else {
-                            List<StdMark> data = snapshot.data!;
+                            List<SMark> data = snapshot.data!;
                             
                             if (_searchQuery.isNotEmpty) {
                               data = data
-                                  .where((std) => std.title
+                                  .where((std) => std.productName
                                       .toLowerCase()
                                       .contains(_searchQuery.toLowerCase()))
                                   .toList();
@@ -120,8 +117,8 @@ class _StdMarksPageState extends State<StdMarksPage> {
   }
 }
 
-ListView _createListView(BuildContext context, List<StdMark> data) {
-  List<StdMark> stdMarks = data;
+ListView _createListView(BuildContext context, List<SMark> data) {
+  List<SMark> stdMarks = data;
 
   return ListView.builder(
     itemCount: stdMarks.length,
@@ -132,13 +129,12 @@ ListView _createListView(BuildContext context, List<StdMark> data) {
               context: context,
               builder: (context) {
                 return StdAlertDialog(
-                  permitNo: stdMarks[index].permitNo,
-                  title: stdMarks[index].title,
+                  permitNo: stdMarks[index].productId!,
+                  title: stdMarks[index].productName,
                   expiryDate: stdMarks[index].expiryDate,
-                  status: stdMarks[index].status,
                   issueDate: stdMarks[index].issueDate,
-                  address: stdMarks[index].address,
-                  prodBrand: stdMarks[index].prodBrand,
+                  address: stdMarks[index].physicalAddress,
+                  prodBrand: stdMarks[index].productBrand,
                 );
               });
         },
@@ -158,7 +154,7 @@ ListView _createListView(BuildContext context, List<StdMark> data) {
             borderRadius: BorderRadius.circular(15),
           ),
         ),
-        title: Text(stdMarks[index].title),
+        title: Text(stdMarks[index].productName),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -167,16 +163,16 @@ ListView _createListView(BuildContext context, List<StdMark> data) {
               stdMarks[index].companyName,
               style: TextStyle(color: Colors.grey),
             ),
-            Gap(10),
-            stdMarks[index].status == 'valid'
-                ? Text(
-                    'Valid',
-                    style: TextStyle(color: Color.fromARGB(255, 73, 230, 79)),
-                  )
-                : Text(
-                    'Invalid',
-                    style: TextStyle(color: Colors.red),
-                  ),
+            // Gap(10),
+            // stdMarks[index].status == 'valid'
+            //     ? Text(
+            //         'Valid',
+            //         style: TextStyle(color: Color.fromARGB(255, 73, 230, 79)),
+            //       )
+            //     : Text(
+            //         'Invalid',
+            //         style: TextStyle(color: Colors.red),
+            //       ),
           ],
         ),
       );

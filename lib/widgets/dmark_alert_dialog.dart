@@ -3,22 +3,18 @@ import 'package:gap/gap.dart';
 
 import '../utils/app_colors.dart';
 
-class StdAlertDialog extends StatelessWidget {
-  final String permitNo;
-  final String title;
-  final int? ksNo;
-  final String prodBrand;
-  final String address;
+class DMarkAlertDialog extends StatelessWidget {
+  final String productId;
+  final String productName;
+  final String physicalAddress;
   final String expiryDate;
   final String issueDate;
 
-  StdAlertDialog({
+  DMarkAlertDialog({
     super.key,
-    required this.permitNo,
-    required this.title,
-    this.ksNo,
-    required this.prodBrand,
-    required this.address,
+    required this.productId,
+    required this.productName,
+    required this.physicalAddress,
     required this.expiryDate,
     required this.issueDate,
   });
@@ -35,7 +31,7 @@ class StdAlertDialog extends StatelessWidget {
             ),
             Gap(10),
             Text(
-              permitNo,
+              productId,
               style: TextStyle(
                 fontSize: 14,
                 color: Colors.grey,
@@ -51,7 +47,7 @@ class StdAlertDialog extends StatelessWidget {
           children: [
             Gap(20),
             Text(
-              title,
+              productName,
               style: TextStyle(
                 fontSize: 21,
                 fontWeight: FontWeight.bold,
@@ -69,12 +65,9 @@ class StdAlertDialog extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    ksNo != null ? Text('Ks No: ${ksNo}') : Text('Ks No: '),
+                  children: [Text('Product ID: $productId'),
                     Gap(10),
-                    Text('Address: ${address}'),
-                    Gap(10),
-                    Text('Product Brand: $prodBrand'),
+                    Text('Address: ${physicalAddress}'),
                     Gap(10),
                     Text('Issue Date: ${issueDate}'),
                     Gap(10),

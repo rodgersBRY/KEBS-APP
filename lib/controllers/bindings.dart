@@ -1,11 +1,13 @@
 import 'package:get/get.dart';
-import 'package:kebs_app/controllers/f_mark_controller.dart';
-import './std_mark_controller.dart';
+import './f_mark_controller.dart';
+import './diamond_controller.dart';
+import './s_mark_controller.dart';
 
 class MyBindings extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<StdMarkController>(() => StdMarkController());
+    Get.lazyPut<SMarkController>(() => SMarkController());
     Get.lazyPut<FMarkController>(() => FMarkController());
+    Get.lazyPut<DMarkController>(() => DMarkController());
   }
 }

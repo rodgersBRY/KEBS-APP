@@ -5,6 +5,11 @@ class CompaniesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Companies'),
+      ),
+      body: Center(child: Text("Companies Page")),
+    );
   }
 }
