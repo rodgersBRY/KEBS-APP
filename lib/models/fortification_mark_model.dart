@@ -1,25 +1,25 @@
 class FMark {
-    FMark({
-        required this.companyName,
-        required this.physicalAddress,
-        required this.productId,
-        required this.productName,
-        required this.productBrand,
-        required this.issueDate,
-        required this.expiryDate,
-        this.ksNo,
-    });
+  FMark({
+    required this.companyName,
+    this.physicalAddress,
+    required this.productId,
+    required this.productName,
+    required this.productBrand,
+    required this.issueDate,
+    required this.expiryDate,
+    this.ksNo,
+  });
 
-    String companyName;
-    String physicalAddress;
-    String productId;
-    String productName;
-    String productBrand;
-    String issueDate;
-    String expiryDate;
-    dynamic ksNo;
+  String companyName;
+  String? physicalAddress;
+  String productId;
+  String productName;
+  String productBrand;
+  String issueDate;
+  String expiryDate;
+  String? ksNo;
 
-    factory FMark.fromJson(Map<String, dynamic> json) => FMark(
+  factory FMark.fromJson(Map<String, dynamic> json) => FMark(
         companyName: json["companyName"],
         physicalAddress: json["physical_address"],
         productId: json["product_id"],
@@ -28,9 +28,9 @@ class FMark {
         issueDate: json["issue_date"],
         expiryDate: json["expiry_date"],
         ksNo: json["ks_NO"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "companyName": companyName,
         "product_id": productId,
         "physical_address": physicalAddress,
@@ -39,5 +39,5 @@ class FMark {
         "issue_date": issueDate,
         "expiry_date": expiryDate,
         "ks_NO": ksNo,
-    };
+      };
 }
