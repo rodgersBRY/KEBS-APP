@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:get/get.dart';
 
 import '../models/std_mark_model.dart';
@@ -38,4 +40,8 @@ class StdMarkController extends GetxController {
   ].obs;
 
   List<StdMark> get stdMarkList => _stdMarks;
+
+  Future<List<StdMark>> fetchStdMarks() async {
+    return stdMarkList;
+  }
 }

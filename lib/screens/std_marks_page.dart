@@ -1,34 +1,38 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:kebs_app/controllers/f_mark_controller.dart';
-import 'package:kebs_app/models/fortification_mark_model.dart';
-import 'package:kebs_app/widgets/fmark_alert_dialog.dart';
 
+import '../controllers/std_mark_controller.dart';
+import '../models/std_mark_model.dart';
 import '../utils/app_colors.dart';
+import '../widgets/widgets.dart';
 
-class FortificationPage extends StatefulWidget {
-  const FortificationPage({super.key});
+class StdMarksPage extends StatefulWidget {
+  StdMarksPage({super.key});
 
   @override
-  State<FortificationPage> createState() => _FortificationPageState();
+  State<StdMarksPage> createState() => _StdMarksPageState();
 }
 
-class _FortificationPageState extends State<FortificationPage> {
-  FMarkController _fMarkController = Get.find();
+class _StdMarksPageState extends State<StdMarksPage> {
+  // dependency injection
+  StdMarkController stdMarksController = Get.find();
 
-  late Future<List<FMark>> fortificationBuilder;
+  // to be assigned upon page load
+  late Future<List<StdMark>> stdMrkBuilder;
 
+  // controller and focus node for the textfield widget
   TextEditingController searchController = TextEditingController();
   FocusNode searchNode = FocusNode();
 
-  String _searchQuery = "";
+  String _searchQuery = '';
 
   @override
   void initState() {
     super.initState();
-
-    fortificationBuilder = _fMarkController.fetchFMarks();
+    stdMrkBuilder = stdMarksController.fetchStdMarks();
   }
 
   @override
@@ -41,7 +45,7 @@ class _FortificationPageState extends State<FortificationPage> {
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: AppColors.primaryBlueColor,
-            title: Text('Fortification Marks'),
+            title: Text('Standardization Marks'),
           ),
           body: Column(
             children: [
@@ -70,11 +74,15 @@ class _FortificationPageState extends State<FortificationPage> {
                         border: InputBorder.none,
                       ),
                     ),
-                  )),
+                  ),
+                  ),
               Gap(20),
               Expanded(
-                child: FutureBuilder<List<FMark>>(
-                    future: fortificationBuilder,
+                child: FutureBuilder<List<StdMark>>(
+                    future: Future.delayed(
+                      Duration(seconds: 3),
+                      () => stdMrkBuilder,
+                    ),
                     builder: (context, snapshot) {
                       switch (snapshot.connectionState) {
                         case ConnectionState.none:
@@ -84,11 +92,11 @@ class _FortificationPageState extends State<FortificationPage> {
                           if (snapshot.hasError) {
                             return new Text('Error: ${snapshot.error}');
                           } else {
-                            List<FMark> data = snapshot.data!;
-
+                            List<StdMark> data = snapshot.data!;
+                            
                             if (_searchQuery.isNotEmpty) {
                               data = data
-                                  .where((fmark) => fmark.productName
+                                  .where((std) => std.title
                                       .toLowerCase()
                                       .contains(_searchQuery.toLowerCase()))
                                   .toList();
@@ -104,26 +112,33 @@ class _FortificationPageState extends State<FortificationPage> {
       ),
     );
   }
+
+  @override
+  void dispose() {
+    super.dispose();
+    searchController.dispose();
+  }
 }
 
-ListView _createListView(BuildContext context, List<FMark> data) {
-  List<FMark> fMarks = data;
+ListView _createListView(BuildContext context, List<StdMark> data) {
+  List<StdMark> stdMarks = data;
 
   return ListView.builder(
-    itemCount: fMarks.length,
+    itemCount: stdMarks.length,
     itemBuilder: (context, index) {
       return ListTile(
         onTap: () {
           showDialog(
               context: context,
               builder: (context) {
-                return FMarkAlertDialog(
-                  prodId: fMarks[index].productId,
-                  title: fMarks[index].productName,
-                  expiryDate: fMarks[index].expiryDate,
-                  issueDate: fMarks[index].issueDate,
-                  address: fMarks[index].physicalAddress!,
-                  prodBrand: fMarks[index].productBrand,
+                return StdAlertDialog(
+                  permitNo: stdMarks[index].permitNo,
+                  title: stdMarks[index].title,
+                  expiryDate: stdMarks[index].expiryDate,
+                  status: stdMarks[index].status,
+                  issueDate: stdMarks[index].issueDate,
+                  address: stdMarks[index].address,
+                  prodBrand: stdMarks[index].prodBrand,
                 );
               });
         },
@@ -137,26 +152,31 @@ ListView _createListView(BuildContext context, List<FMark> data) {
           height: 80,
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/fortification_logo.png'),
-              fit: BoxFit.contain,
+              image: AssetImage('assets/std_logo.png'),
+              fit: BoxFit.cover,
             ),
             borderRadius: BorderRadius.circular(15),
           ),
         ),
-        title: Text(fMarks[index].productName),
+        title: Text(stdMarks[index].title),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Gap(5),
             Text(
-              fMarks[index].companyName,
+              stdMarks[index].companyName,
               style: TextStyle(color: Colors.grey),
             ),
             Gap(10),
-            Text(
-              fMarks[index].productBrand,
-              style: TextStyle(color: Color.fromARGB(255, 73, 230, 79)),
-            )
+            stdMarks[index].status == 'valid'
+                ? Text(
+                    'Valid',
+                    style: TextStyle(color: Color.fromARGB(255, 73, 230, 79)),
+                  )
+                : Text(
+                    'Invalid',
+                    style: TextStyle(color: Colors.red),
+                  ),
           ],
         ),
       );

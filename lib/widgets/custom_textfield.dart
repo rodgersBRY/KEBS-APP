@@ -7,6 +7,7 @@ class CustomTextField extends StatelessWidget {
   final FocusNode focusNode;
   final String hintText;
   final IconData icon;
+  // final VoidCallback onChanged;
 
   CustomTextField({
     super.key,
@@ -14,6 +15,7 @@ class CustomTextField extends StatelessWidget {
     required this.focusNode,
     required this.hintText,
     required this.icon,
+    // required this.onChanged,
   });
 
   @override
@@ -25,6 +27,7 @@ class CustomTextField extends StatelessWidget {
         borderRadius: BorderRadius.circular(15),
       ),
       child: TextField(
+        // onChanged: onChanged(),
         controller: textController,
         focusNode: focusNode,
         style: TextStyle(fontSize: 20),
