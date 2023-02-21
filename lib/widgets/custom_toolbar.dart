@@ -20,7 +20,7 @@ class CustomToolbar extends StatelessWidget {
             icon: Icon(
               Icons.chevron_left,
               size: 30,
-              color: Colors.white,
+              color: Colors.black,
             ),
           ),
           Expanded(child: Container()),
