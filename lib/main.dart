@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kebs_app/screens/test_page.dart';
 
 import './controllers/bindings.dart';
 import './screens/screens.dart';
@@ -66,6 +67,11 @@ class MyApp extends StatelessWidget {
       page: () => DiamondMarkPage(),
       transition: Transition.downToUp,
       binding: MyBindings(),
+    ),
+    GetPage(
+      name: '/test-page',
+      page: () => TestVerifyPage(),
+      transition: Transition.downToUp,
     ),
   ];
 }
