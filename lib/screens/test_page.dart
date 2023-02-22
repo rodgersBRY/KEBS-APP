@@ -25,6 +25,7 @@ class _TestVerifyPageState extends State<TestVerifyPage> {
       child: SafeArea(
         child: Scaffold(
           body: Column(
+            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 15.0),
@@ -35,7 +36,7 @@ class _TestVerifyPageState extends State<TestVerifyPage> {
                   title: '',
                 ),
               ),
-              Gap(50),
+              Gap(150),
               Text(
                 'Test Results Checker',
                 style: TextStyle(

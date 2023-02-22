@@ -35,7 +35,7 @@ class _VerifyStaffPageState extends State<VerifyStaffPage> {
                   title: '',
                 ),
               ),
-              Gap(50),
+              Gap(150),
               Text(
                 'VERIFY DATA',
                 style: TextStyle(
