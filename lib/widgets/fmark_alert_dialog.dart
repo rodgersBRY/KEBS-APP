@@ -61,6 +61,7 @@ class FMarkAlertDialog extends StatelessWidget {
             Gap(20),
             Expanded(
               child: Container(
+                width: double.maxFinite,
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   color: AppColors.primaryBlueColor.withOpacity(.2),

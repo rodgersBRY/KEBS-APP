@@ -22,7 +22,15 @@ class _DiamondMarkPageState extends State<DiamondMarkPage> {
   TextEditingController searchController = TextEditingController();
   FocusNode searchNode = FocusNode();
 
+  @override
+  void initState() {
+    super.initState();
+
+    dMarkBuilder = _dMarkController.fetchDMarks();
+  }
+
   String _searchQuery = "";
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -98,7 +106,6 @@ class _DiamondMarkPageState extends State<DiamondMarkPage> {
   }
 }
 
-
 ListView _createListView(BuildContext context, List<DMark> data) {
   List<DMark> dMarks = data;
 
@@ -111,6 +118,7 @@ ListView _createListView(BuildContext context, List<DMark> data) {
               context: context,
               builder: (context) {
                 return DMarkAlertDialog(
+                  status: dMarks[index].status,
                   productId: dMarks[index].productId,
                   productName: dMarks[index].productName,
                   expiryDate: dMarks[index].expiryDate,
@@ -129,28 +137,32 @@ ListView _createListView(BuildContext context, List<DMark> data) {
           height: 80,
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/fortification_logo.png'),
+              image: AssetImage('assets/diamond_logo.png'),
               fit: BoxFit.contain,
             ),
             borderRadius: BorderRadius.circular(15),
           ),
         ),
         title: Text(dMarks[index].productName),
-        // subtitle: Column(
-        //   crossAxisAlignment: CrossAxisAlignment.start,
-        //   children: [
-        //     Gap(5),
-        //     Text(
-        //       dMarks[index].companyName,
-        //       style: TextStyle(color: Colors.grey),
-        //     ),
-        //     Gap(10),
-        //     Text(
-        //       dMarks[index].productBrand,
-        //       style: TextStyle(color: Color.fromARGB(255, 73, 230, 79)),
-        //     )
-        //   ],
-        // ),
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Gap(5),
+            Text(
+              dMarks[index].address,
+              style: TextStyle(color: Colors.grey),
+            ),
+            Gap(10),
+            Text(
+              dMarks[index].status,
+              style: TextStyle(
+                color: dMarks[index].status == 'Valid'
+                    ? Color.fromARGB(255, 73, 230, 79)
+                    : Colors.red,
+              ),
+            )
+          ],
+        ),
       );
     },
   );

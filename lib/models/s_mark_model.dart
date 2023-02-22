@@ -3,7 +3,7 @@ class SMark {
     required this.companyName,
     required this.physicalAddress,
     this.productId,
-    this.productName = "NULL",
+    required this.productName,
     required this.productBrand,
     required this.ksTitle,
     required this.issueDate,

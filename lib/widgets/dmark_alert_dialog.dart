@@ -4,6 +4,7 @@ import 'package:gap/gap.dart';
 import '../utils/app_colors.dart';
 
 class DMarkAlertDialog extends StatelessWidget {
+  final String status;
   final String productId;
   final String productName;
   final String physicalAddress;
@@ -17,6 +18,7 @@ class DMarkAlertDialog extends StatelessWidget {
     required this.physicalAddress,
     required this.expiryDate,
     required this.issueDate,
+    required this.status,
   });
 
   @override
@@ -35,6 +37,16 @@ class DMarkAlertDialog extends StatelessWidget {
               style: TextStyle(
                 fontSize: 14,
                 color: Colors.grey,
+              ),
+            ),
+            Gap(5),
+            Text(
+              status,
+              style: TextStyle(
+                fontSize: 14,
+                color: status == 'Valid'
+                    ? Color.fromARGB(255, 73, 230, 79)
+                    : Colors.red,
               ),
             ),
           ],
@@ -56,6 +68,7 @@ class DMarkAlertDialog extends StatelessWidget {
             Gap(20),
             Expanded(
               child: Container(
+                width: double.maxFinite,
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   color: AppColors.primaryBlueColor.withOpacity(.2),
@@ -65,7 +78,8 @@ class DMarkAlertDialog extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [Text('Product ID: $productId'),
+                  children: [
+                    Text('Product ID: $productId'),
                     Gap(10),
                     Text('Address: ${physicalAddress}'),
                     Gap(10),
