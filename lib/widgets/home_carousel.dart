@@ -15,13 +15,13 @@ class _CarouselState extends State<Carousel> {
       "title": "Vision",
       "image_icon": 'assets/vision_icon.png',
       "desc":
-          "To be a global leader in standards based solutions that deliver quality and confidence",
+          "A global leader in standards based solutions for trade and sustainable development",
     },
     {
       "title": "Mission",
       "image_icon": "assets/mission_icon.png",
       "desc":
-          "To provide standard based solutions hat promote innovation, trade and quality life"
+          "To provide Standardization, Metrology and conformity Assessment Services that safeguard customers and facilitate trade for a sustainable future"
     },
     {
       "title": "Motto",
