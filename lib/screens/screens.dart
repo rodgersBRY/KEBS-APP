@@ -5,3 +5,4 @@ export './splashscreen.dart';
 export 'std_marks_page.dart';
 export './verify_staff.dart';
 export './diamond_page.dart';
+export './contact_page.dart';

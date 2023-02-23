@@ -42,8 +42,6 @@ class _SMarksPageState extends State<SMarksPage> {
     return date.isAfter(today);
   }
 
-  
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -177,13 +175,13 @@ class _SMarksPageState extends State<SMarksPage> {
                   ? Text(
                       "Valid",
                       style: TextStyle(
-                        color: Colors.green,
+                        color: AppColors.validGreenColor,
                       ),
                     )
                   : Text(
                       "Expired",
                       style: TextStyle(
-                        color: Colors.red,
+                        color: AppColors.expiredRedColor,
                       ),
                     )
             ],

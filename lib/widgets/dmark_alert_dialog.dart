@@ -25,6 +25,7 @@ class DMarkAlertDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Container(
+        padding: const EdgeInsets.all(20),
         child: Column(
           children: [
             Image.asset(
@@ -69,10 +70,9 @@ class DMarkAlertDialog extends StatelessWidget {
             Expanded(
               child: Container(
                 width: double.maxFinite,
-                padding: const EdgeInsets.all(10),
+                padding: const EdgeInsets.all(15),
                 decoration: BoxDecoration(
                   color: AppColors.primaryBlueColor.withOpacity(.2),
-                  border: Border.all(color: Colors.grey),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Column(

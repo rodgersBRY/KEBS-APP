@@ -37,7 +37,6 @@ class MyApp extends StatelessWidget {
       name: '/home',
       page: () => Homepage(),
       transition: Transition.fadeIn,
-      binding: MyBindings(),
     ),
     GetPage(
       name: '/std-page',
@@ -73,5 +72,9 @@ class MyApp extends StatelessWidget {
       page: () => TestVerifyPage(),
       transition: Transition.downToUp,
     ),
+    GetPage(
+        name: '/contact',
+        page: () => ContactPage(),
+        transition: Transition.downToUp),
   ];
 }
