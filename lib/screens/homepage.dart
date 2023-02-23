@@ -3,8 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:kebs_app/utils/app_colors.dart';
+import 'package:url_launcher/url_launcher.dart';
 
+import '../utils/app_colors.dart';
 import '../widgets/gradient_background.dart';
 
 class Homepage extends StatelessWidget {
@@ -45,13 +46,22 @@ class Homepage extends StatelessWidget {
     {"title": "Contact Us", "icon": "assets/contact_icon.png", "route": "/"},
   ];
 
+  _redirectToWebstore() async {
+    const url = 'https://webstore.kebs.org';
+    if (await canLaunchUrl(Uri.parse(url))) {
+      await launchUrl(Uri.parse(url));
+    } else {
+      print('cannot launch the url');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: [
           GradientBackground(),
-          Gap(30),
+          const Gap(15),
           Text(
             'Quick Actions',
             style: TextStyle(
@@ -59,7 +69,6 @@ class Homepage extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          Gap(10),
           Expanded(
             child: Container(
               padding: const EdgeInsets.all(12.0),
@@ -108,6 +117,33 @@ class Homepage extends StatelessWidget {
             ),
           )
         ],
+      ),
+      floatingActionButton: GestureDetector(
+        onTap: _redirectToWebstore,
+        child: Container(
+          padding: EdgeInsets.all(10),
+          width: 150,
+          decoration: BoxDecoration(
+            color: AppColors.primaryBlueColor,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.shopping_cart,
+                color: Colors.white,
+              ),
+              Gap(5),
+              Text(
+                "Buy Standards",
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

@@ -11,6 +11,7 @@ class FMarkAlertDialog extends StatelessWidget {
   final String address;
   final String expiryDate;
   final String issueDate;
+  final bool status;
 
   FMarkAlertDialog({
     super.key,
@@ -21,6 +22,7 @@ class FMarkAlertDialog extends StatelessWidget {
     required this.expiryDate,
     required this.issueDate,
     required this.prodId,
+    required this.status,
   });
 
   @override
@@ -46,10 +48,15 @@ class FMarkAlertDialog extends StatelessWidget {
         width: MediaQuery.of(context).size.height * .9,
         child: Column(
           children: [
-            Text(
-              'Valid',
-              style: TextStyle(color: Color.fromARGB(255, 73, 230, 79)),
-            ),
+            status == true
+                ? Text(
+                    'Valid',
+                    style: TextStyle(color: AppColors.validGreenColor),
+                  )
+                : Text(
+                    'Expired',
+                    style: TextStyle(color: AppColors.expiredRedColor),
+                  ),
             Gap(20),
             Text(
               title,

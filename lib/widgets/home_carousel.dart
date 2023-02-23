@@ -33,7 +33,7 @@ class _CarouselState extends State<Carousel> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        height: 180,
+        height: 100,
         child: CarouselSlider(
           options: CarouselOptions(
             viewportFraction: 0.8,
@@ -75,13 +75,15 @@ class _CarouselState extends State<Carousel> {
                         ),
                       ),
                       Gap(5),
-                      Text(
-                        i['desc'],
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
+                      Flexible(
+                        child: Text(
+                          i['desc'],
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 13,
+                          ),
+                          textAlign: TextAlign.center,
                         ),
-                        textAlign: TextAlign.center,
                       )
                     ],
                   ),

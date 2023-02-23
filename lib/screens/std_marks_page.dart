@@ -3,9 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:kebs_app/models/s_mark_model.dart';
 
 import '../controllers/s_mark_controller.dart';
+import '../models/s_mark_model.dart';
 import '../utils/app_colors.dart';
 import '../widgets/widgets.dart';
 
@@ -35,6 +35,15 @@ class _SMarksPageState extends State<SMarksPage> {
     stdMrkBuilder = stdMarksController.fetchSMarks();
   }
 
+  bool confirmValidity(String expiryDate) {
+    DateTime today = DateTime.now();
+    DateTime date = DateTime.parse(expiryDate);
+
+    return date.isAfter(today);
+  }
+
+  
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -51,31 +60,31 @@ class _SMarksPageState extends State<SMarksPage> {
             children: [
               Gap(20),
               Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10),
-                  child: Container(
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: AppColors.primaryBlueColor.withOpacity(.1),
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: TextField(
-                      onChanged: (val) {
-                        setState(() {
-                          _searchQuery = val;
-                        });
-                      },
-                      controller: searchController,
-                      focusNode: searchNode,
-                      style: TextStyle(fontSize: 20),
-                      decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.search),
-                        hintText: 'Search...',
-                        border: InputBorder.none,
-                      ),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10),
+                child: Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: AppColors.primaryBlueColor.withOpacity(.1),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: TextField(
+                    onChanged: (val) {
+                      setState(() {
+                        _searchQuery = val;
+                      });
+                    },
+                    controller: searchController,
+                    focusNode: searchNode,
+                    style: TextStyle(fontSize: 20),
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.search),
+                      hintText: 'Search...',
+                      border: InputBorder.none,
                     ),
                   ),
-                  ),
+                ),
+              ),
               Gap(20),
               Expanded(
                 child: FutureBuilder<List<SMark>>(
@@ -90,7 +99,7 @@ class _SMarksPageState extends State<SMarksPage> {
                             return new Text('Error: ${snapshot.error}');
                           } else {
                             List<SMark> data = snapshot.data!;
-                            
+
                             if (_searchQuery.isNotEmpty) {
                               data = data
                                   .where((std) => std.productName
@@ -115,67 +124,72 @@ class _SMarksPageState extends State<SMarksPage> {
     super.dispose();
     searchController.dispose();
   }
-}
 
-ListView _createListView(BuildContext context, List<SMark> data) {
-  List<SMark> stdMarks = data;
+  ListView _createListView(BuildContext context, List<SMark> data) {
+    List<SMark> stdMarks = data;
 
-  return ListView.builder(
-    itemCount: stdMarks.length,
-    itemBuilder: (context, index) {
-      return ListTile(
-        onTap: () {
-          showDialog(
-              context: context,
-              builder: (context) {
-                return StdAlertDialog(
-                  permitNo: stdMarks[index].productId!,
-                  title: stdMarks[index].productName,
-                  expiryDate: stdMarks[index].expiryDate,
-                  issueDate: stdMarks[index].issueDate,
-                  address: stdMarks[index].physicalAddress,
-                  prodBrand: stdMarks[index].productBrand,
-                );
-              });
-        },
-        splashColor: AppColors.primaryBlueColor.withOpacity(.3),
-        contentPadding: const EdgeInsets.symmetric(
-          vertical: 8,
-          horizontal: 10,
-        ),
-        leading: Container(
-          width: 80,
-          height: 80,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/std_logo.png'),
-              fit: BoxFit.cover,
-            ),
-            borderRadius: BorderRadius.circular(15),
+    return ListView.builder(
+      itemCount: stdMarks.length,
+      itemBuilder: (context, index) {
+        return ListTile(
+          onTap: () {
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return StdAlertDialog(
+                    status: confirmValidity(stdMarks[index].expiryDate),
+                    permitNo: stdMarks[index].productId!,
+                    title: stdMarks[index].productName,
+                    expiryDate: stdMarks[index].expiryDate,
+                    issueDate: stdMarks[index].issueDate,
+                    address: stdMarks[index].physicalAddress,
+                    prodBrand: stdMarks[index].productBrand,
+                  );
+                });
+          },
+          splashColor: AppColors.primaryBlueColor.withOpacity(.3),
+          contentPadding: const EdgeInsets.symmetric(
+            vertical: 8,
+            horizontal: 10,
           ),
-        ),
-        title: Text(stdMarks[index].productName),
-        subtitle: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Gap(5),
-            Text(
-              stdMarks[index].companyName,
-              style: TextStyle(color: Colors.grey),
+          leading: Container(
+            width: 80,
+            height: 80,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/std_logo.png'),
+                fit: BoxFit.cover,
+              ),
+              borderRadius: BorderRadius.circular(15),
             ),
-            // Gap(10),
-            // stdMarks[index].status == 'valid'
-            //     ? Text(
-            //         'Valid',
-            //         style: TextStyle(color: Color.fromARGB(255, 73, 230, 79)),
-            //       )
-            //     : Text(
-            //         'Invalid',
-            //         style: TextStyle(color: Colors.red),
-            //       ),
-          ],
-        ),
-      );
-    },
-  );
+          ),
+          title: Text(stdMarks[index].productName),
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Gap(5),
+              Text(
+                stdMarks[index].companyName,
+                style: TextStyle(color: Colors.grey),
+              ),
+              Gap(10),
+              confirmValidity(stdMarks[index].expiryDate)
+                  ? Text(
+                      "Valid",
+                      style: TextStyle(
+                        color: Colors.green,
+                      ),
+                    )
+                  : Text(
+                      "Expired",
+                      style: TextStyle(
+                        color: Colors.red,
+                      ),
+                    )
+            ],
+          ),
+        );
+      },
+    );
+  }
 }

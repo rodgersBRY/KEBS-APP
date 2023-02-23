@@ -11,6 +11,7 @@ class StdAlertDialog extends StatelessWidget {
   final String address;
   final String expiryDate;
   final String issueDate;
+  final bool status;
 
   StdAlertDialog({
     super.key,
@@ -21,6 +22,7 @@ class StdAlertDialog extends StatelessWidget {
     required this.address,
     required this.expiryDate,
     required this.issueDate,
+    required this.status,
   });
 
   @override
@@ -49,6 +51,15 @@ class StdAlertDialog extends StatelessWidget {
         width: MediaQuery.of(context).size.height * .9,
         child: Column(
           children: [
+            status
+                ? Text(
+                    "Valid",
+                    style: TextStyle(color: Colors.green),
+                  )
+                : Text(
+                    "Expired",
+                    style: TextStyle(color: Colors.red),
+                  ),
             Gap(20),
             Text(
               title,
@@ -60,6 +71,7 @@ class StdAlertDialog extends StatelessWidget {
             Gap(20),
             Expanded(
               child: Container(
+                width: double.maxFinite,
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   color: AppColors.primaryBlueColor.withOpacity(.2),

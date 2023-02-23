@@ -10,7 +10,7 @@ class GradientBackground extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 350,
+      height: 300,
       child: Stack(
         fit: StackFit.expand,
         children: [
@@ -29,14 +29,14 @@ class GradientBackground extends StatelessWidget {
                 end: Alignment.bottomCenter,
                 colors: [
                   AppColors.primaryBlueColor.withOpacity(.3),
-                  Colors.white,
+                  Colors.white.withOpacity(.9),
                 ],
               ),
             ),
           ),
           Positioned(
-            top: 40,
-            left: 30,
+            top: 35,
+            left: 20,
             child: Container(
               child: Image(
                 image: AssetImage('assets/logo.png'),
@@ -45,8 +45,8 @@ class GradientBackground extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: 40,
-            left: 50,
+            top: 25,
+            left: 55,
             child: Container(
               width: 300,
               height: 300,

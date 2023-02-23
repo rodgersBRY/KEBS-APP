@@ -31,6 +31,13 @@ class _FortificationPageState extends State<FortificationPage> {
     fortificationBuilder = _fMarkController.fetchFMarks();
   }
 
+  bool confirmValidity(String expiryDate) {
+    DateTime today = DateTime.now();
+    DateTime date = DateTime.parse(expiryDate);
+
+    return date.isAfter(today);
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -104,62 +111,68 @@ class _FortificationPageState extends State<FortificationPage> {
       ),
     );
   }
-}
 
-ListView _createListView(BuildContext context, List<FMark> data) {
-  List<FMark> fMarks = data;
+  ListView _createListView(BuildContext context, List<FMark> data) {
+    List<FMark> fMarks = data;
 
-  return ListView.builder(
-    itemCount: fMarks.length,
-    itemBuilder: (context, index) {
-      return ListTile(
-        onTap: () {
-          showDialog(
-              context: context,
-              builder: (context) {
-                return FMarkAlertDialog(
-                  prodId: fMarks[index].productId,
-                  title: fMarks[index].productName,
-                  expiryDate: fMarks[index].expiryDate,
-                  issueDate: fMarks[index].issueDate,
-                  address: fMarks[index].physicalAddress!,
-                  prodBrand: fMarks[index].productBrand,
-                );
-              });
-        },
-        splashColor: AppColors.primaryBlueColor.withOpacity(.3),
-        contentPadding: const EdgeInsets.symmetric(
-          vertical: 8,
-          horizontal: 10,
-        ),
-        leading: Container(
-          width: 80,
-          height: 80,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/fortification_logo.png'),
-              fit: BoxFit.contain,
-            ),
-            borderRadius: BorderRadius.circular(15),
+    return ListView.builder(
+      itemCount: fMarks.length,
+      itemBuilder: (context, index) {
+        return ListTile(
+          onTap: () {
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return FMarkAlertDialog(
+                    status: confirmValidity(fMarks[index].expiryDate),
+                    prodId: fMarks[index].productId,
+                    title: fMarks[index].productName,
+                    expiryDate: fMarks[index].expiryDate,
+                    issueDate: fMarks[index].issueDate,
+                    address: fMarks[index].physicalAddress!,
+                    prodBrand: fMarks[index].productBrand,
+                  );
+                });
+          },
+          splashColor: AppColors.primaryBlueColor.withOpacity(.3),
+          contentPadding: const EdgeInsets.symmetric(
+            vertical: 8,
+            horizontal: 10,
           ),
-        ),
-        title: Text(fMarks[index].productName),
-        subtitle: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Gap(5),
-            Text(
-              fMarks[index].companyName,
-              style: TextStyle(color: Colors.grey),
+          leading: Container(
+            width: 80,
+            height: 80,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/fortification_logo.png'),
+                fit: BoxFit.contain,
+              ),
+              borderRadius: BorderRadius.circular(15),
             ),
-            Gap(10),
-            Text(
-              fMarks[index].productBrand,
-              style: TextStyle(color: Color.fromARGB(255, 73, 230, 79)),
-            )
-          ],
-        ),
-      );
-    },
-  );
+          ),
+          title: Text(fMarks[index].productName),
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Gap(5),
+              Text(
+                fMarks[index].companyName,
+                style: TextStyle(color: Colors.grey),
+              ),
+              Gap(10),
+              confirmValidity(fMarks[index].expiryDate)
+                  ? Text(
+                      'Valid',
+                      style: TextStyle(color: AppColors.validGreenColor),
+                    )
+                  : Text(
+                      'Expired',
+                      style: TextStyle(color: AppColors.expiredRedColor),
+                    )
+            ],
+          ),
+        );
+      },
+    );
+  }
 }
