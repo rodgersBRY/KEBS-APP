@@ -43,7 +43,11 @@ class Homepage extends StatelessWidget {
       "icon": "assets/companies_icon.png",
       "route": "/companies"
     },
-    {"title": "Contact Us", "icon": "assets/contact_icon.png", "route": "/"},
+    {
+      "title": "Contact Us",
+      "icon": "assets/contact_icon.png",
+      "route": "/contact"
+    },
   ];
 
   _redirectToWebstore() async {
