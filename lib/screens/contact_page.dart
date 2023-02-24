@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:kebs_app/utils/app_colors.dart';
 
 class ContactPage extends StatelessWidget {
   const ContactPage({super.key});
@@ -60,11 +61,17 @@ class ContactPage extends StatelessWidget {
             flex: 2,
             child: Container(
               width: double.infinity,
-              color: Colors.grey[100],
+              color: AppColors.primaryBlueColor.withOpacity(.1),
               padding: const EdgeInsets.all(10.0),
               child: Align(
                 alignment: Alignment.centerLeft,
-                child: smallText,
+                child: Row(
+                  children: [
+                    Icon(Icons.phone_android),
+                    Gap(3),
+                    smallText,
+                  ],
+                ),
               ),
             ),
           ),

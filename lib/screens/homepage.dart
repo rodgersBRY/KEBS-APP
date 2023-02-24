@@ -51,11 +51,12 @@ class Homepage extends StatelessWidget {
   ];
 
   _redirectToWebstore() async {
-    const url = 'https://webstore.kebs.org';
-    if (await canLaunchUrl(Uri.parse(url))) {
-      await launchUrl(Uri.parse(url));
+    const url = 'https://webstore.kebs.org/';
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
     } else {
-      print('cannot launch the url');
+      print('cannot launch the url $url');
     }
   }
 
