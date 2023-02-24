@@ -19,6 +19,7 @@ dependencies:
   carousel_slider: ^4.2.1
   http:
   url_launcher: ^6.1.9
+  flutter_automation: ^2.0.0
 
 dev_dependencies:
   flutter_test:
