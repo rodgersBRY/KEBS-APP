@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:get/get.dart';
 
 import '../utils/app_colors.dart';
-import '../widgets/widgets.dart';
 
 class TestVerifyPage extends StatefulWidget {
   const TestVerifyPage({super.key});
@@ -24,18 +22,12 @@ class _TestVerifyPageState extends State<TestVerifyPage> {
       },
       child: SafeArea(
         child: Scaffold(
+          appBar: AppBar(
+            title: Text("Check Results"),
+            backgroundColor: AppColors.primaryBlueColor,
+          ),
           body: Column(
-            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 15.0),
-                child: CustomToolbar(
-                  onPressed: () {
-                    Get.offAllNamed('/home');
-                  },
-                  title: '',
-                ),
-              ),
               Gap(150),
               Text(
                 'Test Results Checker',
@@ -59,7 +51,7 @@ class _TestVerifyPageState extends State<TestVerifyPage> {
                     focusNode: bsNoFocusNode,
                     style: TextStyle(fontSize: 20),
                     decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.search),
+                      prefixIcon: Icon(Icons.numbers),
                       hintText: "BS Number",
                       border: InputBorder.none,
                     ),

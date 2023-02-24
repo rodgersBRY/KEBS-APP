@@ -37,7 +37,11 @@ class Homepage extends StatelessWidget {
       "icon": "assets/testing_icon.png",
       "route": "/test-page"
     },
-    {"title": "Complaints", "icon": "assets/complaints_icon.png", "route": "/"},
+    {
+      "title": "Complaints",
+      "icon": "assets/complaints_icon.png",
+      "route": "/complaints"
+    },
     {
       "title": "Companies",
       "icon": "assets/companies_icon.png",
@@ -54,7 +58,7 @@ class Homepage extends StatelessWidget {
     const url = 'https://webstore.kebs.org/';
     final uri = Uri.parse(url);
     if (await canLaunchUrl(uri)) {
-      await launchUrl(uri);
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
     } else {
       print('cannot launch the url $url');
     }
@@ -81,8 +85,8 @@ class Homepage extends StatelessWidget {
                 itemCount: _quickActions.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
-                  crossAxisSpacing: 10.0,
-                  mainAxisSpacing: 10.0,
+                  crossAxisSpacing: 17.0,
+                  mainAxisSpacing: 17.0,
                 ),
                 itemBuilder: (context, index) {
                   return GestureDetector(
@@ -90,15 +94,12 @@ class Homepage extends StatelessWidget {
                       Get.toNamed(_quickActions[index]['route']);
                     },
                     child: Container(
-                      height: 120,
-                      width: 100,
                       padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
                         border: Border.all(color: AppColors.primaryBlueColor),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Image.asset(

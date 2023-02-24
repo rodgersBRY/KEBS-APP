@@ -17,7 +17,7 @@ class GradientBackground extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/home_bg_3.jpeg'),
+                image: AssetImage('assets/monument.jpeg'),
                 fit: BoxFit.cover,
               ),
             ),

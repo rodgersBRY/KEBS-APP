@@ -9,14 +9,15 @@ class ContactPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          title: Text('Contact Details'),
+          backgroundColor: AppColors.primaryBlueColor,
+        ),
         // backgroundColor: Colors.white,
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            AppBar(
-              elevation: 0,
-              title: Text('Contact Details'),
-            ),
             Gap(40),
             ContactItem(
               BoldText('Customer Care'),

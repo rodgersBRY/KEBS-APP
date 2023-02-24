@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:get/get.dart';
 
 import '../utils/app_colors.dart';
 import '../widgets/widgets.dart';
@@ -24,20 +23,15 @@ class _VerifyStaffPageState extends State<VerifyStaffPage> {
       },
       child: SafeArea(
         child: Scaffold(
+          appBar: AppBar(
+            title: Text("Verify Staff"),
+            backgroundColor: AppColors.primaryBlueColor,
+          ),
           body: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 15.0),
-                child: CustomToolbar(
-                  onPressed: () {
-                    Get.offAllNamed('/home');
-                  },
-                  title: '',
-                ),
-              ),
               Gap(150),
               Text(
-                'VERIFY DATA',
+                'VERIFY STAFF',
                 style: TextStyle(
                   fontSize: 25,
                   fontWeight: FontWeight.bold,

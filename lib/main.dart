@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
     GetPage(
       name: '/',
       page: () => SplashScreen(),
-      transition: Transition.downToUp,
+      transition: Transition.fadeIn,
     ),
     GetPage(
       name: '/home',
@@ -41,40 +41,46 @@ class MyApp extends StatelessWidget {
     GetPage(
       name: '/std-page',
       page: () => SMarksPage(),
-      transition: Transition.downToUp,
+      transition: Transition.fade,
       binding: MyBindings(),
     ),
     GetPage(
       name: '/verify-staff',
       page: () => VerifyStaffPage(),
-      transition: Transition.downToUp,
+      transition: Transition.fade,
     ),
     GetPage(
       name: '/fortification-mark',
       page: () => FortificationPage(),
-      transition: Transition.downToUp,
+      transition: Transition.fade,
       binding: MyBindings(),
     ),
     GetPage(
       name: '/companies',
       page: () => CompaniesPage(),
-      transition: Transition.downToUp,
+      transition: Transition.fade,
       binding: MyBindings(),
     ),
     GetPage(
       name: '/diamond-page',
       page: () => DiamondMarkPage(),
-      transition: Transition.downToUp,
+      transition: Transition.fade,
       binding: MyBindings(),
     ),
     GetPage(
       name: '/test-page',
       page: () => TestVerifyPage(),
-      transition: Transition.downToUp,
+      transition: Transition.fade,
     ),
     GetPage(
-        name: '/contact',
-        page: () => ContactPage(),
-        transition: Transition.downToUp),
+      name: '/contact',
+      page: () => ContactPage(),
+      transition: Transition.fade,
+    ),
+    GetPage(
+      name: '/complaints',
+      page: () => ComplaintsPage(),
+      transition: Transition.fade,
+    ),
   ];
 }

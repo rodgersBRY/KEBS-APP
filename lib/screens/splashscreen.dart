@@ -29,14 +29,15 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Stack(
         children: [
           Container(
+            width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             child: Image.asset(
-              'assets/splash_bg.jpg',
+              'assets/front-view.jpeg',
               fit: BoxFit.cover,
             ),
           ),
           Container(
-            width: double.infinity,
+            width: double.maxFinite,
             padding: const EdgeInsets.symmetric(horizontal: 30),
             color: AppColors.primaryBlueColor.withOpacity(.8),
             child: Column(
@@ -45,7 +46,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 Image(
                   image: AssetImage('assets/logo.png'),
                 ),
-                Gap(30),
+                Gap(40),
                 Text(
                   'Kenya Bureau of Standards',
                   style: TextStyle(
