@@ -95,9 +95,14 @@ class _FortificationPageState extends State<FortificationPage> {
 
                             if (_searchQuery.isNotEmpty) {
                               data = data
-                                  .where((fmark) => fmark.productName
-                                      .toLowerCase()
-                                      .contains(_searchQuery.toLowerCase()))
+                                  .where((fmark) =>
+                                      fmark.productId.toLowerCase().contains(
+                                          _searchQuery.toLowerCase()) ||
+                                      fmark.productBrand.toLowerCase().contains(
+                                          _searchQuery.toLowerCase()) ||
+                                      fmark.companyName
+                                          .toLowerCase()
+                                          .contains(_searchQuery.toLowerCase()))
                                   .toList();
                             }
                             return _createListView(context, data);
