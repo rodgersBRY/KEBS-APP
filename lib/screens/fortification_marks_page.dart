@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import '../controllers/f_mark_controller.dart';
 import '../models/fortification_mark_model.dart';
 import '../utils/app_colors.dart';
-import '../widgets/fmark_alert_dialog.dart';
+import '../widgets/widgets.dart';
 
 class FortificationPage extends StatefulWidget {
   const FortificationPage({super.key});
@@ -89,7 +89,7 @@ class _FortificationPageState extends State<FortificationPage> {
                           return Center(child: CircularProgressIndicator());
                         default:
                           if (snapshot.hasError) {
-                            return new Text('Error: ${snapshot.error}');
+                            return CustomErrorWidget();
                           } else {
                             List<FMark> data = snapshot.data!;
 

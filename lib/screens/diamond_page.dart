@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import '../controllers/diamond_controller.dart';
 import '../models/d_mark_model.dart';
 import '../utils/app_colors.dart';
-import '../widgets/dmark_alert_dialog.dart';
+import '../widgets/widgets.dart';
 
 class DiamondMarkPage extends StatefulWidget {
   const DiamondMarkPage({super.key});
@@ -93,7 +93,7 @@ class _DiamondMarkPageState extends State<DiamondMarkPage> {
                           return Center(child: CircularProgressIndicator());
                         default:
                           if (snapshot.hasError) {
-                            return new Text('Error: ${snapshot.error}');
+                            return CustomErrorWidget();
                           } else {
                             List<DMark> data = snapshot.data!;
 

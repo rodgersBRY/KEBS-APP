@@ -94,12 +94,7 @@ class _SMarksPageState extends State<SMarksPage> {
                           return Center(child: CircularProgressIndicator());
                         default:
                           if (snapshot.hasError) {
-                            return Center(
-                              child: new Text(
-                                'Error: ${snapshot.error}',
-                                style: TextStyle(color: Colors.grey),
-                              ),
-                            );
+                            return CustomErrorWidget();
                           } else {
                             List<SMark> data = snapshot.data!;
 

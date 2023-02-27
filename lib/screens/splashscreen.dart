@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
 
-    Timer(Duration(seconds: 4), () {
+    Timer(Duration(seconds: 2), () {
       Get.offNamed('/home');
     });
   }
@@ -47,11 +47,13 @@ class _SplashScreenState extends State<SplashScreen> {
                   image: AssetImage('assets/logo.png'),
                 ),
                 Gap(40),
-                Text(
-                  'Kenya Bureau of Standards',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 27,
+                FittedBox(
+                  child: Text(
+                    'Kenya Bureau of Standards',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 27,
+                    ),
                   ),
                 ),
                 Gap(20),
@@ -61,6 +63,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   'Standards for Quality Life',
                   style: TextStyle(color: Colors.black, fontSize: 18),
                 ),
+                Gap(30),
               ],
             ),
           ),
