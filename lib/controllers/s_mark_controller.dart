@@ -10,8 +10,10 @@ class SMarkController extends GetxController {
   RxList<SMark> _sMarks = <SMark>[].obs;
 
   Future<List<SMark>> fetchSMarks() async {
-    http.Response resp = await http.get(Uri.parse(
-        'https://kims.kebs.org:8006/api/v1/migration/anonymous/kebsWebsite/getAwardedSmarkPermits'));
+    http.Response resp = await http.get(
+      Uri.parse(
+          'https://kimsint.kebs.org:8006/api/v1/migration/anonymous/kebsWebsite/getAwardedSmarkPermits'),
+    );
 
     List jsonData = jsonDecode(resp.body);
 

@@ -1,22 +1,22 @@
 class SMark {
   SMark({
     required this.companyName,
-    required this.physicalAddress,
+    this.physicalAddress,
     this.productId,
     required this.productName,
     required this.productBrand,
-    required this.ksTitle,
+    this.ksTitle,
     required this.issueDate,
     required this.expiryDate,
     this.ksNo,
   });
 
   String companyName;
-  String physicalAddress;
+  String? physicalAddress;
   String? productId;
   String productName;
-  String productBrand;
-  String ksTitle;
+  String? productBrand;
+  String? ksTitle;
   String issueDate;
   String expiryDate;
   String? ksNo;

@@ -29,6 +29,17 @@ class _DiamondMarkPageState extends State<DiamondMarkPage> {
     dMarkBuilder = _dMarkController.fetchDMarks();
   }
 
+  bool confirmValidity(String? expiryDate) {
+    if (expiryDate != "null") {
+      DateTime today = DateTime.now();
+      DateTime date = DateTime.parse(expiryDate!);
+
+      return date.isAfter(today);
+    } else {
+      return false;
+    }
+  }
+
   String _searchQuery = "";
 
   @override
@@ -104,66 +115,72 @@ class _DiamondMarkPageState extends State<DiamondMarkPage> {
       ),
     );
   }
-}
 
-ListView _createListView(BuildContext context, List<DMark> data) {
-  List<DMark> dMarks = data;
+  ListView _createListView(BuildContext context, List<DMark> data) {
+    List<DMark> dMarks = data;
 
-  return ListView.builder(
-    itemCount: dMarks.length,
-    itemBuilder: (context, index) {
-      return ListTile(
-        onTap: () {
-          showDialog(
-              context: context,
-              builder: (context) {
-                return DMarkAlertDialog(
-                  status: dMarks[index].status,
-                  productId: dMarks[index].productId,
-                  productName: dMarks[index].productName,
-                  expiryDate: dMarks[index].expiryDate,
-                  issueDate: dMarks[index].issueDate,
-                  physicalAddress: dMarks[index].address,
-                );
-              });
-        },
-        splashColor: AppColors.primaryBlueColor.withOpacity(.3),
-        contentPadding: const EdgeInsets.symmetric(
-          vertical: 8,
-          horizontal: 10,
-        ),
-        leading: Container(
-          width: 80,
-          height: 80,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/diamond_logo.png'),
-              fit: BoxFit.contain,
-            ),
-            borderRadius: BorderRadius.circular(15),
+    return ListView.builder(
+      itemCount: dMarks.length,
+      itemBuilder: (context, index) {
+        return ListTile(
+          onTap: () {
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return DMarkAlertDialog(
+                    status: confirmValidity(dMarks[index].expiryDate),
+                    productId: dMarks[index].productId?.toString() ?? '',
+                    productName: dMarks[index].productName,
+                    expiryDate: dMarks[index].expiryDate,
+                    issueDate: dMarks[index].issueDate,
+                    physicalAddress:
+                        dMarks[index].physicalAddress?.toString() ?? "null",
+                  );
+                });
+          },
+          splashColor: AppColors.primaryBlueColor.withOpacity(.3),
+          contentPadding: const EdgeInsets.symmetric(
+            vertical: 8,
+            horizontal: 10,
           ),
-        ),
-        title: Text(dMarks[index].productName),
-        subtitle: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Gap(5),
-            Text(
-              dMarks[index].address,
-              style: TextStyle(color: Colors.grey),
-            ),
-            Gap(10),
-            Text(
-              dMarks[index].status,
-              style: TextStyle(
-                color: dMarks[index].status == 'Valid'
-                    ? Color.fromARGB(255, 73, 230, 79)
-                    : Colors.red,
+          leading: Container(
+            width: 80,
+            height: 80,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/diamond_logo.png'),
+                fit: BoxFit.contain,
               ),
-            )
-          ],
-        ),
-      );
-    },
-  );
+              borderRadius: BorderRadius.circular(15),
+            ),
+          ),
+          title: Text(dMarks[index].productName),
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Gap(5),
+              Text(
+                dMarks[index].physicalAddress?.toString() ?? 'null',
+                style: TextStyle(color: Colors.grey),
+              ),
+              Gap(10),
+              confirmValidity(dMarks[index].expiryDate)
+                  ? Text(
+                      "Valid",
+                      style: TextStyle(
+                        color: AppColors.validGreenColor,
+                      ),
+                    )
+                  : Text(
+                      "Expired",
+                      style: TextStyle(
+                        color: AppColors.expiredRedColor,
+                      ),
+                    )
+            ],
+          ),
+        );
+      },
+    );
+  }
 }

@@ -37,11 +37,11 @@ class Homepage extends StatelessWidget {
       "icon": "assets/testing_icon.png",
       "route": "/test-page"
     },
-    {
-      "title": "Complaints",
-      "icon": "assets/complaints_icon.png",
-      "route": "/complaints"
-    },
+    // {
+    //   "title": "Complaints",
+    //   "icon": "assets/complaints_icon.png",
+    //   "route": "/complaints"
+    // },
     {
       "title": "Companies",
       "icon": "assets/companies_icon.png",

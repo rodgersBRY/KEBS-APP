@@ -1,35 +1,47 @@
 class DMark {
   DMark({
-    required this.productId,
+    required this.companyName,
     required this.productName,
-    required this.address,
     required this.issueDate,
     required this.expiryDate,
-    required this.status,
+    this.physicalAddress,
+    this.productId,
+    this.productBrand,
+    this.ksTitle,
+    this.ksNo,
   });
 
+  String companyName;
+  String? physicalAddress;
+  String? productId;
   String productName;
-  String productId;
-  String address;
+  String? productBrand;
+  String? ksTitle;
   String issueDate;
   String expiryDate;
-  String status;
+  String? ksNo;
 
   factory DMark.fromJson(Map<String, dynamic> json) => DMark(
+        companyName: json["companyName"],
+        physicalAddress: json["physical_address"],
+        productId: json["product_id"],
         productName: json["product_name"],
-        productId: json['product_id'],
-        address: json["address"],
+        productBrand: json["product_brand"],
+        ksTitle: json["ks_title"],
         issueDate: json["issue_date"],
         expiryDate: json["expiry_date"],
-        status: json["status"],
+        ksNo: json["ks_NO"],
       );
 
   Map<String, dynamic> toJson() => {
+        "companyName": companyName,
+        "physical_address": physicalAddress,
+        "product_id": productId,
         "product_name": productName,
-        "address": address,
+        "product_brand": productBrand,
+        "ks_title": ksTitle,
         "issue_date": issueDate,
         "expiry_date": expiryDate,
-        "product_id": productId,
-        "status": status,
+        "ks_NO": ksNo,
       };
 }

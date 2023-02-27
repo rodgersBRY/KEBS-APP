@@ -4,7 +4,7 @@ import 'package:gap/gap.dart';
 import '../utils/app_colors.dart';
 
 class DMarkAlertDialog extends StatelessWidget {
-  final String status;
+  final bool status;
   final String productId;
   final String productName;
   final String physicalAddress;
@@ -42,7 +42,7 @@ class DMarkAlertDialog extends StatelessWidget {
             ),
             Gap(5),
             Text(
-              status,
+              status ? "Valid" : "Expired",
               style: TextStyle(
                 fontSize: 14,
                 color: status == 'Valid'

@@ -42,7 +42,7 @@ class _VerifyStaffPageState extends State<VerifyStaffPage> {
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: CustomTextField(
                   hintText: 'Staff No or ID Number',
-                  icon: Icons.verified_user,
+                  icon: Icons.numbers,
                   textController: staffNoController,
                   focusNode: staffNoFocusNode,
                 ),

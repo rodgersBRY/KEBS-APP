@@ -94,7 +94,12 @@ class _SMarksPageState extends State<SMarksPage> {
                           return Center(child: CircularProgressIndicator());
                         default:
                           if (snapshot.hasError) {
-                            return new Text('Error: ${snapshot.error}');
+                            return Center(
+                              child: new Text(
+                                'Error: ${snapshot.error}',
+                                style: TextStyle(color: Colors.grey),
+                              ),
+                            );
                           } else {
                             List<SMark> data = snapshot.data!;
 
@@ -140,8 +145,8 @@ class _SMarksPageState extends State<SMarksPage> {
                     title: stdMarks[index].productName,
                     expiryDate: stdMarks[index].expiryDate,
                     issueDate: stdMarks[index].issueDate,
-                    address: stdMarks[index].physicalAddress,
-                    prodBrand: stdMarks[index].productBrand,
+                    address: stdMarks[index].physicalAddress!,
+                    prodBrand: stdMarks[index].productBrand!,
                   );
                 });
           },
