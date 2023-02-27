@@ -48,6 +48,7 @@ class MyApp extends StatelessWidget {
       name: '/verify-staff',
       page: () => VerifyStaffPage(),
       transition: Transition.fade,
+      binding: MyBindings(),
     ),
     GetPage(
       name: '/fortification-mark',

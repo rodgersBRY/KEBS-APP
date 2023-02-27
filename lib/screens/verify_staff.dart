@@ -1,6 +1,10 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 
+import '../controllers/staff_verify_controller.dart';
 import '../utils/app_colors.dart';
 import '../widgets/widgets.dart';
 
@@ -64,30 +68,41 @@ class _VerifyStaffPageState extends State<VerifyStaffPage> {
 }
 
 class VerifyButton extends StatelessWidget {
-  const VerifyButton({super.key});
+  VerifyButton({super.key});
+  VerifyStaffController verifyStaffController = Get.find();
+
+  void _verifyStaff() {
+    verifyStaffController.verifyStaff();
+  }
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: _verifyStaff,
       splashColor: Colors.blue.withOpacity(.4),
       child: Container(
-        padding: const EdgeInsets.all(10),
-        height: 70,
-        width: 250,
-        decoration: BoxDecoration(
-          color: AppColors.primaryBlueColor,
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Center(
-            child: Text(
-          'Verify Staff',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 20,
+          padding: const EdgeInsets.all(10),
+          height: 70,
+          width: 250,
+          decoration: BoxDecoration(
+            color: AppColors.primaryBlueColor,
+            borderRadius: BorderRadius.circular(10),
           ),
-        )),
-      ),
+          child: Obx(
+            () => Center(
+              child: verifyStaffController.loading
+                  ? CircularProgressIndicator(
+                      color: Colors.white,
+                    )
+                  : Text(
+                      'Verify Staff',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                      ),
+                    ),
+            ),
+          )),
     );
   }
 }

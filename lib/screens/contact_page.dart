@@ -20,6 +20,7 @@ class ContactPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Gap(40),
               Text(
                 'Managing Director',
                 style: TextStyle(fontSize: 17),
@@ -56,13 +57,26 @@ class ContactPage extends StatelessWidget {
               ),
               Gap(10),
               Text(
+                'Email: info@kebs.org',
+                style: TextStyle(fontSize: 17),
+              ),
+              Gap(40),
+              Text(
                 'PVOC: 0724255242',
                 style: TextStyle(fontSize: 17),
               ),
-              Gap(10),
-              Text(
-                'Email: info@kebs.org',
-                style: TextStyle(fontSize: 17),
+              Expanded(
+                child: Container(),
+              ),
+              Container(
+                width: double.infinity,
+                height: 300,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('assets/toll_image.jpeg'),
+                    fit: BoxFit.fill,
+                  ),
+                ),
               ),
             ],
           ),
