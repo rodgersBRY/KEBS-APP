@@ -14,84 +14,60 @@ class ContactPage extends StatelessWidget {
           title: Text('Contact Details'),
           backgroundColor: AppColors.primaryBlueColor,
         ),
-        // backgroundColor: Colors.white,
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Gap(40),
-            ContactItem(
-              BoldText('Customer Care'),
-              SmallText('254206948000'),
-            ),
-            Gap(20),
-            ContactItem(
-              BoldText("Mombasa Region"),
-              SmallText('0722202137'),
-            ),
-            Gap(20),
-            ContactItem(
-              BoldText("Sample Control"),
-              SmallText('0206948613'),
-            ),
-            Gap(20),
-            ContactItem(
-              BoldText("Toll Free"),
-              SmallText('1545'),
-            ),
-          ],
+        body: Container(
+          width: double.infinity,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Managing Director',
+                style: TextStyle(fontSize: 17),
+              ),
+              Gap(10),
+              Text(
+                'Kenya Bureau of Standards',
+                style: TextStyle(fontSize: 17),
+              ),
+              Gap(40),
+              Text(
+                'Popo road, Off Mombasa Road',
+                style: TextStyle(fontSize: 17),
+              ),
+              Gap(10),
+              Text(
+                'P.O Box 54974 - 00200',
+                style: TextStyle(fontSize: 17),
+              ),
+              Gap(10),
+              Text(
+                'Nairobi, Kenya',
+                style: TextStyle(fontSize: 17),
+              ),
+              Gap(40),
+              Text(
+                'Tel: +254(20) 694 8000',
+                style: TextStyle(fontSize: 17),
+              ),
+              Gap(10),
+              Text(
+                'Mobile: 0722202137 or 0734600471/2',
+                style: TextStyle(fontSize: 17),
+              ),
+              Gap(10),
+              Text(
+                'PVOC: 0724255242',
+                style: TextStyle(fontSize: 17),
+              ),
+              Gap(10),
+              Text(
+                'Email: info@kebs.org',
+                style: TextStyle(fontSize: 17),
+              ),
+            ],
+          ),
         ),
       ),
-    );
-  }
-
-  Widget ContactItem(Widget bigText, Widget smallText) {
-    return SizedBox(
-      height: 130,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            flex: 2,
-            child: Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(10),
-              child: bigText,
-            ),
-          ),
-          Expanded(
-            flex: 2,
-            child: Container(
-              width: double.infinity,
-              color: AppColors.primaryBlueColor.withOpacity(.1),
-              padding: const EdgeInsets.all(10.0),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Row(
-                  children: [
-                    Icon(Icons.phone_android),
-                    Gap(3),
-                    smallText,
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget BoldText(String text) {
-    return Text(
-      text,
-      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 26),
-    );
-  }
-
-  Widget SmallText(String text) {
-    return Text(
-      text,
-      style: TextStyle(fontSize: 16),
     );
   }
 }
