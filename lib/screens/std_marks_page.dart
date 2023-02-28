@@ -101,13 +101,17 @@ class _SMarksPageState extends State<SMarksPage> {
                             if (_searchQuery.isNotEmpty) {
                               data = data
                                   .where((std) =>
-                                      std.productId!.toLowerCase().contains(
-                                          _searchQuery.toLowerCase()) ||
-                                      std.companyName.toLowerCase().contains(
-                                          _searchQuery.toLowerCase()) ||
-                                      std.productBrand!
-                                          .toLowerCase()
-                                          .contains(_searchQuery.toLowerCase()))
+                                          // std.productId!.toLowerCase().contains(
+                                          //     _searchQuery.toLowerCase()) ||
+                                          std.companyName
+                                              .toLowerCase()
+                                              .contains(
+                                                  _searchQuery.toLowerCase())
+                                      //     ||
+                                      // std.productBrand!
+                                      //     .toLowerCase()
+                                      //     .contains(_searchQuery.toLowerCase())
+                                      )
                                   .toList();
                             }
                             return _createListView(context, data);

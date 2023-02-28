@@ -91,7 +91,6 @@ class Homepage extends StatelessWidget {
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Image.asset(
                           _quickActions[index]['icon'],
@@ -103,6 +102,7 @@ class Homepage extends StatelessWidget {
                           child: Text(
                             _quickActions[index]['title'],
                             style: TextStyle(fontSize: 12),
+                            textAlign: TextAlign.center,
                           ),
                         ),
                       ],
@@ -112,17 +112,19 @@ class Homepage extends StatelessWidget {
               },
             ),
           ),
-          Flexible(child: Container(
+          Container(
             padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: OnlineLinks())),
-          Padding(
-            padding: const EdgeInsets.only(top: 20.0),
-            child: Container(
-              height: 150,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/wajibika.jpeg'),
-                  fit: BoxFit.fill,
+            child: OnlineLinks(),
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 20.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('assets/wajibika.jpeg'),
+                    fit: BoxFit.fill,
+                  ),
                 ),
               ),
             ),
@@ -146,13 +148,23 @@ class OnlineLinks extends StatelessWidget {
     }
   }
 
+  _applyForSMark() async {
+    const url = 'https://kims.kebs.org/';
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    } else {
+      print('cannot launch the url $url');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         GestureDetector(
-          onTap: _redirectToWebstore,
+          onTap: _applyForSMark,
           child: Container(
             padding: EdgeInsets.all(10),
             // width: 150,

@@ -100,12 +100,12 @@ class _DiamondMarkPageState extends State<DiamondMarkPage> {
                             if (_searchQuery.isNotEmpty) {
                               data = data
                                   .where((dmark) =>
-                                      dmark.productId!.toLowerCase().contains(
-                                          _searchQuery.toLowerCase()) ||
-                                      dmark.productBrand!
-                                          .toLowerCase()
-                                          .contains(
-                                              _searchQuery.toLowerCase()) ||
+                                      // dmark.productId!.toLowerCase().contains(
+                                      //     _searchQuery.toLowerCase()) ||
+                                      // dmark.productBrand!
+                                      //     .toLowerCase()
+                                      //     .contains(
+                                      //         _searchQuery.toLowerCase()) ||
                                       dmark.companyName
                                           .toLowerCase()
                                           .contains(_searchQuery.toLowerCase()))
