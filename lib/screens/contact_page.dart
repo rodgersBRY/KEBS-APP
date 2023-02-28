@@ -9,6 +9,7 @@ class ContactPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Color.fromARGB(255, 215, 231, 245),
         appBar: AppBar(
           elevation: 0,
           title: Text('Contact Details'),

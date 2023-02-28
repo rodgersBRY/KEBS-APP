@@ -43,7 +43,7 @@ class Homepage extends StatelessWidget {
     //   "route": "/complaints"
     // },
     {
-      "title": "Companies",
+      "title": "Certified\nCompanies",
       "icon": "assets/companies_icon.png",
       "route": "/companies"
     },
@@ -70,13 +70,13 @@ class Homepage extends StatelessWidget {
           ),
           Container(
             height: 320,
-            padding: const EdgeInsets.all(12.0),
+            padding: const EdgeInsets.symmetric(horizontal: 12.0),
             child: GridView.builder(
               itemCount: _quickActions.length,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
-                crossAxisSpacing: 17.0,
-                mainAxisSpacing: 17.0,
+                crossAxisSpacing: 18.0,
+                mainAxisSpacing: 18.0,
               ),
               itemBuilder: (context, index) {
                 return GestureDetector(
@@ -84,7 +84,7 @@ class Homepage extends StatelessWidget {
                     Get.toNamed(_quickActions[index]['route']);
                   },
                   child: Container(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
                     decoration: BoxDecoration(
                       border: Border.all(color: AppColors.primaryBlueColor),
                       borderRadius: BorderRadius.circular(10),
@@ -112,23 +112,27 @@ class Homepage extends StatelessWidget {
               },
             ),
           ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: OnlineLinks(),
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 20.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('assets/wajibika.jpeg'),
-                    fit: BoxFit.fill,
-                  ),
-                ),
-              ),
+          Expanded(child: Container()),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 15.0),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: OnlineLinks(),
             ),
           ),
+          // Expanded(
+          //   child: Padding(
+          //     padding: const EdgeInsets.only(top: 20.0),
+          //     child: Container(
+          //       decoration: BoxDecoration(
+          //         image: DecorationImage(
+          //           image: AssetImage('assets/wajibika.jpeg'),
+          //           fit: BoxFit.fill,
+          //         ),
+          //       ),
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );

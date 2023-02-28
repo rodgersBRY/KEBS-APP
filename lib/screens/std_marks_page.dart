@@ -77,7 +77,8 @@ class _SMarksPageState extends State<SMarksPage> {
                     style: TextStyle(fontSize: 20),
                     decoration: InputDecoration(
                       prefixIcon: Icon(Icons.search),
-                      hintText: 'Search...',
+                      hintText: 'Company Name, Permit No or Product Brand...',
+                      hintStyle: TextStyle(fontSize: 14),
                       border: InputBorder.none,
                     ),
                   ),

@@ -1,43 +1,57 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
+import '../models/staff_model.dart';
+
 class VerifyStaffController extends GetxController {
   RxBool _loading = false.obs;
+  RxList<dynamic> _staffInfo = <dynamic>[].obs;
 
   bool get loading => _loading.value;
+  List<dynamic> get staffInfo => _staffInfo;
 
-  Future<void> verifyStaff() async {
-    // Map<String, dynamic> _requestBody = {
-    //   "header": {
-    //     "serviceName": "BSKApp",
-    //     "messageID": "BSK",
-    //     "connectionID": "BskAccount",
-    //     "connectionPassword": "P@\$\$w0rd@kebs"
-    //   },
-    //   "request": {"staffID": "1334"}
-    // };
+  Future verifyStaff(String staffNo) async {
+    _loading.value = true;
 
     final uri = Uri.https(
       'connect.kebs.org',
       '/hr/urls/kebs_staff.php',
     );
 
-    final resp = await http.post(uri, body: {
-      "request": {"staffID": "1334"},
-      "header": {
-        "serviceName": "BSKApp",
-        "messageID": "BSK",
-        "connectionID": "BskAccount",
-        "connectionPassword": "P@w0rd@kebs"
-      },
-    });
+    try {
+      final resp = await http.post(
+        uri,
+        body: json.encode({
+          "request": {"StaffID": staffNo},
+          "header": {
+            "serviceName": "BSKApp",
+            "messageID": "BSK",
+            "connectionID": "BskAccount",
+            "connectionPassword": "P@\$\$w0rd@kebs"
+          },
+        }),
+        headers: {"Content-Type": "application/json"},
+      );
 
-    final respBody = jsonDecode(resp.body);
+      final respBody = jsonDecode(resp.body);
 
-    print(respBody);
+      _loading.value = false;
 
-    _loading.value = false;
+      _staffInfo
+          .assignAll(respBody.map((staff) => Staff.fromJson(staff)).toList());
+
+      return _staffInfo;
+    } catch (err) {
+      _loading.value = false;
+      Get.snackbar(
+        "Error",
+        "No user under $staffNo",
+        backgroundColor: Colors.white,
+        icon: Icon(Icons.error),
+      );
+    }
   }
 }

@@ -6,7 +6,6 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController textController;
   final FocusNode focusNode;
   final String hintText;
-  final IconData icon;
   // final VoidCallback onChanged;
 
   CustomTextField({
@@ -14,14 +13,13 @@ class CustomTextField extends StatelessWidget {
     required this.textController,
     required this.focusNode,
     required this.hintText,
-    required this.icon,
     // required this.onChanged,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
       decoration: BoxDecoration(
         color: AppColors.primaryBlueColor.withOpacity(.1),
         borderRadius: BorderRadius.circular(15),
@@ -32,7 +30,6 @@ class CustomTextField extends StatelessWidget {
         focusNode: focusNode,
         style: TextStyle(fontSize: 20),
         decoration: InputDecoration(
-          prefixIcon: Icon(icon),
           hintText: hintText,
           border: InputBorder.none,
         ),
