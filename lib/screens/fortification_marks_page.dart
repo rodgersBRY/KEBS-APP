@@ -78,7 +78,7 @@ class _FortificationPageState extends State<FortificationPage> {
                         border: InputBorder.none,
                       ),
                     ),
-                  )),
+                  ),),
               Gap(20),
               Expanded(
                 child: FutureBuilder<List<FMark>>(
@@ -97,7 +97,7 @@ class _FortificationPageState extends State<FortificationPage> {
                             if (_searchQuery.isNotEmpty) {
                               data = data
                                   .where((fmark) =>
-                                      fmark.productId.toLowerCase().contains(
+                                      fmark.productId!.toLowerCase().contains(
                                           _searchQuery.toLowerCase()) ||
                                       fmark.productBrand.toLowerCase().contains(
                                           _searchQuery.toLowerCase()) ||
@@ -131,7 +131,7 @@ class _FortificationPageState extends State<FortificationPage> {
                 builder: (context) {
                   return FMarkAlertDialog(
                     status: confirmValidity(fMarks[index].expiryDate),
-                    prodId: fMarks[index].productId,
+                    prodId: fMarks[index].productId!,
                     title: fMarks[index].productName,
                     expiryDate: fMarks[index].expiryDate,
                     issueDate: fMarks[index].issueDate,

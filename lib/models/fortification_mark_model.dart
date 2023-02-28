@@ -2,7 +2,7 @@ class FMark {
   FMark({
     required this.companyName,
     this.physicalAddress,
-    required this.productId,
+    this.productId,
     required this.productName,
     required this.productBrand,
     required this.issueDate,
@@ -12,7 +12,7 @@ class FMark {
 
   String companyName;
   String? physicalAddress;
-  String productId;
+  String? productId;
   String productName;
   String productBrand;
   String issueDate;
@@ -22,7 +22,7 @@ class FMark {
   factory FMark.fromJson(Map<String, dynamic> json) => FMark(
         companyName: json["companyName"],
         physicalAddress: json["physical_address"],
-        productId: json["product_id"],
+        productId: json["product_id"] != null ? json["product_id"] : "0000",
         productName: json["product_name"],
         productBrand: json["product_brand"],
         issueDate: json["issue_date"],

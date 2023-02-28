@@ -7,6 +7,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../utils/app_colors.dart';
 import '../widgets/gradient_background.dart';
+import '../widgets/online_links_widget.dart';
 
 class Homepage extends StatelessWidget {
   Homepage({super.key});
@@ -28,7 +29,7 @@ class Homepage extends StatelessWidget {
       "route": "/fortification-mark"
     },
     {
-      "title": "Verify Staff",
+      "title": "Verify KEBS Staff",
       "icon": "assets/verify_icon.png",
       "route": "/verify-staff"
     },
@@ -43,7 +44,7 @@ class Homepage extends StatelessWidget {
     //   "route": "/complaints"
     // },
     {
-      "title": "Certified\nCompanies",
+      "title": "Certified\nCompanies/Firms",
       "icon": "assets/companies_icon.png",
       "route": "/companies"
     },
@@ -53,6 +54,26 @@ class Homepage extends StatelessWidget {
       "route": "/contact"
     },
   ];
+
+  _redirectToWebstore() async {
+    const url = 'https://webstore.kebs.org/';
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    } else {
+      print('cannot launch the url $url');
+    }
+  }
+
+  _applyForSMark() async {
+    const url = 'https://kims.kebs.org/';
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    } else {
+      print('cannot launch the url $url');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -112,116 +133,27 @@ class Homepage extends StatelessWidget {
               },
             ),
           ),
-          Expanded(child: Container()),
+          Expanded(
+            child: Container(),
+          ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 15.0),
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: OnlineLinks(),
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            child: OnlineLinks(
+              onTap: _applyForSMark,
+              title: 'Apply for Standardization Mark',
             ),
           ),
-          // Expanded(
-          //   child: Padding(
-          //     padding: const EdgeInsets.only(top: 20.0),
-          //     child: Container(
-          //       decoration: BoxDecoration(
-          //         image: DecorationImage(
-          //           image: AssetImage('assets/wajibika.jpeg'),
-          //           fit: BoxFit.fill,
-          //         ),
-          //       ),
-          //     ),
-          //   ),
-          // ),
+          Gap(10),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            child: OnlineLinks(
+              onTap: _redirectToWebstore,
+              title: "Buy Kenyan Standards",
+            ),
+          ),
+          Gap(20),
         ],
       ),
-    );
-  }
-}
-
-class OnlineLinks extends StatelessWidget {
-  const OnlineLinks({super.key});
-
-  _redirectToWebstore() async {
-    const url = 'https://webstore.kebs.org/';
-    final uri = Uri.parse(url);
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri, mode: LaunchMode.externalApplication);
-    } else {
-      print('cannot launch the url $url');
-    }
-  }
-
-  _applyForSMark() async {
-    const url = 'https://kims.kebs.org/';
-    final uri = Uri.parse(url);
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri, mode: LaunchMode.externalApplication);
-    } else {
-      print('cannot launch the url $url');
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        GestureDetector(
-          onTap: _applyForSMark,
-          child: Container(
-            padding: EdgeInsets.all(10),
-            // width: 150,
-            decoration: BoxDecoration(
-              color: AppColors.primaryBlueColor,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.shopping_cart,
-                  color: Colors.white,
-                ),
-                Gap(5),
-                Text(
-                  "Standardization Mark",
-                  style: TextStyle(color: Colors.white, fontSize: 13),
-                ),
-              ],
-            ),
-          ),
-        ),
-        Gap(20),
-        GestureDetector(
-          onTap: _redirectToWebstore,
-          child: Container(
-            padding: EdgeInsets.all(10),
-            // width: 150,
-            decoration: BoxDecoration(
-              color: AppColors.primaryBlueColor,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.shopping_cart,
-                  color: Colors.white,
-                ),
-                Gap(5),
-                Text(
-                  "Kenyan Standards",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 13,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ],
     );
   }
 }

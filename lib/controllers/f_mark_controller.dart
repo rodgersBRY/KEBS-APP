@@ -10,7 +10,7 @@ class FMarkController extends GetxController {
 
   Future<List<FMark>> fetchFMarks() async {
     http.Response resp = await http.get(Uri.parse(
-        'https://kimsint.kebs.org:8006/api/v1/migration/anonymous/kebsWebsite/getAwardedFmarkPermits'));
+        'https://kims.kebs.org:8006/api/v1/migration/anonymous/kebsWebsite/getAwardedFmarkPermits'));
 
     List jsonData = jsonDecode(resp.body);
 
