@@ -83,5 +83,10 @@ class MyApp extends StatelessWidget {
       page: () => ComplaintsPage(),
       transition: Transition.fade,
     ),
+    GetPage(
+      name: '/company-details',
+      page: () => CompanyDetailsPage(),
+      binding: MyBindings(),
+    ),
   ];
 }

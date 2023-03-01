@@ -3,7 +3,7 @@ import "dart:convert";
 import "package:get/get.dart";
 import 'package:http/http.dart' as http;
 
-import "../models/fortification_mark_model.dart";
+import '../models/fortification_mark_model.dart';
 
 class FMarkController extends GetxController {
   RxList<FMark> _fMarks = <FMark>[].obs;

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kebs_app/utils/app_colors.dart';
-import 'package:kebs_app/widgets/widgets.dart';
 
 import '../controllers/companies_controller.dart';
-import '../models/companies_model.dart';
+import '../utils/app_colors.dart';
+import '../widgets/widgets.dart';
 
 class CompaniesPage extends StatefulWidget {
   const CompaniesPage({super.key});
@@ -55,14 +54,27 @@ class _CompaniesPageState extends State<CompaniesPage> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ListView.builder(
+        // TODO: change incase you need to
         itemCount: 100,
         itemBuilder: (context, index) {
           return Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: ListTile(
+              onTap: () {
+                Get.toNamed(
+                  '/company-details',
+                  arguments: {'companyName': data[index]['companyName']},
+                );
+              },
               leading: CircleAvatar(
                 radius: 30,
                 backgroundColor: Colors.blue[200],
+                child: Center(
+                  child: Text(
+                    '#${index + 1}',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
               ),
               title: Text(data[index]['companyName']),
             ),

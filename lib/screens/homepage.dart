@@ -5,7 +5,6 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../controllers/companies_controller.dart';
 import '../utils/app_colors.dart';
 import '../widgets/gradient_background.dart';
 import '../widgets/online_links_widget.dart';

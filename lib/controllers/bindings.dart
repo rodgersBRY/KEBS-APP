@@ -4,6 +4,7 @@ import './diamond_controller.dart';
 import './s_mark_controller.dart';
 import './staff_verify_controller.dart';
 import './companies_controller.dart';
+import './company_details_controller.dart';
 
 class MyBindings extends Bindings {
   @override
@@ -13,5 +14,6 @@ class MyBindings extends Bindings {
     Get.lazyPut<DMarkController>(() => DMarkController());
     Get.lazyPut<VerifyStaffController>(() => VerifyStaffController());
     Get.lazyPut<CompaniesController>(() => CompaniesController());
+    Get.lazyPut<CompanyDetailsController>(() => CompanyDetailsController());
   }
 }
