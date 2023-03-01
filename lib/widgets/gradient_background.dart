@@ -10,7 +10,7 @@ class GradientBackground extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 300,
+      height: 250,
       child: Stack(
         fit: StackFit.expand,
         children: [
@@ -28,8 +28,8 @@ class GradientBackground extends StatelessWidget {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  AppColors.primaryBlueColor.withOpacity(.3),
-                  Colors.white.withOpacity(.9),
+                  AppColors.primaryBlueColor.withOpacity(.1),
+                  Colors.white,
                 ],
               ),
             ),
@@ -45,11 +45,11 @@ class GradientBackground extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: 25,
+            top: 35,
             left: 55,
             child: Container(
               width: 300,
-              height: 300,
+              height: 200,
               child: Carousel(),
             ),
           ),

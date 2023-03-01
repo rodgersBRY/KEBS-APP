@@ -33,15 +33,15 @@ class _CarouselState extends State<Carousel> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        height: 100,
+        // height: 100,
         child: CarouselSlider(
           options: CarouselOptions(
-            viewportFraction: 0.8,
-            height: 200,
+            viewportFraction: 0.9,
+            height: 150,
             enlargeCenterPage: true,
             enableInfiniteScroll: true,
             autoPlay: true,
-            autoPlayInterval: Duration(seconds: 5),
+            autoPlayInterval: Duration(seconds: 4),
           ),
           items: _statements.map((i) {
             return Builder(builder: (context) {

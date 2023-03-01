@@ -55,9 +55,9 @@ class _FortificationPageState extends State<FortificationPage> {
               Gap(20),
               Padding(
                   padding:
-                      const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10),
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
                   child: Container(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                     decoration: BoxDecoration(
                       color: AppColors.primaryBlueColor.withOpacity(.1),
                       borderRadius: BorderRadius.circular(15),
@@ -142,8 +142,8 @@ class _FortificationPageState extends State<FortificationPage> {
           },
           splashColor: AppColors.primaryBlueColor.withOpacity(.3),
           contentPadding: const EdgeInsets.symmetric(
-            vertical: 8,
-            horizontal: 10,
+            vertical: 3,
+            horizontal: 5,
           ),
           leading: Container(
             width: 80,

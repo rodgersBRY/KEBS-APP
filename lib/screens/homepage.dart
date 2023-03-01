@@ -5,13 +5,14 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../controllers/companies_controller.dart';
 import '../utils/app_colors.dart';
 import '../widgets/gradient_background.dart';
 import '../widgets/online_links_widget.dart';
 
 class Homepage extends StatelessWidget {
   Homepage({super.key});
-
+  
   List _quickActions = [
     {
       "title": "Verify\nStandardization Mark",
@@ -81,7 +82,7 @@ class Homepage extends StatelessWidget {
       body: Column(
         children: [
           GradientBackground(),
-          const Gap(15),
+          const Gap(10),
           Text(
             'Quick Actions',
             style: TextStyle(
@@ -90,8 +91,8 @@ class Homepage extends StatelessWidget {
             ),
           ),
           Container(
-            height: 320,
-            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+            height: 300,
+            padding: const EdgeInsets.symmetric(horizontal: 25.0),
             child: GridView.builder(
               itemCount: _quickActions.length,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -115,8 +116,8 @@ class Homepage extends StatelessWidget {
                       children: [
                         Image.asset(
                           _quickActions[index]['icon'],
-                          height: 60,
-                          width: 60,
+                          height: 50,
+                          width: 50,
                         ),
                         Gap(5),
                         FittedBox(
@@ -133,11 +134,8 @@ class Homepage extends StatelessWidget {
               },
             ),
           ),
-          Expanded(
-            child: Container(),
-          ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            padding: const EdgeInsets.symmetric(horizontal: 15.0),
             child: OnlineLinks(
               onTap: _applyForSMark,
               title: 'Apply for Standardization Mark',
@@ -145,13 +143,12 @@ class Homepage extends StatelessWidget {
           ),
           Gap(10),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            padding: const EdgeInsets.symmetric(horizontal: 15.0),
             child: OnlineLinks(
               onTap: _redirectToWebstore,
               title: "Buy Kenyan Standards",
             ),
           ),
-          Gap(20),
         ],
       ),
     );
