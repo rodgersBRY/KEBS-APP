@@ -44,9 +44,30 @@ class _CompaniesPageState extends State<CompaniesPage> {
                   if (snapshot.hasError) {
                     return Center(child: CustomErrorWidget());
                   }
-                  return Center(child: Text(snapshot.data.length));
+                  return _buildListView(context, snapshot.data);
               }
             }),
+      ),
+    );
+  }
+
+  Widget _buildListView(context, data) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ListView.builder(
+        itemCount: 100,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: ListTile(
+              leading: CircleAvatar(
+                radius: 30,
+                backgroundColor: Colors.blue[200],
+              ),
+              title: Text(data[index]['companyName']),
+            ),
+          );
+        },
       ),
     );
   }

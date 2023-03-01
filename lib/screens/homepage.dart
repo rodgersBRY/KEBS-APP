@@ -134,6 +134,7 @@ class Homepage extends StatelessWidget {
               },
             ),
           ),
+          Expanded(child: Container()),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15.0),
             child: OnlineLinks(
@@ -149,6 +150,7 @@ class Homepage extends StatelessWidget {
               title: "Buy Kenyan Standards",
             ),
           ),
+          Expanded(child: Container()),
         ],
       ),
     );

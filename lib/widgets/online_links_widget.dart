@@ -19,7 +19,7 @@ class OnlineLinks extends StatelessWidget {
       onTap: onTap,
       child: Container(
         padding: EdgeInsets.all(10),
-        height: 70,
+        height: 50,
         width: double.maxFinite,
         decoration: BoxDecoration(
           color: AppColors.primaryBlueColor,
