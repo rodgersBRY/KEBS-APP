@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:kebs_app/models/companies_model.dart';
+import 'package:kebs_app/models/marks_model.dart';
 
 import '../controllers/companies_controller.dart';
 import '../utils/app_colors.dart';
@@ -13,8 +16,13 @@ class CompaniesPage extends StatefulWidget {
 }
 
 class _CompaniesPageState extends State<CompaniesPage> {
-  late Future companiesFuture;
+  late Future<List<Company>> companiesFuture;
   CompaniesController companiesController = Get.find();
+
+  TextEditingController _searchController = new TextEditingController();
+  FocusNode _searchNode = new FocusNode();
+
+  String _searchQuery = '';
 
   @override
   initState() {
@@ -25,27 +33,76 @@ class _CompaniesPageState extends State<CompaniesPage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: AppColors.primaryBlueColor,
-          title: Text('Companies'),
+      child: GestureDetector(
+        onTap: () {
+          _searchNode.unfocus();
+        },
+        child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: AppColors.primaryBlueColor,
+            title: Text('Companies'),
+          ),
+          body: Column(
+            children: [
+              Gap(20),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  decoration: BoxDecoration(
+                    color: AppColors.primaryBlueColor.withOpacity(.1),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: TextField(
+                    onChanged: (val) {
+                      setState(() {
+                        _searchQuery = val;
+                      });
+                    },
+                    controller: _searchController,
+                    focusNode: _searchNode,
+                    style: TextStyle(fontSize: 20),
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.search),
+                      hintText: 'Company Name',
+                      hintStyle: TextStyle(fontSize: 14),
+                      border: InputBorder.none,
+                    ),
+                  ),
+                ),
+              ),
+              FutureBuilder<List<Company>>(
+                  future: companiesFuture,
+                  builder: (context, snapshot) {
+                    switch (snapshot.connectionState) {
+                      case ConnectionState.none:
+                      case ConnectionState.waiting:
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      default:
+                        if (snapshot.hasError) {
+                          return Center(child: CustomErrorWidget());
+                        } else {
+                          List<Company> data = snapshot.data!;
+
+                          if (_searchQuery.isNotEmpty) {
+                            data = data.where((cp) =>
+                                cp.companyName
+                                    .toLowerCase()
+                                    .contains(_searchQuery.toLowerCase())).toList();
+                          }
+                          return Expanded(
+                            child: _buildListView(context, data),
+                          );
+                        }
+                    }
+                  }),
+            ],
+          ),
         ),
-        body: FutureBuilder(
-            future: companiesFuture,
-            builder: (context, snapshot) {
-              switch (snapshot.connectionState) {
-                case ConnectionState.none:
-                case ConnectionState.waiting:
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                default:
-                  if (snapshot.hasError) {
-                    return Center(child: CustomErrorWidget());
-                  }
-                  return _buildListView(context, snapshot.data);
-              }
-            }),
       ),
     );
   }
@@ -54,8 +111,7 @@ class _CompaniesPageState extends State<CompaniesPage> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ListView.builder(
-        // TODO: change incase you need to
-        itemCount: 100,
+        itemCount: data.length,
         itemBuilder: (context, index) {
           return Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -63,7 +119,7 @@ class _CompaniesPageState extends State<CompaniesPage> {
               onTap: () {
                 Get.toNamed(
                   '/company-details',
-                  arguments: {'companyName': data[index]['companyName']},
+                  arguments: {'companyName': data[index].companyName},
                 );
               },
               leading: CircleAvatar(
@@ -76,7 +132,7 @@ class _CompaniesPageState extends State<CompaniesPage> {
                   ),
                 ),
               ),
-              title: Text(data[index]['companyName']),
+              title: Text("${data[index].companyName}"),
             ),
           );
         },

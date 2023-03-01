@@ -85,41 +85,39 @@ class _SMarksPageState extends State<SMarksPage> {
                 ),
               ),
               Gap(20),
-              Expanded(
-                child: FutureBuilder<List<SMark>>(
-                    future: stdMrkBuilder,
-                    builder: (context, snapshot) {
-                      switch (snapshot.connectionState) {
-                        case ConnectionState.none:
-                        case ConnectionState.waiting:
-                          return Center(child: CircularProgressIndicator());
-                        default:
-                          if (snapshot.hasError) {
-                            return CustomErrorWidget();
-                          } else {
-                            List<SMark> data = snapshot.data!;
+              FutureBuilder<List<SMark>>(
+                  future: stdMrkBuilder,
+                  builder: (context, snapshot) {
+                    switch (snapshot.connectionState) {
+                      case ConnectionState.none:
+                      case ConnectionState.waiting:
+                        return Center(child: CircularProgressIndicator());
+                      default:
+                        if (snapshot.hasError) {
+                          return CustomErrorWidget();
+                        } else {
+                          List<SMark> data = snapshot.data!;
 
-                            if (_searchQuery.isNotEmpty) {
-                              data = data
-                                  .where((std) =>
-                                          // std.productId!.toLowerCase().contains(
-                                          //     _searchQuery.toLowerCase()) ||
-                                          std.companyName
-                                              .toLowerCase()
-                                              .contains(
-                                                  _searchQuery.toLowerCase())
-                                      //     ||
-                                      // std.productBrand!
-                                      //     .toLowerCase()
-                                      //     .contains(_searchQuery.toLowerCase())
-                                      )
-                                  .toList();
-                            }
-                            return _createListView(context, data);
+                          if (_searchQuery.isNotEmpty) {
+                            data = data
+                                .where((std) =>
+                                        // std.productId!.toLowerCase().contains(
+                                        //     _searchQuery.toLowerCase()) ||
+                                        std.companyName
+                                            .toLowerCase()
+                                            .contains(
+                                                _searchQuery.toLowerCase())
+                                    //     ||
+                                    // std.productBrand!
+                                    //     .toLowerCase()
+                                    //     .contains(_searchQuery.toLowerCase())
+                                    )
+                                .toList();
                           }
-                      }
-                    }),
-              )
+                          return Expanded(child: _createListView(context, data));
+                        }
+                    }
+                  })
             ],
           ),
         ),

@@ -9,12 +9,18 @@ class DMarkController extends GetxController {
   List<DMark> _dMarks = [];
 
   Future<List<DMark>> fetchDMarks() async {
-    http.Response resp = await http.get(Uri.parse(
-        'https://kimsint.kebs.org:8006/api/v1/migration/anonymous/kebsWebsite/getAwardedDmarkPermits'));
+    try {
+      http.Response resp = await http.get(Uri.parse(
+          'https://kimsint.kebs.org:8006/api/v1/migration/anonymous/kebsWebsite/getAwardedDmarkPermits'));
 
-    List jsonData = jsonDecode(resp.body);
+      List jsonData = jsonDecode(resp.body);
 
-    _dMarks.assignAll(jsonData.map((dMark) => DMark.fromJson(dMark)).toList());
-    return _dMarks;
+      _dMarks
+          .assignAll(jsonData.map((dMark) => DMark.fromJson(dMark)).toList());
+      return _dMarks;
+    } catch (err) {
+      print(err);
+      throw Exception('Something went wrong');
+    }
   }
 }
