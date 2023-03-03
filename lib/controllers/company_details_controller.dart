@@ -8,7 +8,7 @@ class CompanyDetailsController extends GetxController {
 
   Future getCompanyDetails(String companyName) async {
     var uri = Uri.parse(
-        'https://kimsint.kebs.org:8006/api/v1/migration/anonymous/kebsWebsite/getAllAwardedPermitsByCompanyName?companyName=$companyName');
+        'https://kims.kebs.org:8006/api/v1/migration/anonymous/kebsWebsite/getAllAwardedPermitsByCompanyName?companyName=$companyName');
 
     try {
       http.Response resp = await http.get(uri);
