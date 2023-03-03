@@ -69,7 +69,7 @@ class _VerifyStaffPageState extends State<VerifyStaffPage> {
                 splashColor: Colors.blue.withOpacity(.4),
                 child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 10),
-                    height: 70,
+                    height: 50,
                     width: 300,
                     decoration: BoxDecoration(
                       color: AppColors.primaryBlueColor,
