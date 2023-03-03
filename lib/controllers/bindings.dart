@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import './f_mark_controller.dart';
-import './diamond_controller.dart';
-import './s_mark_controller.dart';
+import 'fMark_controller.dart';
+import 'dMark_controller.dart';
+import 'sMark_controller.dart';
 import './staff_verify_controller.dart';
 import './companies_controller.dart';
 import './company_details_controller.dart';

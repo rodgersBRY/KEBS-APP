@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
-import '../controllers/f_mark_controller.dart';
-import '../models/fortification_mark_model.dart';
+import '../controllers/fMark_controller.dart';
+import '../models/marks_model.dart';
 import '../utils/app_colors.dart';
 import '../widgets/widgets.dart';
 
@@ -17,7 +17,7 @@ class FortificationPage extends StatefulWidget {
 class _FortificationPageState extends State<FortificationPage> {
   FMarkController _fMarkController = Get.find();
 
-  late Future<List<FMark>> fortificationBuilder;
+  late Future<List<MarkModel>> fMarkFuture;
 
   TextEditingController searchController = TextEditingController();
   FocusNode searchNode = FocusNode();
@@ -28,7 +28,7 @@ class _FortificationPageState extends State<FortificationPage> {
   void initState() {
     super.initState();
 
-    fortificationBuilder = _fMarkController.fetchFMarks();
+    fMarkFuture = _fMarkController.fetchFMarks();
   }
 
   bool confirmValidity(String expiryDate) {
@@ -81,8 +81,8 @@ class _FortificationPageState extends State<FortificationPage> {
                   ),),
               Gap(20),
               Expanded(
-                child: FutureBuilder<List<FMark>>(
-                    future: fortificationBuilder,
+                child: FutureBuilder<List<MarkModel>>(
+                    future: fMarkFuture,
                     builder: (context, snapshot) {
                       switch (snapshot.connectionState) {
                         case ConnectionState.none:
@@ -92,12 +92,12 @@ class _FortificationPageState extends State<FortificationPage> {
                           if (snapshot.hasError) {
                             return CustomErrorWidget();
                           } else {
-                            List<FMark> data = snapshot.data!;
+                            List<MarkModel> data = snapshot.data!;
 
                             if (_searchQuery.isNotEmpty) {
                               data = data
                                   .where((fmark) =>
-                                      fmark.productId!.toLowerCase().contains(
+                                      fmark.productId.toLowerCase().contains(
                                           _searchQuery.toLowerCase()) ||
                                       fmark.productBrand.toLowerCase().contains(
                                           _searchQuery.toLowerCase()) ||
@@ -118,8 +118,8 @@ class _FortificationPageState extends State<FortificationPage> {
     );
   }
 
-  ListView _createListView(BuildContext context, List<FMark> data) {
-    List<FMark> fMarks = data;
+  ListView _createListView(BuildContext context, List<MarkModel> data) {
+    List<MarkModel> fMarks = data;
 
     return ListView.builder(
       itemCount: fMarks.length,
@@ -130,12 +130,12 @@ class _FortificationPageState extends State<FortificationPage> {
                 context: context,
                 builder: (context) {
                   return FMarkAlertDialog(
-                    status: confirmValidity(fMarks[index].expiryDate),
-                    prodId: fMarks[index].productId!,
+                    status: confirmValidity(fMarks[index].expiryDate.toString()),
+                    prodId: fMarks[index].productId,
                     title: fMarks[index].productName,
-                    expiryDate: fMarks[index].expiryDate,
-                    issueDate: fMarks[index].issueDate,
-                    address: fMarks[index].physicalAddress!,
+                    expiryDate: fMarks[index].expiryDate.toString(),
+                    issueDate: fMarks[index].issueDate.toString(),
+                    address: fMarks[index].physicalAddress,
                     prodBrand: fMarks[index].productBrand,
                   );
                 });
@@ -166,7 +166,7 @@ class _FortificationPageState extends State<FortificationPage> {
                 style: TextStyle(color: Colors.grey),
               ),
               Gap(10),
-              confirmValidity(fMarks[index].expiryDate)
+              confirmValidity(fMarks[index].expiryDate.toString())
                   ? Text(
                       'Valid',
                       style: TextStyle(color: AppColors.validGreenColor),

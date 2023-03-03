@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:kebs_app/models/companies_model.dart';
-import 'package:kebs_app/models/marks_model.dart';
 
 import '../controllers/companies_controller.dart';
+import '../models/companies_model.dart';
 import '../utils/app_colors.dart';
 import '../widgets/widgets.dart';
 

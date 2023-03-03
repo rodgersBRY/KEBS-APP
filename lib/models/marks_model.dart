@@ -5,7 +5,7 @@ class MarkModel {
     required this.productId,
     required this.productName,
     required this.productBrand,
-    this.ksTitle,
+    required this.ksTitle,
     required this.issueDate,
     required this.expiryDate,
     required this.ksNo,
@@ -16,20 +16,21 @@ class MarkModel {
   String productId;
   String productName;
   String productBrand;
-  dynamic ksTitle;
-  DateTime issueDate;
-  DateTime expiryDate;
+  String ksTitle;
+  String issueDate;
+  String expiryDate;
   String ksNo;
 
   factory MarkModel.fromJson(Map<String, dynamic> json) => MarkModel(
-        companyName: json["companyName"],
-        physicalAddress: json["physical_address"],
-        productId: json["product_id"],
-        productName: json["product_name"],
-        productBrand: json["product_brand"],
-        ksTitle: json["ks_title"],
-        issueDate: DateTime.parse(json["issue_date"]),
-        expiryDate: DateTime.parse(json["expiry_date"]),
-        ksNo: json["ks_NO"],
+        companyName: json["companyName"] ?? 'null',
+        physicalAddress: json["physical_address"] ?? 'null',
+        productId: json["product_id"] ?? 'null',
+        productName:
+            json["product_name"] ?? "null",
+        productBrand: json["product_brand"] ?? "null",
+        ksTitle: json["ks_title"] ?? "null",
+        issueDate: json["issue_date"] ?? "null",
+        expiryDate: json["expiry_date"] ?? "null",
+        ksNo: json["ks_NO"] ?? "null",
       );
 }

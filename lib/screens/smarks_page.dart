@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
-import '../controllers/s_mark_controller.dart';
-import '../models/s_mark_model.dart';
+import '../controllers/sMark_controller.dart';
+import '../models/marks_model.dart';
 import '../utils/app_colors.dart';
 import '../widgets/widgets.dart';
 
@@ -18,10 +18,10 @@ class SMarksPage extends StatefulWidget {
 
 class _SMarksPageState extends State<SMarksPage> {
   // dependency injection
-  SMarkController stdMarksController = Get.find();
+  SMarkController sMarkController = Get.find();
 
   // to be assigned upon page load
-  late Future<List<SMark>> stdMrkBuilder;
+  late Future<List<MarkModel>> sMarkFuture;
 
   // controller and focus node for the textfield widget
   TextEditingController searchController = TextEditingController();
@@ -32,7 +32,7 @@ class _SMarksPageState extends State<SMarksPage> {
   @override
   void initState() {
     super.initState();
-    stdMrkBuilder = stdMarksController.fetchSMarks();
+    sMarkFuture = sMarkController.fetchSMarks();
   }
 
   bool confirmValidity(String expiryDate) {
@@ -61,7 +61,8 @@ class _SMarksPageState extends State<SMarksPage> {
                 padding:
                     const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10),
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                   decoration: BoxDecoration(
                     color: AppColors.primaryBlueColor.withOpacity(.1),
                     borderRadius: BorderRadius.circular(15),
@@ -85,8 +86,8 @@ class _SMarksPageState extends State<SMarksPage> {
                 ),
               ),
               Gap(20),
-              FutureBuilder<List<SMark>>(
-                  future: stdMrkBuilder,
+              FutureBuilder<List<MarkModel>>(
+                  future: sMarkFuture,
                   builder: (context, snapshot) {
                     switch (snapshot.connectionState) {
                       case ConnectionState.none:
@@ -96,25 +97,24 @@ class _SMarksPageState extends State<SMarksPage> {
                         if (snapshot.hasError) {
                           return CustomErrorWidget();
                         } else {
-                          List<SMark> data = snapshot.data!;
+                          List<MarkModel> data = snapshot.data!;
 
                           if (_searchQuery.isNotEmpty) {
                             data = data
                                 .where((std) =>
-                                        // std.productId!.toLowerCase().contains(
-                                        //     _searchQuery.toLowerCase()) ||
-                                        std.companyName
-                                            .toLowerCase()
-                                            .contains(
-                                                _searchQuery.toLowerCase())
-                                    //     ||
-                                    // std.productBrand!
-                                    //     .toLowerCase()
-                                    //     .contains(_searchQuery.toLowerCase())
-                                    )
+                                    std.productId
+                                        .toLowerCase()
+                                        .contains(_searchQuery.toLowerCase()) ||
+                                    std.companyName
+                                        .toLowerCase()
+                                        .contains(_searchQuery.toLowerCase()) ||
+                                    std.productBrand
+                                        .toLowerCase()
+                                        .contains(_searchQuery.toLowerCase()))
                                 .toList();
                           }
-                          return Expanded(child: _createListView(context, data));
+                          return Expanded(
+                              child: _createListView(context, data));
                         }
                     }
                   })
@@ -131,8 +131,8 @@ class _SMarksPageState extends State<SMarksPage> {
     searchController.dispose();
   }
 
-  ListView _createListView(BuildContext context, List<SMark> data) {
-    List<SMark> stdMarks = data;
+  ListView _createListView(BuildContext context, List<MarkModel> data) {
+    List<MarkModel> stdMarks = data;
 
     return ListView.builder(
       itemCount: stdMarks.length,
@@ -144,12 +144,12 @@ class _SMarksPageState extends State<SMarksPage> {
                 builder: (context) {
                   return StdAlertDialog(
                     status: confirmValidity(stdMarks[index].expiryDate),
-                    permitNo: stdMarks[index].productId!,
+                    permitNo: stdMarks[index].productId,
                     title: stdMarks[index].productName,
                     expiryDate: stdMarks[index].expiryDate,
                     issueDate: stdMarks[index].issueDate,
-                    address: stdMarks[index].physicalAddress!,
-                    prodBrand: stdMarks[index].productBrand!,
+                    address: stdMarks[index].physicalAddress,
+                    prodBrand: stdMarks[index].productBrand,
                   );
                 });
           },
