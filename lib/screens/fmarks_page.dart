@@ -129,14 +129,18 @@ class _FortificationPageState extends State<FortificationPage> {
             showDialog(
                 context: context,
                 builder: (context) {
-                  return FMarkAlertDialog(
+                  return CustomAlertDialog(
+                    imagePath: 'assets/fmark_logo.png',
                     status: confirmValidity(fMarks[index].expiryDate.toString()),
-                    prodId: fMarks[index].productId,
-                    title: fMarks[index].productName,
+                    productId: fMarks[index].productId,
+                    productName: fMarks[index].productName,
                     expiryDate: fMarks[index].expiryDate.toString(),
                     issueDate: fMarks[index].issueDate.toString(),
-                    address: fMarks[index].physicalAddress,
-                    prodBrand: fMarks[index].productBrand,
+                    physicalAddress: fMarks[index].physicalAddress,
+                    productBrand: fMarks[index].productBrand,
+                    ksTitle: fMarks[index].ksTitle,
+                    ksNo: fMarks[index].ksNo,
+                    companyName: fMarks[index].companyName,
                   );
                 });
           },
@@ -150,7 +154,7 @@ class _FortificationPageState extends State<FortificationPage> {
             height: 80,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/fortification_logo.png'),
+                image: AssetImage('assets/fmark_logo.png'),
                 fit: BoxFit.contain,
               ),
               borderRadius: BorderRadius.circular(15),

@@ -142,14 +142,18 @@ class _SMarksPageState extends State<SMarksPage> {
             showDialog(
                 context: context,
                 builder: (context) {
-                  return StdAlertDialog(
+                  return CustomAlertDialog(
+                    imagePath: 'assets/smark_logo.png',
                     status: confirmValidity(stdMarks[index].expiryDate),
-                    permitNo: stdMarks[index].productId,
-                    title: stdMarks[index].productName,
+                    productId: stdMarks[index].productId,
+                    productName: stdMarks[index].productName,
                     expiryDate: stdMarks[index].expiryDate,
                     issueDate: stdMarks[index].issueDate,
-                    address: stdMarks[index].physicalAddress,
-                    prodBrand: stdMarks[index].productBrand,
+                    physicalAddress: stdMarks[index].physicalAddress,
+                    productBrand: stdMarks[index].productBrand,
+                    ksNo: stdMarks[index].ksNo,
+                    ksTitle: stdMarks[index].ksTitle,
+                    companyName: stdMarks[index].companyName,
                   );
                 });
           },
@@ -163,7 +167,7 @@ class _SMarksPageState extends State<SMarksPage> {
             height: 80,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/std_logo.png'),
+                image: AssetImage('assets/smark_logo.png'),
                 fit: BoxFit.contain,
               ),
               borderRadius: BorderRadius.circular(15),

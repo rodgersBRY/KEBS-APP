@@ -74,19 +74,20 @@ class MyApp extends StatelessWidget {
       transition: Transition.fade,
     ),
     GetPage(
+      name: '/company-details',
+      page: () => CompanyDetailsPage(),
+      transition: Transition.fade,
+      binding: MyBindings(),
+    ),
+    GetPage(
       name: '/contact',
       page: () => ContactPage(),
       transition: Transition.fade,
     ),
-    GetPage(
-      name: '/complaints',
-      page: () => ComplaintsPage(),
-      transition: Transition.fade,
-    ),
-    GetPage(
-      name: '/company-details',
-      page: () => CompanyDetailsPage(),
-      binding: MyBindings(),
-    ),
+    // GetPage(
+    //   name: '/complaints',
+    //   page: () => ComplaintsPage(),
+    //   transition: Transition.fade,
+    // ),
   ];
 }

@@ -3,15 +3,20 @@ import 'package:gap/gap.dart';
 
 import '../utils/app_colors.dart';
 
-class DMarkAlertDialog extends StatelessWidget {
+class CustomAlertDialog extends StatelessWidget {
+  final String imagePath;
   final bool status;
   final String productId;
   final String productName;
   final String physicalAddress;
   final String expiryDate;
   final String issueDate;
+  final String companyName;
+  final String productBrand;
+  final String ksTitle;
+  final String ksNo;
 
-  DMarkAlertDialog({
+  CustomAlertDialog({
     super.key,
     required this.productId,
     required this.productName,
@@ -19,6 +24,11 @@ class DMarkAlertDialog extends StatelessWidget {
     required this.expiryDate,
     required this.issueDate,
     required this.status,
+    required this.imagePath,
+    required this.companyName,
+    required this.productBrand,
+    required this.ksTitle,
+    required this.ksNo,
   });
 
   @override
@@ -29,12 +39,21 @@ class DMarkAlertDialog extends StatelessWidget {
         child: Column(
           children: [
             Image.asset(
-              'assets/std_logo.png',
+              imagePath,
               height: 60,
             ),
             Gap(10),
             Text(
-              productId,
+              productName,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 21,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Gap(10),
+            Text(
+              'Permit No: $productId',
               style: TextStyle(
                 fontSize: 14,
                 color: Colors.grey,
@@ -54,18 +73,9 @@ class DMarkAlertDialog extends StatelessWidget {
         ),
       ),
       content: Container(
-        height: MediaQuery.of(context).size.height * .4,
         width: MediaQuery.of(context).size.height * .9,
         child: Column(
           children: [
-            Gap(20),
-            Text(
-              productName,
-              style: TextStyle(
-                fontSize: 21,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
             Gap(20),
             Expanded(
               child: Container(
@@ -79,14 +89,30 @@ class DMarkAlertDialog extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Text('Product ID: $productId'),
+                    Text(
+                      'Product Information',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                     Gap(10),
-                    Text('Address: ${physicalAddress}'),
+                    Text("Company Name: $companyName"),
+                    Gap(10),
+                    Text('Product Brand: $productBrand'),
+                    Gap(10),
+                    Text('Permit No: $productId'),
+                    Gap(10),
+                    Text('Physical Address: ${physicalAddress}'),
                     Gap(10),
                     Text('Issue Date: ${issueDate}'),
                     Gap(10),
                     Text('Expiry Date: ${expiryDate}'),
                     Gap(10),
+                    Text('KS Title: $ksTitle'),
+                    Gap(10),
+                    Text('Ks No: $ksNo'),
                   ],
                 ),
               ),

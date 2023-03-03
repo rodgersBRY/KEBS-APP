@@ -15,17 +15,17 @@ class Homepage extends StatelessWidget {
   List _quickActions = [
     {
       "title": "Verify\nStandardization Mark",
-      "icon": "assets/std_logo.png",
+      "icon": "assets/smark_logo.png",
       "route": "/std-page"
     },
     {
       "title": "Verify\nDiamond Mark",
-      "icon": "assets/diamond_logo.png",
+      "icon": "assets/dmark_logo.png",
       "route": "/diamond-page"
     },
     {
       "title": "Verify\nFortification Mark",
-      "icon": "assets/fortification_logo.png",
+      "icon": "assets/fmark_logo.png",
       "route": "/fortification-mark"
     },
     {

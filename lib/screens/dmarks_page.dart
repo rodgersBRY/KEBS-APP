@@ -105,10 +105,8 @@ class _DiamondMarkPageState extends State<DiamondMarkPage> {
                                   .where((dmark) =>
                                       dmark.productId.toLowerCase().contains(
                                           _searchQuery.toLowerCase()) ||
-                                      dmark.productBrand
-                                          .toLowerCase()
-                                          .contains(
-                                              _searchQuery.toLowerCase()) ||
+                                      dmark.productBrand.toLowerCase().contains(
+                                          _searchQuery.toLowerCase()) ||
                                       dmark.companyName
                                           .toLowerCase()
                                           .contains(_searchQuery.toLowerCase()))
@@ -137,7 +135,8 @@ class _DiamondMarkPageState extends State<DiamondMarkPage> {
             showDialog(
                 context: context,
                 builder: (context) {
-                  return DMarkAlertDialog(
+                  return CustomAlertDialog(
+                    imagePath: 'assets/dmark_logo.png',
                     status:
                         confirmValidity(dMarks[index].expiryDate.toString()),
                     productId: dMarks[index].productId,
@@ -145,6 +144,10 @@ class _DiamondMarkPageState extends State<DiamondMarkPage> {
                     expiryDate: dMarks[index].expiryDate.toString(),
                     issueDate: dMarks[index].issueDate.toString(),
                     physicalAddress: dMarks[index].physicalAddress,
+                    companyName: dMarks[index].companyName,
+                    productBrand: dMarks[index].productBrand,
+                    ksNo: dMarks[index].ksNo,
+                    ksTitle: dMarks[index].ksTitle,
                   );
                 });
           },
@@ -158,7 +161,7 @@ class _DiamondMarkPageState extends State<DiamondMarkPage> {
             height: 80,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/diamond_logo.png'),
+                image: AssetImage('assets/dmark_logo.png'),
                 fit: BoxFit.contain,
               ),
               borderRadius: BorderRadius.circular(15),
