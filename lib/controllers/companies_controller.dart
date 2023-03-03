@@ -19,8 +19,7 @@ class CompaniesController extends GetxController {
 
       return _companies;
     } catch (err) {
-      print(err);
-      throw Exception('Something went wrong');
+      throw Exception(err);
     }
   }
 }

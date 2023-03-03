@@ -20,8 +20,7 @@ class DMarkController extends GetxController {
           .assignAll(jsonData.map((dMark) => MarkModel.fromJson(dMark)).toList());
       return _dMarks;
     } catch (err) {
-      print(err);
-      throw Exception('Something went wrong');
+      throw Exception(err);
     }
   }
 }

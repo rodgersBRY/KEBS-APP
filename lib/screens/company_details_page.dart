@@ -181,7 +181,7 @@ class _CompanyDetailsPageState extends State<CompanyDetailsPage> {
             ),
             Gap(10),
             Text(
-              productId,
+              "Permit No: $productId",
               style: TextStyle(
                 fontSize: 14,
                 color: Colors.grey,
@@ -199,7 +199,7 @@ class _CompanyDetailsPageState extends State<CompanyDetailsPage> {
         ),
       ),
       content: Container(
-        height: MediaQuery.of(context).size.height * .4,
+        height: MediaQuery.of(context).size.height * .3,
         width: MediaQuery.of(context).size.height * .9,
         child: Column(
           children: [
@@ -213,9 +213,9 @@ class _CompanyDetailsPageState extends State<CompanyDetailsPage> {
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Text('Product ID: $productId'),
+                    Text('Permit No: $productId'),
                     Gap(10),
                     Text('Physical Address: ${physicalAddress}'),
                     Gap(10),

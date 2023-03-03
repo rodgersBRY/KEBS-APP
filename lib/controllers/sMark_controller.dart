@@ -10,15 +10,20 @@ class SMarkController extends GetxController {
   List<MarkModel> _sMarks = [];
 
   Future<List<MarkModel>> fetchSMarks() async {
-    http.Response resp = await http.get(
-      Uri.parse(
-          'https://kims.kebs.org:8006/api/v1/migration/anonymous/kebsWebsite/getAwardedSmarkPermits'),
-    );
+    try {
+      http.Response resp = await http.get(
+        Uri.parse(
+            'https://kims.kebs.org:8006/api/v1/migration/anonymous/kebsWebsite/getAwardedSmarkPermits'),
+      );
 
-    List jsonData = jsonDecode(resp.body);
+      List jsonData = jsonDecode(resp.body);
 
-    _sMarks.assignAll(jsonData.map((sMark) => MarkModel.fromJson(sMark)).toList());
+      _sMarks.assignAll(
+          jsonData.map((sMark) => MarkModel.fromJson(sMark)).toList());
 
-    return _sMarks;
+      return _sMarks;
+    } catch (err) {
+      throw Exception(err);
+    }
   }
 }

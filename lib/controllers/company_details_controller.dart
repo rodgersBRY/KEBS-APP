@@ -15,14 +15,11 @@ class CompanyDetailsController extends GetxController {
 
       var jsonData = jsonDecode(resp.body);
 
-      print(jsonData);
-
       companyDetails = jsonData;
 
-      print(companyDetails);
       return companyDetails;
     } catch (err) {
-      throw Exception('$err');
+      throw Exception(err);
     }
   }
 }
