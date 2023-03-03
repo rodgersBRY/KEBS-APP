@@ -213,7 +213,7 @@ class _CompanyDetailsPageState extends State<CompanyDetailsPage> {
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Text('Permit No: $productId'),
                     Gap(10),

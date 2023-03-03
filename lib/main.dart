@@ -68,11 +68,7 @@ class MyApp extends StatelessWidget {
       transition: Transition.fade,
       binding: MyBindings(),
     ),
-    GetPage(
-      name: '/test-page',
-      page: () => TestVerifyPage(),
-      transition: Transition.fade,
-    ),
+    
     GetPage(
       name: '/company-details',
       page: () => CompanyDetailsPage(),
@@ -87,6 +83,11 @@ class MyApp extends StatelessWidget {
     // GetPage(
     //   name: '/complaints',
     //   page: () => ComplaintsPage(),
+    //   transition: Transition.fade,
+    // ),
+    // GetPage(
+    //   name: '/test-page',
+    //   page: () => TestVerifyPage(),
     //   transition: Transition.fade,
     // ),
   ];

@@ -64,7 +64,7 @@ class CustomAlertDialog extends StatelessWidget {
               status ? "Valid" : "Expired",
               style: TextStyle(
                 fontSize: 14,
-                color: status == 'Valid'
+                color: status
                     ? Color.fromARGB(255, 73, 230, 79)
                     : Colors.red,
               ),
