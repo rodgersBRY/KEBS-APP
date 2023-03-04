@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../controllers/company_details_controller.dart';
 import '../utils/app_colors.dart';
@@ -35,6 +36,10 @@ class _CompanyDetailsPageState extends State<CompanyDetailsPage> {
     } else {
       return false;
     }
+  }
+
+  String formatDate(String date) {
+    return DateFormat.yMMMMd().format(DateTime.parse(date));
   }
 
   @override
@@ -77,6 +82,25 @@ class _CompanyDetailsPageState extends State<CompanyDetailsPage> {
                   ),
                 );
               } else if (snapshot.data.length != 0) {
+                List marks = snapshot.data;
+
+                var sMarks = marks
+                    .where((mark) => mark['product_id'].contains("SM#"))
+                    .toList();
+
+                var fMarks = marks
+                    .where((mark) => mark['product_id'].contains("FM#"))
+                    .toList();
+
+                var dMarks = marks
+                    .where((mark) => mark['product_id'].contains("DM#"))
+                    .toList();
+
+                var nullMarks = marks
+                    .where((mark) => !(mark['product_id'].contains("FM#") ||
+                        mark['product_id'].contains("SM#")))
+                    .toList();
+
                 return Column(
                   children: [
                     Container(
@@ -85,11 +109,50 @@ class _CompanyDetailsPageState extends State<CompanyDetailsPage> {
                           horizontal: 10, vertical: 15),
                       color: Colors.grey[200],
                       child: Text(
-                        'Acquired Marks',
+                        'Fortification Marks',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
-                    Expanded(child: _buildListView(context, snapshot.data)),
+                    fMarks.length != 0
+                        ? Expanded(child: _buildListView(context, fMarks))
+                        : SizedBox(height: 50),
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 15),
+                      color: Colors.grey[200],
+                      child: Text(
+                        'Standardization Marks',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    sMarks.length != 0
+                        ? Expanded(child: _buildListView(context, sMarks))
+                        : SizedBox(height: 50),
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 15),
+                      color: Colors.grey[200],
+                      child: Text(
+                        'Diamond Marks',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    dMarks.length != 0
+                        ? Expanded(child: _buildListView(context, dMarks))
+                        : SizedBox(height: 50),
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 15),
+                      color: Colors.grey[200],
+                      child: Text(
+                        'Marks',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Expanded(child: _buildListView(context, nullMarks))
                   ],
                 );
               }
@@ -199,14 +262,15 @@ class _CompanyDetailsPageState extends State<CompanyDetailsPage> {
         ),
       ),
       content: Container(
-        height: MediaQuery.of(context).size.height * .3,
+        height: MediaQuery.of(context).size.height * .4,
         width: MediaQuery.of(context).size.height * .9,
         child: Column(
           children: [
             Expanded(
               child: Container(
                 width: double.maxFinite,
-                padding: const EdgeInsets.symmetric(horizontal: 20),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 decoration: BoxDecoration(
                   color: AppColors.primaryBlueColor.withOpacity(.2),
                   borderRadius: BorderRadius.circular(10),
@@ -219,9 +283,9 @@ class _CompanyDetailsPageState extends State<CompanyDetailsPage> {
                     Gap(10),
                     Text('Physical Address: ${physicalAddress}'),
                     Gap(10),
-                    Text('Date Issued: ${issueDate}'),
+                    Text('Date Issued: ${formatDate(issueDate)}'),
                     Gap(10),
-                    Text('Expiry Date: ${expiryDate}'),
+                    Text('Expiry Date: ${formatDate(expiryDate)}'),
                     Gap(10),
                   ],
                 ),

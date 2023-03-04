@@ -88,10 +88,11 @@ class _CompaniesPageState extends State<CompaniesPage> {
                           List<Company> data = snapshot.data!;
 
                           if (_searchQuery.isNotEmpty) {
-                            data = data.where((cp) =>
-                                cp.companyName
+                            data = data
+                                .where((cp) => cp.companyName
                                     .toLowerCase()
-                                    .contains(_searchQuery.toLowerCase())).toList();
+                                    .contains(_searchQuery.toLowerCase()))
+                                .toList();
                           }
                           return Expanded(
                             child: _buildListView(context, data),
@@ -109,8 +110,11 @@ class _CompaniesPageState extends State<CompaniesPage> {
   Widget _buildListView(context, data) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: ListView.builder(
+      child: ListView.separated(
         itemCount: data.length,
+        separatorBuilder: (context, index) {
+          return Divider();
+        },
         itemBuilder: (context, index) {
           return Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),

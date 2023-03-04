@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:intl/intl.dart';
 
 import '../utils/app_colors.dart';
 
@@ -31,7 +32,10 @@ class CustomAlertDialog extends StatelessWidget {
     required this.ksNo,
   });
 
-  @override
+  String formatDate(String date) {
+    return DateFormat.yMMMMd().format(DateTime.parse(date));
+  }
+
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Container(
@@ -64,9 +68,7 @@ class CustomAlertDialog extends StatelessWidget {
               status ? "Valid" : "Expired",
               style: TextStyle(
                 fontSize: 14,
-                color: status
-                    ? Color.fromARGB(255, 73, 230, 79)
-                    : Colors.red,
+                color: status ? Color.fromARGB(255, 73, 230, 79) : Colors.red,
               ),
             ),
           ],
@@ -106,13 +108,13 @@ class CustomAlertDialog extends StatelessWidget {
                     Gap(10),
                     Text('Physical Address: ${physicalAddress}'),
                     Gap(10),
-                    Text('Issue Date: ${issueDate}'),
+                    Text('Issue Date: ${formatDate(issueDate)}'),
                     Gap(10),
-                    Text('Expiry Date: ${expiryDate}'),
+                    Text("Expiry Date: ${formatDate(expiryDate)}"),
                     Gap(10),
-                    Text('KS Title: $ksTitle'),
+                    Text('Standard Title: $ksTitle'),
                     Gap(10),
-                    Text('Ks No: $ksNo'),
+                    Text('Standard Ref: $ksNo'),
                   ],
                 ),
               ),
