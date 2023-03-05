@@ -188,7 +188,7 @@ class _CompanyDetailsPageState extends State<CompanyDetailsPage> {
                     builder: (context) {
                       return _buildAlertDialog(
                         status: confirmValidity(data[index]['expiry_date']),
-                        productName: data[index]['product_name'],
+                        productName: data[index]['product_name'] ?? "",
                         productId: data[index]['product_id'],
                         expiryDate: data[index]['expiry_date'],
                         issueDate: data[index]['issue_date'],
@@ -203,9 +203,9 @@ class _CompanyDetailsPageState extends State<CompanyDetailsPage> {
                   style: TextStyle(color: Colors.black),
                 ),
               ),
-              title: Text(data[index]['companyName']),
+              title: Text(data[index]['product_name'] ?? ''),
               subtitle: Text(
-                data[index]['product_name'],
+                data[index]['companyName'],
                 style: TextStyle(color: Colors.grey),
               ),
               trailing: confirmValidity(data[index]['expiry_date'])
