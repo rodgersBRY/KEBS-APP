@@ -31,6 +31,7 @@ class MarkDetailsPage extends StatelessWidget {
           foregroundColor: Colors.black,
         ),
         body: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
           width: double.infinity,
           height: double.infinity,
           color: Colors.white,
@@ -53,6 +54,7 @@ class MarkDetailsPage extends StatelessWidget {
               Gap(5),
               Text(
                 markArg.productName,
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
