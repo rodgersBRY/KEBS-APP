@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:kebs_app/controllers/network_controller.dart';
 import 'fMark_controller.dart';
 import 'dMark_controller.dart';
 import 'sMark_controller.dart';
@@ -15,5 +16,6 @@ class MyBindings extends Bindings {
     Get.lazyPut<VerifyStaffController>(() => VerifyStaffController());
     Get.lazyPut<CompaniesController>(() => CompaniesController());
     Get.lazyPut<CompanyDetailsController>(() => CompanyDetailsController());
+    Get.lazyPut<NetworkService>(() => NetworkService());
   }
 }

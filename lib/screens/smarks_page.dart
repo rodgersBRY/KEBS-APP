@@ -10,28 +10,31 @@ import '../utils/app_colors.dart';
 import '../widgets/widgets.dart';
 
 class SMarksPage extends StatefulWidget {
-  SMarksPage({super.key});
+  const SMarksPage({super.key});
 
   @override
   State<SMarksPage> createState() => _SMarksPageState();
 }
 
 class _SMarksPageState extends State<SMarksPage> {
-  // dependency injection
-  SMarkController sMarkController = Get.find();
+  final SMarkController sMarkController = Get.find();
 
-  // to be assigned upon page load
+  // ignore: null_argument_to_non_null_type
   late Future<List<MarkModel>> sMarkFuture;
 
   // controller and focus node for the textfield widget
-  TextEditingController searchController = TextEditingController();
-  FocusNode searchNode = FocusNode();
+  final TextEditingController searchController = TextEditingController();
+  final FocusNode searchNode = FocusNode();
 
   String _searchQuery = '';
 
   @override
   void initState() {
     super.initState();
+
+    // if (!_networkService.connected) {
+    //   Get.snackbar("Network Error", "Check your Internet Connection");
+    // }
     sMarkFuture = sMarkController.fetchSMarks();
   }
 
@@ -40,6 +43,12 @@ class _SMarksPageState extends State<SMarksPage> {
     DateTime date = DateTime.parse(expiryDate);
 
     return date.isAfter(today);
+  }
+
+  // refresh data upon dragging down
+  Future<void> _refreshData() {
+    sMarkFuture = sMarkController.fetchSMarks();
+    return sMarkFuture;
   }
 
   @override
@@ -52,73 +61,75 @@ class _SMarksPageState extends State<SMarksPage> {
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: AppColors.primaryBlueColor,
-            title: Text('Standardization Marks'),
+            title: const Text('Standardization Marks'),
           ),
-          body: Column(
-            children: [
-              Gap(20),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10),
-                child: Container(
+          body: RefreshIndicator(
+            onRefresh: _refreshData,
+            child: Column(
+              children: [
+                const Gap(20),
+                Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                  decoration: BoxDecoration(
-                    color: AppColors.primaryBlueColor.withOpacity(.1),
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: TextField(
-                    onChanged: (val) {
-                      setState(() {
-                        _searchQuery = val;
-                      });
-                    },
-                    controller: searchController,
-                    focusNode: searchNode,
-                    style: TextStyle(fontSize: 20),
-                    decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.search),
-                      hintText: 'Company Name, Permit No or Product Brand...',
-                      hintStyle: TextStyle(fontSize: 14),
-                      border: InputBorder.none,
+                      const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10),
+                  child: Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    decoration: BoxDecoration(
+                      color: AppColors.primaryBlueColor.withOpacity(.1),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: TextField(
+                      onChanged: (val) {
+                        setState(() {
+                          _searchQuery = val;
+                        });
+                      },
+                      controller: searchController,
+                      focusNode: searchNode,
+                      style: const TextStyle(fontSize: 20),
+                      decoration: const InputDecoration(
+                        prefixIcon: Icon(Icons.search),
+                        hintText: 'Company Name, Permit No or Product Brand...',
+                        hintStyle: TextStyle(fontSize: 14),
+                        border: InputBorder.none,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              Gap(20),
-              FutureBuilder<List<MarkModel>>(
-                  future: sMarkFuture,
-                  builder: (context, snapshot) {
-                    switch (snapshot.connectionState) {
-                      case ConnectionState.none:
-                      case ConnectionState.waiting:
-                        return Center(child: CircularProgressIndicator());
-                      default:
-                        if (snapshot.hasError) {
-                          return CustomErrorWidget();
-                        } else {
-                          List<MarkModel> data = snapshot.data!;
+                const Gap(20),
+                FutureBuilder<List<MarkModel>>(
+                    future: sMarkFuture,
+                    builder: (context, snapshot) {
+                      switch (snapshot.connectionState) {
+                        case ConnectionState.none:
+                        case ConnectionState.waiting:
+                          return const Center(
+                              child: CircularProgressIndicator());
+                        default:
+                          if (snapshot.hasError) {
+                            return const CustomErrorWidget();
+                          } else {
+                            List<MarkModel> data = snapshot.data!;
 
-                          if (_searchQuery.isNotEmpty) {
-                            data = data
-                                .where((std) =>
-                                    std.productId
-                                        .toLowerCase()
-                                        .contains(_searchQuery.toLowerCase()) ||
-                                    std.companyName
-                                        .toLowerCase()
-                                        .contains(_searchQuery.toLowerCase()) ||
-                                    std.productBrand
-                                        .toLowerCase()
-                                        .contains(_searchQuery.toLowerCase()))
-                                .toList();
+                            if (_searchQuery.isNotEmpty) {
+                              data = data
+                                  .where((std) =>
+                                      std.productId.toLowerCase().contains(
+                                          _searchQuery.toLowerCase()) ||
+                                      std.companyName.toLowerCase().contains(
+                                          _searchQuery.toLowerCase()) ||
+                                      std.productBrand
+                                          .toLowerCase()
+                                          .contains(_searchQuery.toLowerCase()))
+                                  .toList();
+                            }
+                            return Expanded(
+                                child: _createListView(context, data));
                           }
-                          return Expanded(
-                              child: _createListView(context, data));
-                        }
-                    }
-                  })
-            ],
+                      }
+                    })
+              ],
+            ),
           ),
         ),
       ),
@@ -166,7 +177,7 @@ class _SMarksPageState extends State<SMarksPage> {
             width: 80,
             height: 80,
             decoration: BoxDecoration(
-              image: DecorationImage(
+              image: const DecorationImage(
                 image: AssetImage('assets/smark_logo.png'),
                 fit: BoxFit.contain,
               ),
@@ -177,12 +188,12 @@ class _SMarksPageState extends State<SMarksPage> {
           subtitle: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Gap(5),
+              const Gap(5),
               Text(
                 stdMarks[index].companyName,
-                style: TextStyle(color: Colors.grey),
+                style: const TextStyle(color: Colors.grey),
               ),
-              Gap(10),
+              const Gap(10),
               confirmValidity(stdMarks[index].expiryDate)
                   ? Text(
                       "Valid",

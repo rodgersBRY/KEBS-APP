@@ -16,16 +16,15 @@ class CompaniesPage extends StatefulWidget {
 
 class _CompaniesPageState extends State<CompaniesPage> {
   late Future<List<Company>> companiesFuture;
-  CompaniesController companiesController = Get.find();
+  final CompaniesController _companiesController = Get.find();
 
-  TextEditingController _searchController = new TextEditingController();
-  FocusNode _searchNode = new FocusNode();
-
+  final FocusNode _searchNode = FocusNode();
+  final TextEditingController _searchTextController = TextEditingController();
   String _searchQuery = '';
 
   @override
   initState() {
-    companiesFuture = companiesController.fetchCompanies();
+    companiesFuture = _companiesController.fetchCompanies();
     super.initState();
   }
 
@@ -39,11 +38,11 @@ class _CompaniesPageState extends State<CompaniesPage> {
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: AppColors.primaryBlueColor,
-            title: Text('Companies'),
+            title: const Text('Companies'),
           ),
           body: Column(
             children: [
-              Gap(20),
+              const Gap(20),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
@@ -60,10 +59,10 @@ class _CompaniesPageState extends State<CompaniesPage> {
                         _searchQuery = val;
                       });
                     },
-                    controller: _searchController,
+                    controller: _searchTextController,
                     focusNode: _searchNode,
-                    style: TextStyle(fontSize: 20),
-                    decoration: InputDecoration(
+                    style: const TextStyle(fontSize: 20),
+                    decoration: const InputDecoration(
                       prefixIcon: Icon(Icons.search),
                       hintText: 'Company Name',
                       hintStyle: TextStyle(fontSize: 14),
@@ -78,12 +77,12 @@ class _CompaniesPageState extends State<CompaniesPage> {
                     switch (snapshot.connectionState) {
                       case ConnectionState.none:
                       case ConnectionState.waiting:
-                        return Center(
+                        return const Center(
                           child: CircularProgressIndicator(),
                         );
                       default:
                         if (snapshot.hasError) {
-                          return Center(child: CustomErrorWidget());
+                          return const Center(child: CustomErrorWidget());
                         } else {
                           List<Company> data = snapshot.data!;
 
@@ -113,33 +112,38 @@ class _CompaniesPageState extends State<CompaniesPage> {
       child: ListView.separated(
         itemCount: data.length,
         separatorBuilder: (context, index) {
-          return Divider();
+          return const Divider();
         },
         itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: ListTile(
-              onTap: () {
-                Get.toNamed(
-                  '/company-details',
-                  arguments: {'companyName': data[index].companyName},
-                );
-              },
-              leading: CircleAvatar(
-                radius: 30,
-                backgroundColor: Colors.blue[200],
-                child: Center(
-                  child: Text(
-                    '#${index + 1}',
-                    style: TextStyle(color: Colors.white),
-                  ),
+          return ListTile(
+            contentPadding: const EdgeInsets.symmetric(horizontal: 5.0),
+            onTap: () {
+              Get.toNamed(
+                '/company-details',
+                arguments: {'companyName': data[index].companyName},
+              );
+            },
+            leading: CircleAvatar(
+              radius: 30,
+              backgroundColor: Colors.blue[200],
+              child: Center(
+                child: Text(
+                  '#${index + 1}',
+                  style: const TextStyle(color: Colors.white),
                 ),
               ),
-              title: Text("${data[index].companyName}"),
             ),
+            title: Text("${data[index].companyName}"),
           );
         },
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _companiesController.dispose();
+    _searchTextController.dispose();
+    super.dispose();
   }
 }

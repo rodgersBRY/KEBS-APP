@@ -1,3 +1,4 @@
+// ignore: file_names
 import 'dart:async';
 import 'dart:convert';
 
@@ -7,7 +8,8 @@ import 'package:http/http.dart' as http;
 import '../models/marks_model.dart';
 
 class SMarkController extends GetxController {
-  List<MarkModel> _sMarks = [];
+
+  final List<MarkModel> _sMarks = [];
 
   Future<List<MarkModel>> fetchSMarks() async {
     try {

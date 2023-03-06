@@ -14,12 +14,10 @@ class _ComplaintsPageState extends State<ComplaintsPage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text('File a Complaint'),
+          title:const Text('File a Complaint'),
           backgroundColor: AppColors.primaryBlueColor,
         ),
-        body: Container(
-          child: Text('Complaining nonstop'),
-        ),
+        body: const Text('Complaining nonstop'),
       ),
     );
   }

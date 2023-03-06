@@ -8,14 +8,14 @@ class GradientBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
       height: 250,
       child: Stack(
         fit: StackFit.expand,
         children: [
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('assets/monument.jpeg'),
                 fit: BoxFit.cover,
@@ -34,20 +34,18 @@ class GradientBackground extends StatelessWidget {
               ),
             ),
           ),
-          Positioned(
+          const Positioned(
             top: 35,
             left: 20,
-            child: Container(
-              child: Image(
-                image: AssetImage('assets/logo.png'),
-                width: 60,
-              ),
+            child: Image(
+              image: AssetImage('assets/logo.png'),
+              width: 60,
             ),
           ),
-          Positioned(
+          const Positioned(
             top: 35,
             left: 55,
-            child: Container(
+            child: SizedBox(
               width: 300,
               height: 200,
               child: Carousel(),

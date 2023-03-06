@@ -17,7 +17,7 @@ class CustomAlertDialog extends StatelessWidget {
   final String ksTitle;
   final String ksNo;
 
-  CustomAlertDialog({
+  const CustomAlertDialog({
     super.key,
     required this.productId,
     required this.productName,
@@ -36,6 +36,7 @@ class CustomAlertDialog extends StatelessWidget {
     return DateFormat.yMMMMd().format(DateTime.parse(date));
   }
 
+  @override
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Container(
@@ -46,39 +47,41 @@ class CustomAlertDialog extends StatelessWidget {
               imagePath,
               height: 60,
             ),
-            Gap(10),
+            const Gap(10),
             Text(
               productName,
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 21,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Gap(10),
+            const Gap(10),
             Text(
               'Permit No: $productId',
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 14,
                 color: Colors.grey,
               ),
             ),
-            Gap(5),
+            const Gap(5),
             Text(
               status ? "Valid" : "Expired",
               style: TextStyle(
                 fontSize: 14,
-                color: status ? Color.fromARGB(255, 73, 230, 79) : Colors.red,
+                color: status
+                    ? const Color.fromARGB(255, 73, 230, 79)
+                    : Colors.red,
               ),
             ),
           ],
         ),
       ),
-      content: Container(
+      content: SizedBox(
         width: MediaQuery.of(context).size.height * .9,
         child: Column(
           children: [
-            Gap(20),
+            const Gap(20),
             Expanded(
               child: Container(
                 width: double.maxFinite,
@@ -91,7 +94,7 @@ class CustomAlertDialog extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Text(
+                    const Text(
                       'Product Information',
                       textAlign: TextAlign.center,
                       style: TextStyle(
@@ -99,21 +102,19 @@ class CustomAlertDialog extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Gap(10),
+                    const Gap(10),
                     Text("Company Name: $companyName"),
-                    Gap(10),
+                    const Gap(10),
                     Text('Product Brand: $productBrand'),
-                    Gap(10),
+                    const Gap(10),
                     Text('Permit No: $productId'),
-                    Gap(10),
-                    Text('Physical Address: ${physicalAddress}'),
-                    Gap(10),
+                    const Gap(10),
                     Text('Issue Date: ${formatDate(issueDate)}'),
-                    Gap(10),
+                    const Gap(10),
                     Text("Expiry Date: ${formatDate(expiryDate)}"),
-                    Gap(10),
+                    const Gap(10),
                     Text('Standard Title: $ksTitle'),
-                    Gap(10),
+                    const Gap(10),
                     Text('Standard Ref: $ksNo'),
                   ],
                 ),

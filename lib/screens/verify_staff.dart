@@ -9,7 +9,7 @@ import '../utils/app_colors.dart';
 import '../widgets/widgets.dart';
 
 class VerifyStaffPage extends StatefulWidget {
-  VerifyStaffPage({super.key});
+  const VerifyStaffPage({super.key});
 
   @override
   State<VerifyStaffPage> createState() => _VerifyStaffPageState();
@@ -41,20 +41,20 @@ class _VerifyStaffPageState extends State<VerifyStaffPage> {
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
-            title: Text("Verify Staff"),
+            title: const Text("Verify Staff"),
             backgroundColor: AppColors.primaryBlueColor,
           ),
           body: Column(
             children: [
-              Gap(100),
-              Text(
+              const Gap(100),
+              const Text(
                 'VERIFY STAFF',
                 style: TextStyle(
                   fontSize: 25,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              Gap(40),
+              const Gap(40),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: CustomTextField(
@@ -63,7 +63,7 @@ class _VerifyStaffPageState extends State<VerifyStaffPage> {
                   focusNode: staffNoFocusNode,
                 ),
               ),
-              Gap(50),
+              const Gap(50),
               InkWell(
                 onTap: _verifyStaff,
                 splashColor: Colors.blue.withOpacity(.4),
@@ -78,10 +78,10 @@ class _VerifyStaffPageState extends State<VerifyStaffPage> {
                     child: Obx(
                       () => Center(
                         child: verifyStaffController.loading
-                            ? CircularProgressIndicator(
+                            ? const CircularProgressIndicator(
                                 color: Colors.white,
                               )
-                            : Text(
+                            : const Text(
                                 'Verify',
                                 style: TextStyle(
                                   color: Colors.white,
@@ -91,7 +91,7 @@ class _VerifyStaffPageState extends State<VerifyStaffPage> {
                       ),
                     )),
               ),
-              Gap(45),
+              const Gap(45),
               Expanded(
                 child: Container(
                   width: double.maxFinite,
@@ -104,16 +104,22 @@ class _VerifyStaffPageState extends State<VerifyStaffPage> {
                           case ConnectionState.waiting:
                           default:
                             if (snapshot.hasError) {
-                              return Expanded(child: CustomErrorWidget());
-                            } else if (!snapshot.hasData) {
-                              return Container(
-                                child: Center(
+                              return const Expanded(
                                   child: Text(
-                                    'Staff Info will appear here',
-                                    style: TextStyle(
-                                      color: Colors.grey,
-                                      fontSize: 20,
-                                    ),
+                                'Hello World',
+                                style: TextStyle(
+                                  color: Colors.red,
+                                  fontSize: 24,
+                                ),
+                              ));
+                            } else if (!snapshot.hasData) {
+                              return Center(
+                                child: Text(
+                                  'Staff Info will appear here',
+                                  style: TextStyle(
+                                    color: Colors.grey[400],
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
                               );
@@ -125,47 +131,59 @@ class _VerifyStaffPageState extends State<VerifyStaffPage> {
                                     "HR No: ${snapshot.data[0].hrno}",
                                     style: TextStyle(
                                       fontSize: 17,
-                                      color: Colors.grey[700],
+                                      color: snapshot.data[0].status == "ACTIVE"
+                                          ? Colors.grey[700]
+                                          : AppColors.expiredRedColor,
                                     ),
                                   ),
-                                  Gap(15),
+                                  const Gap(15),
                                   Text(
                                     "Last Name: ${snapshot.data[0].firstname}",
                                     style: TextStyle(
                                       fontSize: 17,
-                                      color: Colors.grey[700],
+                                      color: snapshot.data[0].status == "ACTIVE"
+                                          ? Colors.grey[700]
+                                          : AppColors.expiredRedColor,
                                     ),
                                   ),
-                                  Gap(15),
+                                  const Gap(15),
                                   Text(
                                     "Middle Name: ${snapshot.data[0].middlename}",
                                     style: TextStyle(
                                       fontSize: 17,
-                                      color: Colors.grey[700],
+                                      color: snapshot.data[0].status == "ACTIVE"
+                                          ? Colors.grey[700]
+                                          : AppColors.expiredRedColor,
                                     ),
                                   ),
-                                  Gap(15),
+                                  const Gap(15),
                                   Text(
                                     "Last Name: ${snapshot.data[0].lastname}",
                                     style: TextStyle(
                                       fontSize: 17,
-                                      color: Colors.grey[700],
+                                      color: snapshot.data[0].status == "ACTIVE"
+                                          ? Colors.grey[700]
+                                          : AppColors.expiredRedColor,
                                     ),
                                   ),
-                                  Gap(15),
+                                  const Gap(15),
                                   Text(
                                     "Position: ${snapshot.data[0].position}",
                                     style: TextStyle(
                                       fontSize: 17,
-                                      color: Colors.grey[700],
+                                      color: snapshot.data[0].status == "ACTIVE"
+                                          ? Colors.grey[700]
+                                          : AppColors.expiredRedColor,
                                     ),
                                   ),
-                                  Gap(15),
+                                  const Gap(15),
                                   Text(
                                     "Status: ${snapshot.data[0].status}",
                                     style: TextStyle(
                                       fontSize: 17,
-                                      color: Colors.grey[700],
+                                      color: snapshot.data[0].status == "ACTIVE"
+                                          ? AppColors.validGreenColor
+                                          : AppColors.expiredRedColor,
                                     ),
                                   ),
                                 ],

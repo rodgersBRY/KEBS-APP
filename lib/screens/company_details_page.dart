@@ -9,7 +9,7 @@ import '../controllers/company_details_controller.dart';
 import '../utils/app_colors.dart';
 
 class CompanyDetailsPage extends StatefulWidget {
-  CompanyDetailsPage({super.key});
+  const CompanyDetailsPage({super.key});
 
   @override
   State<CompanyDetailsPage> createState() => _CompanyDetailsPageState();
@@ -55,7 +55,7 @@ class _CompanyDetailsPageState extends State<CompanyDetailsPage> {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
             case ConnectionState.waiting:
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             default:
@@ -69,7 +69,7 @@ class _CompanyDetailsPageState extends State<CompanyDetailsPage> {
                         color: Colors.grey[300],
                         size: 80,
                       ),
-                      Gap(20),
+                      const Gap(20),
                       Text(
                         'Missing Information about this company',
                         style: TextStyle(
@@ -84,22 +84,22 @@ class _CompanyDetailsPageState extends State<CompanyDetailsPage> {
               } else if (snapshot.data.length != 0) {
                 List marks = snapshot.data;
 
-                var sMarks = marks
+                marks = marks
                     .where((mark) => mark['product_id'].contains("SM#"))
                     .toList();
 
-                var fMarks = marks
-                    .where((mark) => mark['product_id'].contains("FM#"))
-                    .toList();
+                // var fMarks = marks
+                //     .where((mark) => mark['product_id'].contains("FM#"))
+                //     .toList();
 
-                var dMarks = marks
-                    .where((mark) => mark['product_id'].contains("DM#"))
-                    .toList();
+                // var dMarks = marks
+                //     .where((mark) => mark['product_id'].contains("DM#"))
+                //     .toList();
 
-                var nullMarks = marks
-                    .where((mark) => !(mark['product_id'].contains("FM#") ||
-                        mark['product_id'].contains("SM#")))
-                    .toList();
+                // var nullMarks = marks
+                //     .where((mark) => !(mark['product_id'].contains("FM#") ||
+                //         mark['product_id'].contains("SM#")))
+                //     .toList();
 
                 return Column(
                   children: [
@@ -108,51 +108,12 @@ class _CompanyDetailsPageState extends State<CompanyDetailsPage> {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 10, vertical: 15),
                       color: Colors.grey[200],
-                      child: Text(
-                        'Fortification Marks',
+                      child: const Text(
+                        'Acquired Marks',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
-                    fMarks.length != 0
-                        ? Expanded(child: _buildListView(context, fMarks))
-                        : SizedBox(height: 50),
-                    Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 15),
-                      color: Colors.grey[200],
-                      child: Text(
-                        'Standardization Marks',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                    sMarks.length != 0
-                        ? Expanded(child: _buildListView(context, sMarks))
-                        : SizedBox(height: 50),
-                    Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 15),
-                      color: Colors.grey[200],
-                      child: Text(
-                        'Diamond Marks',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                    dMarks.length != 0
-                        ? Expanded(child: _buildListView(context, dMarks))
-                        : SizedBox(height: 50),
-                    Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 15),
-                      color: Colors.grey[200],
-                      child: Text(
-                        'Marks',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                    Expanded(child: _buildListView(context, nullMarks))
+                    Expanded(child: _buildListView(context, marks)),
                   ],
                 );
               }
@@ -176,7 +137,7 @@ class _CompanyDetailsPageState extends State<CompanyDetailsPage> {
     return ListView.separated(
         itemCount: data.length,
         separatorBuilder: (context, index) {
-          return Divider();
+          return const Divider();
         },
         itemBuilder: (context, index) {
           return Padding(
@@ -200,20 +161,20 @@ class _CompanyDetailsPageState extends State<CompanyDetailsPage> {
                 backgroundColor: Colors.white,
                 child: Text(
                   (index + 1).toString(),
-                  style: TextStyle(color: Colors.black),
+                  style: const TextStyle(color: Colors.black),
                 ),
               ),
               title: Text(data[index]['product_name'] ?? ''),
               subtitle: Text(
                 data[index]['companyName'],
-                style: TextStyle(color: Colors.grey),
+                style: const TextStyle(color: Colors.grey),
               ),
               trailing: confirmValidity(data[index]['expiry_date'])
-                  ? Icon(
+                  ? const Icon(
                       Icons.check,
                       color: Colors.green,
                     )
-                  : Icon(
+                  : const Icon(
                       Icons.error,
                       color: Colors.red,
                     ),
@@ -237,31 +198,33 @@ class _CompanyDetailsPageState extends State<CompanyDetailsPage> {
           children: [
             Text(
               productName,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 21,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Gap(10),
+            const Gap(10),
             Text(
               "Permit No: $productId",
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 14,
                 color: Colors.grey,
               ),
             ),
-            Gap(5),
+            const Gap(5),
             Text(
               status ? "Valid" : "Expired",
               style: TextStyle(
                 fontSize: 14,
-                color: status ? Color.fromARGB(255, 73, 230, 79) : Colors.red,
+                color: status
+                    ? const Color.fromARGB(255, 73, 230, 79)
+                    : Colors.red,
               ),
             ),
           ],
         ),
       ),
-      content: Container(
+      content: SizedBox(
         height: MediaQuery.of(context).size.height * .4,
         width: MediaQuery.of(context).size.height * .9,
         child: Column(
@@ -280,13 +243,13 @@ class _CompanyDetailsPageState extends State<CompanyDetailsPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Text('Permit No: $productId'),
-                    Gap(10),
-                    Text('Physical Address: ${physicalAddress}'),
-                    Gap(10),
+                    const Gap(10),
+                    Text('Physical Address: $physicalAddress'),
+                    const Gap(10),
                     Text('Date Issued: ${formatDate(issueDate)}'),
-                    Gap(10),
+                    const Gap(10),
                     Text('Expiry Date: ${formatDate(expiryDate)}'),
-                    Gap(10),
+                    const Gap(10),
                   ],
                 ),
               ),

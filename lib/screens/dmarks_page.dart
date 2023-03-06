@@ -15,7 +15,7 @@ class DiamondMarkPage extends StatefulWidget {
 }
 
 class _DiamondMarkPageState extends State<DiamondMarkPage> {
-  DMarkController _dMarkController = Get.find();
+  final DMarkController _dMarkController = Get.find();
 
   late Future<List<MarkModel>> dMarkBuilder;
 
@@ -52,11 +52,11 @@ class _DiamondMarkPageState extends State<DiamondMarkPage> {
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: AppColors.primaryBlueColor,
-            title: Text('Diamond Marks'),
+            title: const Text('Diamond Marks'),
           ),
           body: Column(
             children: [
-              Gap(20),
+              const Gap(20),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10),
@@ -75,8 +75,8 @@ class _DiamondMarkPageState extends State<DiamondMarkPage> {
                     },
                     controller: searchController,
                     focusNode: searchNode,
-                    style: TextStyle(fontSize: 20),
-                    decoration: InputDecoration(
+                    style: const TextStyle(fontSize: 20),
+                    decoration: const InputDecoration(
                       prefixIcon: Icon(Icons.search),
                       hintText: 'Company Name, Permit No or Product Brand...',
                       hintStyle: TextStyle(fontSize: 14),
@@ -85,7 +85,7 @@ class _DiamondMarkPageState extends State<DiamondMarkPage> {
                   ),
                 ),
               ),
-              Gap(20),
+              const Gap(20),
               Expanded(
                 child: FutureBuilder<List<MarkModel>>(
                     future: dMarkBuilder,
@@ -93,10 +93,11 @@ class _DiamondMarkPageState extends State<DiamondMarkPage> {
                       switch (snapshot.connectionState) {
                         case ConnectionState.none:
                         case ConnectionState.waiting:
-                          return Center(child: CircularProgressIndicator());
+                          return const Center(
+                              child: CircularProgressIndicator());
                         default:
                           if (snapshot.hasError) {
-                            return CustomErrorWidget();
+                            return const CustomErrorWidget();
                           } else {
                             List<MarkModel> data = snapshot.data!;
 
@@ -160,7 +161,7 @@ class _DiamondMarkPageState extends State<DiamondMarkPage> {
             width: 80,
             height: 80,
             decoration: BoxDecoration(
-              image: DecorationImage(
+              image: const DecorationImage(
                 image: AssetImage('assets/dmark_logo.png'),
                 fit: BoxFit.contain,
               ),
@@ -171,12 +172,12 @@ class _DiamondMarkPageState extends State<DiamondMarkPage> {
           subtitle: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Gap(5),
+              const Gap(5),
               Text(
                 dMarks[index].companyName,
-                style: TextStyle(color: Colors.grey),
+                style: const TextStyle(color: Colors.grey),
               ),
-              Gap(10),
+              const Gap(10),
               confirmValidity(dMarks[index].expiryDate.toString())
                   ? Text(
                       "Valid",

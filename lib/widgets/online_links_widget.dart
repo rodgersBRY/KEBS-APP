@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import '../utils/app_colors.dart';
@@ -18,7 +17,7 @@ class OnlineLinks extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         height: 50,
         width: double.maxFinite,
         decoration: BoxDecoration(
@@ -28,7 +27,7 @@ class OnlineLinks extends StatelessWidget {
         child: Center(
           child: Text(
             title,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.white,
               fontSize: 15,
             ),

@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 import '../models/marks_model.dart';
 
 class DMarkController extends GetxController {
-  List<MarkModel> _dMarks = [];
+  final List<MarkModel> _dMarks = [];
 
   Future<List<MarkModel>> fetchDMarks() async {
     try {

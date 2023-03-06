@@ -10,7 +10,7 @@ class Carousel extends StatefulWidget {
 }
 
 class _CarouselState extends State<Carousel> {
-  List _statements = [
+  final List _statements = [
     {
       "title": "Vision",
       "image_icon": 'assets/vision_icon.png',
@@ -35,62 +35,62 @@ class _CarouselState extends State<Carousel> {
     return SizedBox(
         // height: 100,
         child: CarouselSlider(
-          options: CarouselOptions(
-            viewportFraction: 0.9,
-            height: 150,
-            enlargeCenterPage: true,
-            enableInfiniteScroll: true,
-            autoPlay: true,
-            autoPlayInterval: Duration(seconds: 4),
-          ),
-          items: _statements.map((i) {
-            return Builder(builder: (context) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 8.0,
-                  vertical: 2.0,
-                ),
-                child: Container(
-                  padding: const EdgeInsets.all(10),
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.white, width: 2.0),
-                    borderRadius: BorderRadius.circular(10),
+      options: CarouselOptions(
+        viewportFraction: 0.9,
+        height: 150,
+        enlargeCenterPage: true,
+        enableInfiniteScroll: true,
+        autoPlay: true,
+        autoPlayInterval: const Duration(seconds: 4),
+      ),
+      items: _statements.map((i) {
+        return Builder(builder: (context) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 8.0,
+              vertical: 2.0,
+            ),
+            child: Container(
+              padding: const EdgeInsets.all(10),
+              width: double.infinity,
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.white, width: 2.0),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image(
+                    color: Colors.white,
+                    width: 50,
+                    image: AssetImage(i['image_icon']),
                   ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image(
+                  const Gap(5),
+                  Text(
+                    i['title'],
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 17,
+                    ),
+                  ),
+                  const Gap(5),
+                  Flexible(
+                    child: Text(
+                      i['desc'],
+                      style: const TextStyle(
                         color: Colors.white,
-                        width: 50,
-                        image: AssetImage(i['image_icon']),
+                        fontSize: 13,
                       ),
-                      Gap(5),
-                      Text(
-                        i['title'],
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 17,
-                        ),
-                      ),
-                      Gap(5),
-                      Flexible(
-                        child: Text(
-                          i['desc'],
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 13,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              );
-            });
-          }).toList(),
-        ));
+                      textAlign: TextAlign.center,
+                    ),
+                  )
+                ],
+              ),
+            ),
+          );
+        });
+      }).toList(),
+    ));
   }
 }

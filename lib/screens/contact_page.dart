@@ -9,60 +9,59 @@ class ContactPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Color.fromARGB(255, 215, 231, 245),
+        backgroundColor: const Color.fromARGB(255, 215, 231, 245),
         appBar: AppBar(
           elevation: 0,
-          title: Text('Contact Details'),
+          title: const Text('Contact Details'),
           backgroundColor: AppColors.primaryBlueColor,
         ),
-        body: Container(
+        body: SizedBox(
           width: double.infinity,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Gap(40),
-              Text(
+              const Text(
                 'Managing Director',
                 style: TextStyle(fontSize: 17),
               ),
-              Gap(10),
-              Text(
+              const Gap(10),
+              const Text(
                 'Kenya Bureau of Standards',
                 style: TextStyle(fontSize: 17),
               ),
-              Gap(40),
-              Text(
+              const Gap(40),
+              const Text(
                 'Popo road, Off Mombasa Road',
                 style: TextStyle(fontSize: 17),
               ),
-              Gap(10),
-              Text(
+              const Gap(10),
+              const Text(
                 'P.O Box 54974 - 00200',
                 style: TextStyle(fontSize: 17),
               ),
-              Gap(10),
-              Text(
+              const Gap(10),
+              const Text(
                 'Nairobi, Kenya',
                 style: TextStyle(fontSize: 17),
               ),
-              Gap(40),
-              Text(
+              const Gap(40),
+              const Text(
                 'Tel: +254(20) 694 8000',
                 style: TextStyle(fontSize: 17),
               ),
-              Gap(10),
-              Text(
+              const Gap(10),
+              const Text(
                 'Mobile: 0722202137 or 0734600471/2',
                 style: TextStyle(fontSize: 17),
               ),
-              Gap(10),
-              Text(
+              const Gap(10),
+              const Text(
                 'Email: info@kebs.org',
                 style: TextStyle(fontSize: 17),
               ),
-              Gap(40),
-              Text(
+              const Gap(40),
+              const Text(
                 'PVOC: 0724255242',
                 style: TextStyle(fontSize: 17),
               ),
@@ -72,7 +71,7 @@ class ContactPage extends StatelessWidget {
               Container(
                 width: double.infinity,
                 height: 300,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage('assets/toll_image.jpeg'),
                     fit: BoxFit.fill,

@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
 
-    Timer(Duration(seconds: 2), () {
+    Timer(const Duration(seconds: 2), () {
       Get.offNamed('/home');
     });
   }
@@ -28,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          Container(
+          SizedBox(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             child: Image.asset(
@@ -42,7 +42,7 @@ class _SplashScreenState extends State<SplashScreen> {
             color: AppColors.primaryBlueColor.withOpacity(.8),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+              children: const [
                 Image(
                   image: AssetImage('assets/logo.png'),
                 ),

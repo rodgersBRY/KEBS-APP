@@ -4,7 +4,7 @@ class CustomToolbar extends StatelessWidget {
   final VoidCallback onPressed;
   final String title;
 
-  CustomToolbar({super.key, required this.onPressed, required this.title});
+  const CustomToolbar({super.key, required this.onPressed, required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class CustomToolbar extends StatelessWidget {
           IconButton(
             splashRadius: 20,
             onPressed: onPressed,
-            icon: Icon(
+            icon:const Icon(
               Icons.chevron_left,
               size: 30,
               color: Colors.black,
@@ -26,7 +26,7 @@ class CustomToolbar extends StatelessWidget {
           Expanded(child: Container()),
           Text(
             title,
-            style: TextStyle(fontSize: 20, color: Colors.white),
+            style:const TextStyle(fontSize: 20, color: Colors.white),
           ),
         ],
       ),

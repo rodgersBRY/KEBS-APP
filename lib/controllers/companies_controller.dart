@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:kebs_app/models/companies_model.dart';
 
 class CompaniesController extends GetxController {
-  List<Company> _companies = [];
+  final List<Company> _companies = [];
 
   Future<List<Company>> fetchCompanies() async {
     try {

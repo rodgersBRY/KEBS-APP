@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
   List<GetPage> getPages = [
     GetPage(
       name: '/',
-      page: () => SplashScreen(),
+      page: () => const SplashScreen(),
       transition: Transition.fadeIn,
     ),
     GetPage(
@@ -39,43 +39,43 @@ class MyApp extends StatelessWidget {
     ),
     GetPage(
       name: '/std-page',
-      page: () => SMarksPage(),
+      page: () => const SMarksPage(),
       transition: Transition.fade,
       binding: MyBindings(),
     ),
     GetPage(
       name: '/verify-staff',
-      page: () => VerifyStaffPage(),
+      page: () => const VerifyStaffPage(),
       transition: Transition.fade,
       binding: MyBindings(),
     ),
     GetPage(
       name: '/fortification-mark',
-      page: () => FortificationPage(),
+      page: () => const FortificationPage(),
       transition: Transition.fade,
       binding: MyBindings(),
     ),
     GetPage(
       name: '/companies',
-      page: () => CompaniesPage(),
+      page: () => const CompaniesPage(),
       transition: Transition.fade,
       binding: MyBindings(),
     ),
     GetPage(
       name: '/diamond-page',
-      page: () => DiamondMarkPage(),
+      page: () => const DiamondMarkPage(),
       transition: Transition.fade,
       binding: MyBindings(),
     ),
     GetPage(
       name: '/company-details',
-      page: () => CompanyDetailsPage(),
+      page: () => const CompanyDetailsPage(),
       transition: Transition.fade,
       binding: MyBindings(),
     ),
     GetPage(
       name: '/contact',
-      page: () => ContactPage(),
+      page: () => const ContactPage(),
       transition: Transition.fade,
     ),
     // GetPage(

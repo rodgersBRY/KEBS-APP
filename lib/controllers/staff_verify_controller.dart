@@ -7,8 +7,8 @@ import 'package:http/http.dart' as http;
 import '../models/staff_model.dart';
 
 class VerifyStaffController extends GetxController {
-  RxBool _loading = false.obs;
-  RxList<dynamic> _staffInfo = <dynamic>[].obs;
+  final RxBool _loading = false.obs;
+  final RxList<dynamic> _staffInfo = <dynamic>[].obs;
 
   bool get loading => _loading.value;
   List<dynamic> get staffInfo => _staffInfo;
@@ -46,12 +46,7 @@ class VerifyStaffController extends GetxController {
       return _staffInfo;
     } catch (err) {
       _loading.value = false;
-      Get.snackbar(
-        "Error",
-        "No user under $staffNo",
-        backgroundColor: Colors.white,
-        icon: Icon(Icons.error),
-      );
+      debugPrint("Error: $err");
     }
   }
 }

@@ -7,7 +7,7 @@ class CustomTextField extends StatelessWidget {
   final FocusNode focusNode;
   final String hintText;
 
-  CustomTextField({
+  const CustomTextField({
     super.key,
     required this.textController,
     required this.focusNode,
@@ -26,7 +26,7 @@ class CustomTextField extends StatelessWidget {
         // onChanged: onChanged(),
         controller: textController,
         focusNode: focusNode,
-        style: TextStyle(fontSize: 20),
+        style: const TextStyle(fontSize: 20),
         decoration: InputDecoration(
           hintText: hintText,
           border: InputBorder.none,

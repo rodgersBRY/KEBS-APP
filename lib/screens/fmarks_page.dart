@@ -15,7 +15,7 @@ class FortificationPage extends StatefulWidget {
 }
 
 class _FortificationPageState extends State<FortificationPage> {
-  FMarkController _fMarkController = Get.find();
+  final FMarkController _fMarkController = Get.find();
 
   late Future<List<MarkModel>> fMarkFuture;
 
@@ -48,38 +48,40 @@ class _FortificationPageState extends State<FortificationPage> {
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: AppColors.primaryBlueColor,
-            title: Text('Fortification Marks'),
+            title: const Text('Fortification Marks'),
           ),
           body: Column(
             children: [
-              Gap(20),
+              const Gap(20),
               Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+                child: Container(
                   padding:
-                      const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                    decoration: BoxDecoration(
-                      color: AppColors.primaryBlueColor.withOpacity(.1),
-                      borderRadius: BorderRadius.circular(15),
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  decoration: BoxDecoration(
+                    color: AppColors.primaryBlueColor.withOpacity(.1),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: TextField(
+                    onChanged: (val) {
+                      setState(() {
+                        _searchQuery = val;
+                      });
+                    },
+                    controller: searchController,
+                    focusNode: searchNode,
+                    style: const TextStyle(fontSize: 20),
+                    decoration: const InputDecoration(
+                      prefixIcon: Icon(Icons.search),
+                      hintText: 'Company Name, Permit No or Product Brand...',
+                      hintStyle: TextStyle(fontSize: 14),
+                      border: InputBorder.none,
                     ),
-                    child: TextField(
-                      onChanged: (val) {
-                        setState(() {
-                          _searchQuery = val;
-                        });
-                      },
-                      controller: searchController,
-                      focusNode: searchNode,
-                      style: TextStyle(fontSize: 20),
-                      decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.search),
-                        hintText: 'Company Name, Permit No or Product Brand...',
-                        hintStyle: TextStyle(fontSize: 14),
-                        border: InputBorder.none,
-                      ),
-                    ),
-                  ),),
-              Gap(20),
+                  ),
+                ),
+              ),
+             const Gap(20),
               Expanded(
                 child: FutureBuilder<List<MarkModel>>(
                     future: fMarkFuture,
@@ -87,10 +89,11 @@ class _FortificationPageState extends State<FortificationPage> {
                       switch (snapshot.connectionState) {
                         case ConnectionState.none:
                         case ConnectionState.waiting:
-                          return Center(child: CircularProgressIndicator());
+                          return const Center(
+                              child: CircularProgressIndicator());
                         default:
                           if (snapshot.hasError) {
-                            return CustomErrorWidget();
+                            return const CustomErrorWidget();
                           } else {
                             List<MarkModel> data = snapshot.data!;
 
@@ -131,7 +134,8 @@ class _FortificationPageState extends State<FortificationPage> {
                 builder: (context) {
                   return CustomAlertDialog(
                     imagePath: 'assets/fmark_logo.png',
-                    status: confirmValidity(fMarks[index].expiryDate.toString()),
+                    status:
+                        confirmValidity(fMarks[index].expiryDate.toString()),
                     productId: fMarks[index].productId,
                     productName: fMarks[index].productName,
                     expiryDate: fMarks[index].expiryDate.toString(),
@@ -153,7 +157,7 @@ class _FortificationPageState extends State<FortificationPage> {
             width: 80,
             height: 80,
             decoration: BoxDecoration(
-              image: DecorationImage(
+              image: const DecorationImage(
                 image: AssetImage('assets/fmark_logo.png'),
                 fit: BoxFit.contain,
               ),
@@ -164,12 +168,12 @@ class _FortificationPageState extends State<FortificationPage> {
           subtitle: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Gap(5),
+              const Gap(5),
               Text(
                 fMarks[index].companyName,
-                style: TextStyle(color: Colors.grey),
+                style: const TextStyle(color: Colors.grey),
               ),
-              Gap(10),
+              const Gap(10),
               confirmValidity(fMarks[index].expiryDate.toString())
                   ? Text(
                       'Valid',

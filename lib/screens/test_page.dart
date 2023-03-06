@@ -23,20 +23,20 @@ class _TestVerifyPageState extends State<TestVerifyPage> {
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
-            title: Text("Check Results"),
+            title: const Text("Check Results"),
             backgroundColor: AppColors.primaryBlueColor,
           ),
           body: Column(
             children: [
-              Gap(150),
-              Text(
+              const Gap(150),
+              const Text(
                 'Test Results Checker',
                 style: TextStyle(
                   fontSize: 25,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              Gap(40),
+              const Gap(40),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: Container(
@@ -49,8 +49,8 @@ class _TestVerifyPageState extends State<TestVerifyPage> {
                     // onChanged: onChanged(),
                     controller: bsNoController,
                     focusNode: bsNoFocusNode,
-                    style: TextStyle(fontSize: 20),
-                    decoration: InputDecoration(
+                    style: const TextStyle(fontSize: 20),
+                    decoration: const InputDecoration(
                       prefixIcon: Icon(Icons.numbers),
                       hintText: "BS Number",
                       border: InputBorder.none,
@@ -58,8 +58,8 @@ class _TestVerifyPageState extends State<TestVerifyPage> {
                   ),
                 ),
               ),
-              Gap(50),
-              VerifyButton()
+              const Gap(50),
+              const VerifyButton()
             ],
           ),
         ),
@@ -90,7 +90,7 @@ class VerifyButton extends StatelessWidget {
           color: AppColors.primaryBlueColor,
           borderRadius: BorderRadius.circular(10),
         ),
-        child: Center(
+        child: const Center(
             child: Text(
           'Submit',
           style: TextStyle(

@@ -11,8 +11,8 @@ import '../widgets/online_links_widget.dart';
 
 class Homepage extends StatelessWidget {
   Homepage({super.key});
-  
-  List _quickActions = [
+
+  final List _quickActions = [
     {
       "title": "Verify\nStandardization Mark",
       "icon": "assets/smark_logo.png",
@@ -61,7 +61,7 @@ class Homepage extends StatelessWidget {
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri, mode: LaunchMode.externalApplication);
     } else {
-      print('cannot launch the url $url');
+      debugPrint('cannot launch the url $url');
     }
   }
 
@@ -71,7 +71,7 @@ class Homepage extends StatelessWidget {
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri, mode: LaunchMode.externalApplication);
     } else {
-      print('cannot launch the url $url');
+      debugPrint('cannot launch the url $url');
     }
   }
 
@@ -80,9 +80,9 @@ class Homepage extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          GradientBackground(),
+          const GradientBackground(),
           const Gap(10),
-          Text(
+          const Text(
             'Quick Actions',
             style: TextStyle(
               fontSize: 20,
@@ -94,7 +94,7 @@ class Homepage extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 25.0),
             child: GridView.builder(
               itemCount: _quickActions.length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
                 crossAxisSpacing: 18.0,
                 mainAxisSpacing: 18.0,
@@ -118,11 +118,11 @@ class Homepage extends StatelessWidget {
                           height: 50,
                           width: 50,
                         ),
-                        Gap(5),
+                        const Gap(5),
                         FittedBox(
                           child: Text(
                             _quickActions[index]['title'],
-                            style: TextStyle(fontSize: 12),
+                            style: const TextStyle(fontSize: 12),
                             textAlign: TextAlign.center,
                           ),
                         ),
@@ -141,7 +141,7 @@ class Homepage extends StatelessWidget {
               title: 'Apply for Standardization Mark',
             ),
           ),
-          Gap(10),
+          const Gap(10),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15.0),
             child: OnlineLinks(
