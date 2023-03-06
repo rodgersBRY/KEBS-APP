@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kebs_app/screens/mark_details_page.dart';
 
 import './controllers/bindings.dart';
 import './screens/screens.dart';
@@ -76,6 +77,11 @@ class MyApp extends StatelessWidget {
     GetPage(
       name: '/contact',
       page: () => const ContactPage(),
+      transition: Transition.fade,
+    ),
+    GetPage(
+      name: '/mark-details-page',
+      page: () => const MarkDetailsPage(),
       transition: Transition.fade,
     ),
     // GetPage(

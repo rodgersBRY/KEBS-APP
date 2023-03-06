@@ -81,7 +81,7 @@ class _FortificationPageState extends State<FortificationPage> {
                   ),
                 ),
               ),
-             const Gap(20),
+              const Gap(20),
               Expanded(
                 child: FutureBuilder<List<MarkModel>>(
                     future: fMarkFuture,
@@ -129,24 +129,14 @@ class _FortificationPageState extends State<FortificationPage> {
       itemBuilder: (context, index) {
         return ListTile(
           onTap: () {
-            showDialog(
-                context: context,
-                builder: (context) {
-                  return CustomAlertDialog(
-                    imagePath: 'assets/fmark_logo.png',
-                    status:
-                        confirmValidity(fMarks[index].expiryDate.toString()),
-                    productId: fMarks[index].productId,
-                    productName: fMarks[index].productName,
-                    expiryDate: fMarks[index].expiryDate.toString(),
-                    issueDate: fMarks[index].issueDate.toString(),
-                    physicalAddress: fMarks[index].physicalAddress,
-                    productBrand: fMarks[index].productBrand,
-                    ksTitle: fMarks[index].ksTitle,
-                    ksNo: fMarks[index].ksNo,
-                    companyName: fMarks[index].companyName,
-                  );
-                });
+            Get.toNamed(
+              '/mark-details-page',
+              arguments: {
+                'mark': fMarks[index],
+                'imagePath': 'assets/fmark_logo.png',
+                "status": confirmValidity(fMarks[index].expiryDate.toString()),
+              },
+            );
           },
           splashColor: AppColors.primaryBlueColor.withOpacity(.3),
           contentPadding: const EdgeInsets.symmetric(

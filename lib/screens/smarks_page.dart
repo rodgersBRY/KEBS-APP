@@ -32,9 +32,6 @@ class _SMarksPageState extends State<SMarksPage> {
   void initState() {
     super.initState();
 
-    // if (!_networkService.connected) {
-    //   Get.snackbar("Network Error", "Check your Internet Connection");
-    // }
     sMarkFuture = sMarkController.fetchSMarks();
   }
 
@@ -150,23 +147,15 @@ class _SMarksPageState extends State<SMarksPage> {
       itemBuilder: (context, index) {
         return ListTile(
           onTap: () {
-            showDialog(
-                context: context,
-                builder: (context) {
-                  return CustomAlertDialog(
-                    imagePath: 'assets/smark_logo.png',
-                    status: confirmValidity(stdMarks[index].expiryDate),
-                    productId: stdMarks[index].productId,
-                    productName: stdMarks[index].productName,
-                    expiryDate: stdMarks[index].expiryDate,
-                    issueDate: stdMarks[index].issueDate,
-                    physicalAddress: stdMarks[index].physicalAddress,
-                    productBrand: stdMarks[index].productBrand,
-                    ksNo: stdMarks[index].ksNo,
-                    ksTitle: stdMarks[index].ksTitle,
-                    companyName: stdMarks[index].companyName,
-                  );
-                });
+            Get.toNamed(
+              '/mark-details-page',
+              arguments: {
+                'mark': stdMarks[index],
+                'imagePath': 'assets/smark_logo.png',
+                "status":
+                    confirmValidity(stdMarks[index].expiryDate.toString()),
+              },
+            );
           },
           splashColor: AppColors.primaryBlueColor.withOpacity(.3),
           contentPadding: const EdgeInsets.symmetric(

@@ -133,24 +133,14 @@ class _DiamondMarkPageState extends State<DiamondMarkPage> {
       itemBuilder: (context, index) {
         return ListTile(
           onTap: () {
-            showDialog(
-                context: context,
-                builder: (context) {
-                  return CustomAlertDialog(
-                    imagePath: 'assets/dmark_logo.png',
-                    status:
-                        confirmValidity(dMarks[index].expiryDate.toString()),
-                    productId: dMarks[index].productId,
-                    productName: dMarks[index].productName,
-                    expiryDate: dMarks[index].expiryDate.toString(),
-                    issueDate: dMarks[index].issueDate.toString(),
-                    physicalAddress: dMarks[index].physicalAddress,
-                    companyName: dMarks[index].companyName,
-                    productBrand: dMarks[index].productBrand,
-                    ksNo: dMarks[index].ksNo,
-                    ksTitle: dMarks[index].ksTitle,
-                  );
-                });
+            Get.toNamed(
+              '/mark-details-page',
+              arguments: {
+                'mark': dMarks[index],
+                'imagePath': 'assets/dmark_logo.png',
+                "status": confirmValidity(dMarks[index].expiryDate.toString()),
+              },
+            );
           },
           splashColor: AppColors.primaryBlueColor.withOpacity(.3),
           contentPadding: const EdgeInsets.symmetric(
