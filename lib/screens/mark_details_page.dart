@@ -48,7 +48,7 @@ class MarkDetailsPage extends StatelessWidget {
               Gap(10),
               Text(
                 markArg.productId,
-                style: TextStyle(color: Colors.grey, fontSize: 14),
+                style: TextStyle(color: Colors.grey, fontSize: 15),
               ),
               Gap(5),
               Text(
@@ -103,47 +103,56 @@ class MarkDetailsPage extends StatelessWidget {
                       children: [
                         Text(
                           'Permit No: ${markArg.productId}',
-                          style: TextStyle(fontSize: 20, color: Colors.grey),
+                          style:
+                              TextStyle(fontSize: 20, color: Colors.grey[800]),
                         ),
                         Gap(5),
                         Text(
                           'Product Name: ${markArg.productName}',
-                          style: TextStyle(fontSize: 20, color: Colors.grey),
+                          style:
+                              TextStyle(fontSize: 20, color: Colors.grey[800]),
                         ),
                         Gap(10),
                         Text(
                           'Product Brand: ${markArg.productBrand}',
-                          style: TextStyle(fontSize: 20, color: Colors.grey),
+                          style:
+                              TextStyle(fontSize: 20, color: Colors.grey[800]),
                         ),
                         Gap(10),
                         Text(
                           'Company Name: ${markArg.companyName}',
-                          style: TextStyle(fontSize: 20, color: Colors.grey),
+                          style:
+                              TextStyle(fontSize: 20, color: Colors.grey[800]),
                         ),
                         Gap(10),
                         Text(
                           "Physical Address: ${markArg.physicalAddress}",
-                          style: TextStyle(fontSize: 20, color: Colors.grey),
+                          style:
+                              TextStyle(fontSize: 20, color: Colors.grey[800]),
                         ),
                         Gap(30),
                         Text(
                           'Issue Date: ${formatDate(markArg.issueDate)}',
-                          style: TextStyle(fontSize: 20, color: Colors.grey),
+                          style:
+                              TextStyle(fontSize: 20, color: Colors.grey[800]),
                         ),
                         Gap(10),
                         Text(
                           'Expiry Date: ${formatDate(markArg.expiryDate)}',
-                          style: TextStyle(fontSize: 20, color: Colors.grey),
+                          style:
+                              TextStyle(fontSize: 20, color: Colors.grey[800]),
                         ),
                         Gap(10),
                         Text(
                           'Standard Title: ${markArg.ksTitle}',
-                          style: TextStyle(fontSize: 20, color: Colors.grey),
+                          style:
+                              TextStyle(fontSize: 20, color: Colors.grey[800]),
                         ),
                         Gap(10),
                         Text(
                           'Standard Ref: ${markArg.ksNo}',
-                          style: TextStyle(fontSize: 20, color: Colors.grey),
+                          style:
+                              TextStyle(fontSize: 20, color: Colors.grey[800]),
                         ),
                       ],
                     ),
