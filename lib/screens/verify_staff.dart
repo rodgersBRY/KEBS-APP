@@ -46,12 +46,16 @@ class _VerifyStaffPageState extends State<VerifyStaffPage> {
           ),
           body: Column(
             children: [
-              const Gap(100),
-              const Text(
-                'VERIFY STAFF',
-                style: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.only(top: 50),
+                child: const Text(
+                  'VERIFY STAFF',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               const Gap(40),
@@ -64,34 +68,35 @@ class _VerifyStaffPageState extends State<VerifyStaffPage> {
                 ),
               ),
               const Gap(50),
-              InkWell(
-                onTap: _verifyStaff,
-                splashColor: Colors.blue.withOpacity(.4),
-                child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    height: 50,
-                    width: 300,
-                    decoration: BoxDecoration(
-                      color: AppColors.primaryBlueColor,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Obx(
-                      () => Center(
-                        child: verifyStaffController.loading
-                            ? const CircularProgressIndicator(
-                                color: Colors.white,
-                              )
-                            : const Text(
-                                'Verify',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                ),
-                              ),
+              Flexible(
+                child: InkWell(
+                  onTap: _verifyStaff,
+                  splashColor: Colors.blue.withOpacity(.4),
+                  child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      height: 50,
+                      width: 300,
+                      decoration: BoxDecoration(
+                        color: AppColors.primaryBlueColor,
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                    )),
+                      child: Obx(
+                        () => Center(
+                          child: verifyStaffController.loading
+                              ? const CircularProgressIndicator(
+                                  color: Colors.white,
+                                )
+                              : const Text(
+                                  'Verify',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                  ),
+                                ),
+                        ),
+                      )),
+                ),
               ),
-              const Gap(45),
               Expanded(
                 child: Container(
                   width: double.maxFinite,
@@ -104,14 +109,7 @@ class _VerifyStaffPageState extends State<VerifyStaffPage> {
                           case ConnectionState.waiting:
                           default:
                             if (snapshot.hasError) {
-                              return const Expanded(
-                                  child: Text(
-                                'Hello World',
-                                style: TextStyle(
-                                  color: Colors.red,
-                                  fontSize: 24,
-                                ),
-                              ));
+                              return Center(child: const CustomErrorWidget());
                             } else if (!snapshot.hasData) {
                               return Center(
                                 child: Text(
