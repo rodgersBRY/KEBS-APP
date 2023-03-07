@@ -49,8 +49,8 @@ class CustomListView extends StatelessWidget {
             width: 80,
             height: 80,
             decoration: BoxDecoration(
-              image: const DecorationImage(
-                image: AssetImage('assets/smark_logo.png'),
+              image: DecorationImage(
+                image: AssetImage(imagePath),
                 fit: BoxFit.contain,
               ),
               borderRadius: BorderRadius.circular(15),
@@ -73,9 +73,7 @@ class CustomListView extends StatelessWidget {
                     )
                   : Text(
                       "Expired",
-                      style: TextStyle(
-                        color: AppColors.expiredRedColor,
-                      ),
+                      style: TextStyle(color: AppColors.expiredRedColor),
                     )
             ],
           ),

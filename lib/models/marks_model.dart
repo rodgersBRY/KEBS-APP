@@ -24,7 +24,7 @@ class MarkModel {
   factory MarkModel.fromJson(Map<String, dynamic> json) => MarkModel(
         companyName: json["companyName"] ?? '',
         physicalAddress: json["physical_address"] ?? '',
-        productId: json["product_id"] ?? '',
+        productId: json["product_id"],
         productName:
             json["product_name"] ?? "",
         productBrand: json["product_brand"] ?? "",

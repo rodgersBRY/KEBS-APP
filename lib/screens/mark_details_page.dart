@@ -29,9 +29,9 @@ class MarkDetailsPage extends StatelessWidget {
         ),
         body: Container(
           width: double.infinity,
-          height: double.infinity,
           color: Colors.white,
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Gap(10),
               SizedBox(
@@ -67,32 +67,46 @@ class MarkDetailsPage extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const Gap(20),
+              const Gap(40),
               Container(
-                width: double.infinity,
+                height: 60,
+                width: MediaQuery.of(context).size.width * .9,
                 padding:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
                 decoration: BoxDecoration(
-                    color: AppColors.primaryBlueColor.withOpacity(.1),
-                    border: Border.symmetric(
-                        horizontal: BorderSide(
-                      color: Colors.grey[300]!,
-                    ))),
-                child: Text(
-                  detailsTitle,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    // color: Colors.grey,
+                  color: AppColors.primaryBlueColor.withOpacity(.1),
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    topRight: Radius.circular(10),
+                  ),
+                ),
+                child: Center(
+                  child: Text(
+                    detailsTitle,
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
-              Expanded(
+              Container(
+                width: MediaQuery.of(context).size.width * .9,
+                color: Colors.grey[300],
+                height: 1,
+              ),
+              Flexible(
+                flex: 2,
                 child: Container(
+                  width: MediaQuery.of(context).size.width * .9,
                   padding: const EdgeInsets.all(20),
-                  color: AppColors.primaryBlueColor.withOpacity(.1),
-                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: AppColors.primaryBlueColor.withOpacity(.1),
+                    borderRadius: const BorderRadius.only(
+                      bottomLeft: Radius.circular(10),
+                      bottomRight: Radius.circular(10),
+                    ),
+                  ),
                   child: SingleChildScrollView(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
