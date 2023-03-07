@@ -67,36 +67,35 @@ class _VerifyStaffPageState extends State<VerifyStaffPage> {
                   focusNode: staffNoFocusNode,
                 ),
               ),
-              const Gap(50),
-              Flexible(
-                child: InkWell(
-                  onTap: _verifyStaff,
-                  splashColor: Colors.blue.withOpacity(.4),
-                  child: Container(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      height: 50,
-                      width: 300,
-                      decoration: BoxDecoration(
-                        color: AppColors.primaryBlueColor,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Obx(
-                        () => Center(
-                          child: verifyStaffController.loading
-                              ? const CircularProgressIndicator(
+              const Gap(20),
+              InkWell(
+                onTap: _verifyStaff,
+                splashColor: Colors.blue.withOpacity(.4),
+                child: Container(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    height: 50,
+                    width: 300,
+                    decoration: BoxDecoration(
+                      color: AppColors.primaryBlueColor,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Obx(
+                      () => Center(
+                        child: verifyStaffController.loading
+                            ? const CircularProgressIndicator(
+                                color: Colors.white,
+                              )
+                            : const Text(
+                                'Verify',
+                                style: TextStyle(
                                   color: Colors.white,
-                                )
-                              : const Text(
-                                  'Verify',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                  ),
+                                  fontSize: 20,
                                 ),
-                        ),
-                      )),
-                ),
+                              ),
+                      ),
+                    )),
               ),
+              const Gap(30),
               Expanded(
                 child: Container(
                   width: double.maxFinite,
@@ -135,33 +134,16 @@ class _VerifyStaffPageState extends State<VerifyStaffPage> {
                                     ),
                                   ),
                                   const Gap(15),
-                                  Text(
-                                    "Last Name: ${snapshot.data[0].firstname}",
-                                    style: TextStyle(
-                                      fontSize: 17,
-                                      color: snapshot.data[0].status == "ACTIVE"
-                                          ? Colors.grey[700]
-                                          : AppColors.expiredRedColor,
-                                    ),
-                                  ),
-                                  const Gap(15),
-                                  Text(
-                                    "Middle Name: ${snapshot.data[0].middlename}",
-                                    style: TextStyle(
-                                      fontSize: 17,
-                                      color: snapshot.data[0].status == "ACTIVE"
-                                          ? Colors.grey[700]
-                                          : AppColors.expiredRedColor,
-                                    ),
-                                  ),
-                                  const Gap(15),
-                                  Text(
-                                    "Last Name: ${snapshot.data[0].lastname}",
-                                    style: TextStyle(
-                                      fontSize: 17,
-                                      color: snapshot.data[0].status == "ACTIVE"
-                                          ? Colors.grey[700]
-                                          : AppColors.expiredRedColor,
+                                  FittedBox(
+                                    child: Text(
+                                      "Full Name: ${snapshot.data[0].firstname ?? ''} ${snapshot.data[0].middlename ?? ''} ${snapshot.data[0].lastname ?? ''}",
+                                      style: TextStyle(
+                                        fontSize: 17,
+                                        color:
+                                            snapshot.data[0].status == "ACTIVE"
+                                                ? Colors.grey[700]
+                                                : AppColors.expiredRedColor,
+                                      ),
                                     ),
                                   ),
                                   const Gap(15),
