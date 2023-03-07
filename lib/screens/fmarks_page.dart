@@ -109,7 +109,7 @@ class _FortificationPageState extends State<FortificationPage> {
                                           .contains(_searchQuery.toLowerCase()))
                                   .toList();
                             }
-                            return _createListView(context, data);
+                            return CustomListView(marks: data);
                           }
                       }
                     }),
@@ -118,65 +118,6 @@ class _FortificationPageState extends State<FortificationPage> {
           ),
         ),
       ),
-    );
-  }
-
-  ListView _createListView(BuildContext context, List<MarkModel> data) {
-    List<MarkModel> fMarks = data;
-
-    return ListView.builder(
-      itemCount: fMarks.length,
-      itemBuilder: (context, index) {
-        return ListTile(
-          onTap: () {
-            Get.toNamed(
-              '/mark-details-page',
-              arguments: {
-                'mark': fMarks[index],
-                'imagePath': 'assets/fmark_logo.png',
-                "status": confirmValidity(fMarks[index].expiryDate.toString()),
-              },
-            );
-          },
-          splashColor: AppColors.primaryBlueColor.withOpacity(.3),
-          contentPadding: const EdgeInsets.symmetric(
-            vertical: 3,
-            horizontal: 5,
-          ),
-          leading: Container(
-            width: 80,
-            height: 80,
-            decoration: BoxDecoration(
-              image: const DecorationImage(
-                image: AssetImage('assets/fmark_logo.png'),
-                fit: BoxFit.contain,
-              ),
-              borderRadius: BorderRadius.circular(15),
-            ),
-          ),
-          title: Text(fMarks[index].productName),
-          subtitle: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Gap(5),
-              Text(
-                fMarks[index].companyName,
-                style: const TextStyle(color: Colors.grey),
-              ),
-              const Gap(10),
-              confirmValidity(fMarks[index].expiryDate.toString())
-                  ? Text(
-                      'Valid',
-                      style: TextStyle(color: AppColors.validGreenColor),
-                    )
-                  : Text(
-                      'Expired',
-                      style: TextStyle(color: AppColors.expiredRedColor),
-                    )
-            ],
-          ),
-        );
-      },
     );
   }
 }

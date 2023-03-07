@@ -35,13 +35,6 @@ class _SMarksPageState extends State<SMarksPage> {
     sMarkFuture = sMarkController.fetchSMarks();
   }
 
-  bool confirmValidity(String expiryDate) {
-    DateTime today = DateTime.now();
-    DateTime date = DateTime.parse(expiryDate);
-
-    return date.isAfter(today);
-  }
-
   // refresh data upon dragging down
   Future<void> _refreshData() {
     sMarkFuture = sMarkController.fetchSMarks();
@@ -94,37 +87,38 @@ class _SMarksPageState extends State<SMarksPage> {
                   ),
                 ),
                 const Gap(20),
-                FutureBuilder<List<MarkModel>>(
-                    future: sMarkFuture,
-                    builder: (context, snapshot) {
-                      switch (snapshot.connectionState) {
-                        case ConnectionState.none:
-                        case ConnectionState.waiting:
-                          return const Center(
-                              child: CircularProgressIndicator());
-                        default:
-                          if (snapshot.hasError) {
-                            return const CustomErrorWidget();
-                          } else {
-                            List<MarkModel> data = snapshot.data!;
-
-                            if (_searchQuery.isNotEmpty) {
-                              data = data
-                                  .where((std) =>
-                                      std.productId.toLowerCase().contains(
-                                          _searchQuery.toLowerCase()) ||
-                                      std.companyName.toLowerCase().contains(
-                                          _searchQuery.toLowerCase()) ||
-                                      std.productBrand
-                                          .toLowerCase()
-                                          .contains(_searchQuery.toLowerCase()))
-                                  .toList();
+                Expanded(
+                  child: FutureBuilder<List<MarkModel>>(
+                      future: sMarkFuture,
+                      builder: (context, snapshot) {
+                        switch (snapshot.connectionState) {
+                          case ConnectionState.none:
+                          case ConnectionState.waiting:
+                            return const Center(
+                                child: CircularProgressIndicator());
+                          default:
+                            if (snapshot.hasError) {
+                              return const CustomErrorWidget();
+                            } else {
+                              List<MarkModel> data = snapshot.data!;
+                
+                              if (_searchQuery.isNotEmpty) {
+                                data = data
+                                    .where((std) =>
+                                        std.productId.toLowerCase().contains(
+                                            _searchQuery.toLowerCase()) ||
+                                        std.companyName.toLowerCase().contains(
+                                            _searchQuery.toLowerCase()) ||
+                                        std.productBrand
+                                            .toLowerCase()
+                                            .contains(_searchQuery.toLowerCase()))
+                                    .toList();
+                              }
+                              return CustomListView(marks: data);
                             }
-                            return Expanded(
-                                child: _createListView(context, data));
-                          }
-                      }
-                    })
+                        }
+                      }),
+                )
               ],
             ),
           ),
@@ -137,69 +131,5 @@ class _SMarksPageState extends State<SMarksPage> {
   void dispose() {
     super.dispose();
     searchController.dispose();
-  }
-
-  ListView _createListView(BuildContext context, List<MarkModel> data) {
-    List<MarkModel> stdMarks = data;
-
-    return ListView.builder(
-      itemCount: stdMarks.length,
-      itemBuilder: (context, index) {
-        return ListTile(
-          onTap: () {
-            Get.toNamed(
-              '/mark-details-page',
-              arguments: {
-                'mark': stdMarks[index],
-                'imagePath': 'assets/smark_logo.png',
-                "status":
-                    confirmValidity(stdMarks[index].expiryDate.toString()),
-              },
-            );
-          },
-          splashColor: AppColors.primaryBlueColor.withOpacity(.3),
-          contentPadding: const EdgeInsets.symmetric(
-            vertical: 3,
-            horizontal: 5,
-          ),
-          leading: Container(
-            width: 80,
-            height: 80,
-            decoration: BoxDecoration(
-              image: const DecorationImage(
-                image: AssetImage('assets/smark_logo.png'),
-                fit: BoxFit.contain,
-              ),
-              borderRadius: BorderRadius.circular(15),
-            ),
-          ),
-          title: Text(stdMarks[index].productName),
-          subtitle: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Gap(5),
-              Text(
-                stdMarks[index].companyName,
-                style: const TextStyle(color: Colors.grey),
-              ),
-              const Gap(10),
-              confirmValidity(stdMarks[index].expiryDate)
-                  ? Text(
-                      "Valid",
-                      style: TextStyle(
-                        color: AppColors.validGreenColor,
-                      ),
-                    )
-                  : Text(
-                      "Expired",
-                      style: TextStyle(
-                        color: AppColors.expiredRedColor,
-                      ),
-                    )
-            ],
-          ),
-        );
-      },
-    );
   }
 }

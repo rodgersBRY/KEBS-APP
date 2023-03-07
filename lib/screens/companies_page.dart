@@ -44,8 +44,7 @@ class _CompaniesPageState extends State<CompaniesPage> {
             children: [
               const Gap(20),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: Container(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
@@ -71,34 +70,35 @@ class _CompaniesPageState extends State<CompaniesPage> {
                   ),
                 ),
               ),
-              FutureBuilder<List<Company>>(
-                  future: companiesFuture,
-                  builder: (context, snapshot) {
-                    switch (snapshot.connectionState) {
-                      case ConnectionState.none:
-                      case ConnectionState.waiting:
-                        return const Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      default:
-                        if (snapshot.hasError) {
-                          return const Center(child: CustomErrorWidget());
-                        } else {
-                          List<Company> data = snapshot.data!;
-
-                          if (_searchQuery.isNotEmpty) {
-                            data = data
-                                .where((cp) => cp.companyName
-                                    .toLowerCase()
-                                    .contains(_searchQuery.toLowerCase()))
-                                .toList();
-                          }
-                          return Expanded(
-                            child: _buildListView(context, data),
+              const Gap(20),
+              Expanded(
+                child: FutureBuilder<List<Company>>(
+                    future: companiesFuture,
+                    builder: (context, snapshot) {
+                      switch (snapshot.connectionState) {
+                        case ConnectionState.none:
+                        case ConnectionState.waiting:
+                          return const Center(
+                            child: CircularProgressIndicator(),
                           );
-                        }
-                    }
-                  }),
+                        default:
+                          if (snapshot.hasError) {
+                            return const Center(child: CustomErrorWidget());
+                          } else {
+                            List<Company> data = snapshot.data!;
+
+                            if (_searchQuery.isNotEmpty) {
+                              data = data
+                                  .where((cp) => cp.companyName
+                                      .toLowerCase()
+                                      .contains(_searchQuery.toLowerCase()))
+                                  .toList();
+                            }
+                            return _buildListView(context, data);
+                          }
+                      }
+                    }),
+              ),
             ],
           ),
         ),
@@ -107,42 +107,38 @@ class _CompaniesPageState extends State<CompaniesPage> {
   }
 
   Widget _buildListView(context, data) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: ListView.separated(
-        itemCount: data.length,
-        separatorBuilder: (context, index) {
-          return const Divider();
-        },
-        itemBuilder: (context, index) {
-          return ListTile(
-            contentPadding: const EdgeInsets.symmetric(horizontal: 5.0),
-            onTap: () {
-              Get.toNamed(
-                '/company-details',
-                arguments: {'companyName': data[index].companyName},
-              );
-            },
-            leading: CircleAvatar(
-              radius: 30,
-              backgroundColor: Colors.blue[200],
-              child: Center(
-                child: Text(
-                  '#${index + 1}',
-                  style: const TextStyle(color: Colors.white),
-                ),
+    return ListView.separated(
+      itemCount: data.length,
+      separatorBuilder: (context, index) {
+        return const Divider();
+      },
+      itemBuilder: (context, index) {
+        return ListTile(
+          contentPadding: const EdgeInsets.symmetric(horizontal: 5.0),
+          onTap: () {
+            Get.toNamed(
+              '/company-details',
+              arguments: {'companyName': data[index].companyName},
+            );
+          },
+          leading: CircleAvatar(
+            radius: 30,
+            backgroundColor: Colors.blue[200],
+            child: Center(
+              child: Text(
+                '#${index + 1}',
+                style: const TextStyle(color: Colors.white),
               ),
             ),
-            title: Text("${data[index].companyName}"),
-          );
-        },
-      ),
+          ),
+          title: Text("${data[index].companyName}"),
+        );
+      },
     );
   }
 
   @override
   void dispose() {
-    _companiesController.dispose();
     _searchTextController.dispose();
     super.dispose();
   }

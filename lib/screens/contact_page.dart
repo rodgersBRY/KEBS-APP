@@ -21,50 +21,24 @@ class ContactPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
-                'Managing Director',
-                style: TextStyle(fontSize: 17),
-              ),
+              const Gap(30),
+              _buildText('Managing Director'),
               const Gap(10),
-              const Text(
-                'Kenya Bureau of Standards',
-                style: TextStyle(fontSize: 17),
-              ),
+              _buildText('Kenya Bureau of Standards'),
               const Gap(40),
-              const Text(
-                'Popo road, Off Mombasa Road',
-                style: TextStyle(fontSize: 17),
-              ),
+              _buildText('Popo road, Off Mombasa Road'),
               const Gap(10),
-              const Text(
-                'P.O Box 54974 - 00200',
-                style: TextStyle(fontSize: 17),
-              ),
+              _buildText('P.O Box 54974 - 00200'),
               const Gap(10),
-              const Text(
-                'Nairobi, Kenya',
-                style: TextStyle(fontSize: 17),
-              ),
+              _buildText('Nairobi, Kenya'),
               const Gap(40),
-              const Text(
-                'Tel: +254(20) 694 8000',
-                style: TextStyle(fontSize: 17),
-              ),
+              _buildText('Tel: +254(20) 694 8000'),
               const Gap(10),
-              const Text(
-                'Mobile: 0722202137 or 0734600471/2',
-                style: TextStyle(fontSize: 17),
-              ),
+              _buildText('Mobile: 0722202137 or 0734600471/2'),
               const Gap(10),
-              const Text(
-                'Email: info@kebs.org',
-                style: TextStyle(fontSize: 17),
-              ),
+              _buildText('Email: info@kebs.org'),
               const Gap(40),
-              const Text(
-                'PVOC: 0724255242',
-                style: TextStyle(fontSize: 17),
-              ),
+              _buildText('PVOC: 0724255242'),
               Expanded(
                 child: Container(),
               ),
@@ -82,6 +56,13 @@ class ContactPage extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  Text _buildText(String text) {
+    return Text(
+      text,
+      style: TextStyle(fontSize: 17),
     );
   }
 }
