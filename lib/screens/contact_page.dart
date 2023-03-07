@@ -62,7 +62,7 @@ class ContactPage extends StatelessWidget {
   Text _buildText(String text) {
     return Text(
       text,
-      style: TextStyle(fontSize: 17),
+      style: const TextStyle(fontSize: 17),
     );
   }
 }

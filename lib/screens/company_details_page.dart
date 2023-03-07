@@ -88,19 +88,6 @@ class _CompanyDetailsPageState extends State<CompanyDetailsPage> {
                     .where((mark) => mark['product_id'].contains("SM#"))
                     .toList();
 
-                // var fMarks = marks
-                //     .where((mark) => mark['product_id'].contains("FM#"))
-                //     .toList();
-
-                // var dMarks = marks
-                //     .where((mark) => mark['product_id'].contains("DM#"))
-                //     .toList();
-
-                // var nullMarks = marks
-                //     .where((mark) => !(mark['product_id'].contains("FM#") ||
-                //         mark['product_id'].contains("SM#")))
-                //     .toList();
-
                 return Column(
                   children: [
                     Container(

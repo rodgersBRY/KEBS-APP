@@ -48,7 +48,7 @@ class VerifyStaffController extends GetxController {
       _loading.value = false;
       Get.snackbar(
         backgroundColor: Colors.white,
-        icon: Icon(Icons.error),
+        icon: const Icon(Icons.error),
         "No user found",
         "No user with number $staffNo exists in our database",
       );

@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-import './custom_alert_dialog.dart';
 import '../models/marks_model.dart';
 import '../utils/app_colors.dart';
 
 class CustomListView extends StatelessWidget {
   final List<MarkModel> marks;
+  final String imagePath;
+  final String detailsTitle;
 
-  const CustomListView({super.key, required this.marks});
+  const CustomListView({
+    super.key,
+    required this.marks,
+    required this.imagePath,
+    required this.detailsTitle,
+  });
 
   bool confirmValidity(String expiryDate) {
     DateTime today = DateTime.now();
@@ -20,28 +27,21 @@ class CustomListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.separated(
       separatorBuilder: ((context, index) {
-        return Divider();
+        return const Divider();
       }),
       itemCount: marks.length,
       itemBuilder: (context, index) {
         return ListTile(
           onTap: () {
-            showDialog(
-                context: context,
-                builder: (context) {
-                  return CustomAlertDialog(
-                    imagePath: 'assets/smark_logo.png',
-                    status: confirmValidity(marks[index].expiryDate.toString()),
-                    productId: marks[index].productId,
-                    productName: marks[index].productName,
-                    expiryDate: marks[index].expiryDate.toString(),
-                    issueDate: marks[index].issueDate.toString(),
-                    productBrand: marks[index].productBrand,
-                    ksTitle: marks[index].ksTitle,
-                    ksNo: marks[index].ksNo,
-                    companyName: marks[index].companyName,
-                  );
-                });
+            Get.toNamed(
+              '/mark-details-page',
+              arguments: {
+                'detailsTitle': detailsTitle,
+                'mark': marks[index],
+                'imagePath': imagePath,
+                "status": confirmValidity(marks[index].expiryDate.toString()),
+              },
+            );
           },
           splashColor: AppColors.primaryBlueColor.withOpacity(.3),
           contentPadding: const EdgeInsets.symmetric(horizontal: 5),

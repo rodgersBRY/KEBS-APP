@@ -36,7 +36,7 @@ class _SMarksPageState extends State<SMarksPage> {
   }
 
   // refresh data upon dragging down
-  Future<void> _refreshData() {
+  Future _refreshData() {
     sMarkFuture = sMarkController.fetchSMarks();
     return sMarkFuture;
   }
@@ -101,7 +101,7 @@ class _SMarksPageState extends State<SMarksPage> {
                               return const CustomErrorWidget();
                             } else {
                               List<MarkModel> data = snapshot.data!;
-                
+
                               if (_searchQuery.isNotEmpty) {
                                 data = data
                                     .where((std) =>
@@ -109,12 +109,15 @@ class _SMarksPageState extends State<SMarksPage> {
                                             _searchQuery.toLowerCase()) ||
                                         std.companyName.toLowerCase().contains(
                                             _searchQuery.toLowerCase()) ||
-                                        std.productBrand
-                                            .toLowerCase()
-                                            .contains(_searchQuery.toLowerCase()))
+                                        std.productBrand.toLowerCase().contains(
+                                            _searchQuery.toLowerCase()))
                                     .toList();
                               }
-                              return CustomListView(marks: data);
+                              return CustomListView(
+                                marks: data,
+                                imagePath: 'assets/smark_logo.png',
+                                detailsTitle: 'Standardization Mark Details',
+                              );
                             }
                         }
                       }),

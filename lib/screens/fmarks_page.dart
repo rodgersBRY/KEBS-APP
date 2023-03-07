@@ -109,7 +109,11 @@ class _FortificationPageState extends State<FortificationPage> {
                                           .contains(_searchQuery.toLowerCase()))
                                   .toList();
                             }
-                            return CustomListView(marks: data);
+                            return CustomListView(
+                              marks: data,
+                              imagePath: 'assets/fmark_logo.png',
+                              detailsTitle: 'Fortification Mark Details',
+                            );
                           }
                       }
                     }),

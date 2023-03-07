@@ -113,7 +113,11 @@ class _DiamondMarkPageState extends State<DiamondMarkPage> {
                                           .contains(_searchQuery.toLowerCase()))
                                   .toList();
                             }
-                            return CustomListView(marks: data);
+                            return CustomListView(
+                              marks: data,
+                              imagePath: 'assets/dmark_logo.png',
+                              detailsTitle: 'Diamond Mark Details',
+                            );
                           }
                       }
                     }),

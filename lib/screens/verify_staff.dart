@@ -108,7 +108,7 @@ class _VerifyStaffPageState extends State<VerifyStaffPage> {
                           case ConnectionState.waiting:
                           default:
                             if (snapshot.hasError) {
-                              return Center(child: const CustomErrorWidget());
+                              return const Center(child: CustomErrorWidget());
                             } else if (!snapshot.hasData) {
                               return Center(
                                 child: Text(
