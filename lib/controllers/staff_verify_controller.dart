@@ -46,7 +46,12 @@ class VerifyStaffController extends GetxController {
       return _staffInfo;
     } catch (err) {
       _loading.value = false;
-      debugPrint("Error: $err");
+      Get.snackbar(
+        backgroundColor: Colors.white,
+        icon: Icon(Icons.error),
+        "No user found",
+        "No user with number $staffNo exists in our database",
+      );
     }
   }
 }
