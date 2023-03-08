@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../controllers/companies_controller.dart';
 import '../models/companies_model.dart';
@@ -78,8 +79,11 @@ class _CompaniesPageState extends State<CompaniesPage> {
                       switch (snapshot.connectionState) {
                         case ConnectionState.none:
                         case ConnectionState.waiting:
-                          return const Center(
-                            child: CircularProgressIndicator(),
+                          return Center(
+                            child: LoadingAnimationWidget.hexagonDots(
+                              color: AppColors.primaryBlueColor,
+                              size: 30,
+                            ),
                           );
                         default:
                           if (snapshot.hasError) {

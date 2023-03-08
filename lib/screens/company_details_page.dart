@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../controllers/company_details_controller.dart';
 import '../utils/app_colors.dart';
@@ -55,8 +56,11 @@ class _CompanyDetailsPageState extends State<CompanyDetailsPage> {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
             case ConnectionState.waiting:
-              return const Center(
-                child: CircularProgressIndicator(),
+              return Center(
+                child: LoadingAnimationWidget.hexagonDots(
+                  color: AppColors.primaryBlueColor,
+                  size: 30,
+                ),
               );
             default:
               if (snapshot.hasError) {
@@ -83,10 +87,6 @@ class _CompanyDetailsPageState extends State<CompanyDetailsPage> {
                 );
               } else if (snapshot.data.length != 0) {
                 List marks = snapshot.data;
-
-                marks = marks
-                    .where((mark) => mark['product_id'].contains("SM#"))
-                    .toList();
 
                 return Column(
                   children: [
