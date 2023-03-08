@@ -143,7 +143,7 @@ class MarkDetailsPage extends StatelessWidget {
   Text _builtText(String text) {
     return Text(
       text,
-      style: TextStyle(fontSize: 22, color: Colors.grey[800]),
+      style: TextStyle(fontSize: 20, color: Colors.grey[800]),
     );
   }
 }
