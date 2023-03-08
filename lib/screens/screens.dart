@@ -9,3 +9,4 @@ export './contact_page.dart';
 export './complaints_page.dart';
 export './company_details_page.dart';
 export './mark_details_page.dart';
+export './dmark_details_page.dart';

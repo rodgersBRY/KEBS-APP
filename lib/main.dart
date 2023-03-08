@@ -83,6 +83,11 @@ class MyApp extends StatelessWidget {
       page: () => const MarkDetailsPage(),
       transition: Transition.fade,
     ),
+    GetPage(
+      name: '/dmark-details-page',
+      page: () =>const DMarkDetailsPage(),
+      transition: Transition.fade,
+    )
     // GetPage(
     //   name: '/complaints',
     //   page: () => ComplaintsPage(),

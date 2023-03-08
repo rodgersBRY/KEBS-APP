@@ -6,6 +6,7 @@ import '../utils/app_colors.dart';
 
 class CustomListView extends StatelessWidget {
   final List<MarkModel> marks;
+  final String routeName;
   final String imagePath;
   final String detailsTitle;
 
@@ -13,6 +14,7 @@ class CustomListView extends StatelessWidget {
     super.key,
     required this.marks,
     required this.imagePath,
+    this.routeName = "/mark-details-page",
     required this.detailsTitle,
   });
 
@@ -34,7 +36,7 @@ class CustomListView extends StatelessWidget {
         return ListTile(
           onTap: () {
             Get.toNamed(
-              '/mark-details-page',
+              routeName,
               arguments: {
                 'detailsTitle': detailsTitle,
                 'mark': marks[index],

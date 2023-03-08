@@ -149,6 +149,7 @@ class _DiamondMarkPageState extends State<DiamondMarkPage> {
                                   .toList();
                             }
                             return CustomListView(
+                              routeName: '/dmark-details-page',
                               marks: data,
                               imagePath: 'assets/dmark_logo.png',
                               detailsTitle: 'Diamond Mark Details',
