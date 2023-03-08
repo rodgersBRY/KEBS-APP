@@ -112,10 +112,6 @@ class DMarkDetailsPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         _builtText('Permit No: ${markArg.productId}'),
-                        const Gap(5),
-                        _builtText('Product Name: ${markArg.productName}'),
-                        const Gap(10),
-                        _builtText('Product Brand: ${markArg.productBrand}'),
                         const Gap(10),
                         _builtText('Company Name: ${markArg.companyName}'),
                         const Gap(30),
