@@ -6,7 +6,6 @@ class GlobalFunctions {
   final TextEditingController permitNoController = TextEditingController();
 
   searchByPermitNumber(List<MarkModel> list) {
-    print(permitNoController.text.trim());
     
     List<MarkModel> result = list
         .where(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../controllers/fMark_controller.dart';
 import '../models/marks_model.dart';
@@ -41,7 +42,8 @@ class _FortificationPageState extends State<FortificationPage> {
   }
 
   searchByPermitNo() {
-    List<MarkModel> result = globalFunctions.searchByPermitNumber(_fMarkController.fMarks);
+    List<MarkModel> result =
+        globalFunctions.searchByPermitNumber(_fMarkController.fMarks);
 
     if (result.isNotEmpty) {
       // clear the textfield
@@ -118,8 +120,12 @@ class _FortificationPageState extends State<FortificationPage> {
                       switch (snapshot.connectionState) {
                         case ConnectionState.none:
                         case ConnectionState.waiting:
-                          return const Center(
-                              child: CircularProgressIndicator());
+                          return Center(
+                            child: LoadingAnimationWidget.hexagonDots(
+                              color: AppColors.primaryBlueColor,
+                              size: 30,
+                            ),
+                          );
                         default:
                           if (snapshot.hasError) {
                             return const CustomErrorWidget();

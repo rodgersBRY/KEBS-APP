@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../controllers/sMark_controller.dart';
 import '../models/marks_model.dart';
@@ -131,8 +132,12 @@ class _SMarksPageState extends State<SMarksPage> {
                         switch (snapshot.connectionState) {
                           case ConnectionState.none:
                           case ConnectionState.waiting:
-                            return const Center(
-                                child: CircularProgressIndicator());
+                            return Center(
+                              child: LoadingAnimationWidget.hexagonDots(
+                                color: AppColors.primaryBlueColor,
+                                size: 30,
+                              ),
+                            );
                           default:
                             if (snapshot.hasError) {
                               return const CustomErrorWidget();
