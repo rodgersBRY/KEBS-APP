@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:kebs_app/controllers/dMark_controller.dart';
 
 import '../models/marks_model.dart';
 
 class GlobalFunctions {
-  static TextEditingController permitNoController = TextEditingController();
-  final DMarkController dMarkController = Get.find();
+  final TextEditingController permitNoController = TextEditingController();
 
-  searchByPermitNumber() {
-    List<MarkModel> dmarks = dMarkController.dMarks;
-
-    List<MarkModel> result = dmarks
+  searchByPermitNumber(List<MarkModel> list) {
+    print(permitNoController.text.trim());
+    
+    List<MarkModel> result = list
         .where(
           (mark) =>
               mark.productId.toLowerCase() ==

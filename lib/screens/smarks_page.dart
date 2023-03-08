@@ -38,20 +38,21 @@ class _SMarksPageState extends State<SMarksPage> {
   }
 
   searchByPermitNo() {
-    List<MarkModel> result = globalFunctions.searchByPermitNumber();
+    List<MarkModel> result =
+        globalFunctions.searchByPermitNumber(sMarkController.sMarks);
 
     if (result.isNotEmpty) {
       // clear the textfield
-      GlobalFunctions.permitNoController.clear();
+      globalFunctions.permitNoController.clear();
       // close the dialog box
       Navigator.of(context).pop();
       // navigate to details page
       Get.toNamed(
         '/mark-details-page',
         arguments: {
-          'detailsTitle': 'Diamond Mark Details',
+          'detailsTitle': 'Standardization Mark Details',
           'mark': result[0],
-          'imagePath': 'assets/dmark_logo.png',
+          'imagePath': 'assets/smark_logo.png',
           "status": confirmValidity(result[0].expiryDate.toString()),
         },
       );
@@ -176,7 +177,7 @@ class _SMarksPageState extends State<SMarksPage> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: TextField(
-                          controller: GlobalFunctions.permitNoController,
+                          controller: globalFunctions.permitNoController,
                           decoration: const InputDecoration(
                             hintText: "e.g. SM#12345",
                             border: InputBorder.none,
@@ -186,7 +187,7 @@ class _SMarksPageState extends State<SMarksPage> {
                       actions: [
                         TextButton(
                           onPressed: () {
-                            GlobalFunctions.permitNoController.clear();
+                            globalFunctions.permitNoController.clear();
                             Navigator.of(context).pop();
                           },
                           child: const Text(
@@ -216,7 +217,7 @@ class _SMarksPageState extends State<SMarksPage> {
 
   @override
   void dispose() {
-    super.dispose();
     searchController.dispose();
+    super.dispose();
   }
 }

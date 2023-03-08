@@ -45,11 +45,11 @@ class _DiamondMarkPageState extends State<DiamondMarkPage> {
   }
 
   searchByPermitNo() {
-    List<MarkModel> result = globalFunctions.searchByPermitNumber();
+    List<MarkModel> result = globalFunctions.searchByPermitNumber(_dMarkController.dMarks);
 
     if (result.isNotEmpty) {
       // clear the textfield
-      GlobalFunctions.permitNoController.clear();
+      globalFunctions.permitNoController.clear();
       // close the dialog box
       Navigator.of(context).pop();
       // navigate to details page
@@ -170,7 +170,7 @@ class _DiamondMarkPageState extends State<DiamondMarkPage> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: TextField(
-                          controller: GlobalFunctions.permitNoController,
+                          controller: globalFunctions.permitNoController,
                           decoration: const InputDecoration(
                             hintText: "e.g. DM#12345",
                             border: InputBorder.none,
@@ -180,7 +180,7 @@ class _DiamondMarkPageState extends State<DiamondMarkPage> {
                       actions: [
                         TextButton(
                           onPressed: () {
-                            GlobalFunctions.permitNoController.clear();
+                            globalFunctions.permitNoController.clear();
                             Navigator.of(context).pop();
                           },
                           child: const Text(
@@ -210,7 +210,7 @@ class _DiamondMarkPageState extends State<DiamondMarkPage> {
 
   @override
   void dispose() {
-    GlobalFunctions.permitNoController.dispose();
+    globalFunctions.permitNoController.dispose();
     searchController.dispose();
     super.dispose();
   }
