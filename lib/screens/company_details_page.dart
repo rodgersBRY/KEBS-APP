@@ -96,7 +96,7 @@ class _CompanyDetailsPageState extends State<CompanyDetailsPage> {
                           horizontal: 10, vertical: 15),
                       color: Colors.grey[200],
                       child: const Text(
-                        'Acquired Marks',
+                        'Issued Permits',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
