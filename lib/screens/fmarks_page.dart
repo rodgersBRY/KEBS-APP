@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import '../controllers/fMark_controller.dart';
 import '../models/marks_model.dart';
 import '../utils/app_colors.dart';
+import '../utils/global_functions.dart';
 import '../widgets/widgets.dart';
 
 class FortificationPage extends StatefulWidget {
@@ -16,6 +17,7 @@ class FortificationPage extends StatefulWidget {
 
 class _FortificationPageState extends State<FortificationPage> {
   final FMarkController _fMarkController = Get.find();
+  final GlobalFunctions globalFunctions = GlobalFunctions();
 
   late Future<List<MarkModel>> fMarkFuture;
 
@@ -36,6 +38,33 @@ class _FortificationPageState extends State<FortificationPage> {
     DateTime date = DateTime.parse(expiryDate);
 
     return date.isAfter(today);
+  }
+
+  searchByPermitNo() {
+    List<MarkModel> result = globalFunctions.searchByPermitNumber();
+
+    if (result.isNotEmpty) {
+      // clear the textfield
+      GlobalFunctions.permitNoController.clear();
+      // close the dialog box
+      Navigator.of(context).pop();
+      // navigate to details page
+      Get.toNamed(
+        '/mark-details-page',
+        arguments: {
+          'detailsTitle': 'Diamond Mark Details',
+          'mark': result[0],
+          'imagePath': 'assets/dmark_logo.png',
+          "status": confirmValidity(result[0].expiryDate.toString()),
+        },
+      );
+    } else {
+      Get.snackbar(
+        backgroundColor: Colors.white,
+        "Not Found",
+        "No permit with that number",
+      );
+    }
   }
 
   @override
@@ -119,6 +148,54 @@ class _FortificationPageState extends State<FortificationPage> {
                     }),
               )
             ],
+          ),
+          floatingActionButton: FloatingActionButton(
+            backgroundColor: AppColors.validGreenColor,
+            onPressed: () {
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: const Text('Enter Permit Number'),
+                      content: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        decoration: BoxDecoration(
+                          color: AppColors.primaryBlueColor.withOpacity(.1),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: TextField(
+                          controller: GlobalFunctions.permitNoController,
+                          decoration: const InputDecoration(
+                            hintText: "e.g. FM#12345",
+                            border: InputBorder.none,
+                          ),
+                        ),
+                      ),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            GlobalFunctions.permitNoController.clear();
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text(
+                            'Cancel',
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: searchByPermitNo,
+                          child: Text(
+                            'Search',
+                            style: TextStyle(
+                              color: AppColors.primaryBlueColor,
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  });
+            },
+            child: const Icon(Icons.search),
           ),
         ),
       ),

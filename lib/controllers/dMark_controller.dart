@@ -1,7 +1,7 @@
-import 'dart:async';
+// ignore_for_file: file_names
+
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
@@ -9,6 +9,8 @@ import '../models/marks_model.dart';
 
 class DMarkController extends GetxController {
   final List<MarkModel> _dMarks = [];
+
+  List<MarkModel> get dMarks => _dMarks;
 
   Future<List<MarkModel>> fetchDMarks() async {
     try {
@@ -20,12 +22,9 @@ class DMarkController extends GetxController {
       List jsonData = jsonDecode(resp.body);
 
       for (var mark in jsonData) {
-        if (mark['product_id'] != null) {
-          _dMarks.add(MarkModel.fromJson(mark));
-        }
+        _dMarks.add(MarkModel.fromJson(mark));
       }
 
-      debugPrint(_dMarks.length.toString());
       return _dMarks;
     } catch (err) {
       throw Exception(err);

@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:kebs_app/models/companies_model.dart';
+
+import '../models/companies_model.dart';
 
 class CompaniesController extends GetxController {
   final List<Company> _companies = [];
@@ -15,19 +15,19 @@ class CompaniesController extends GetxController {
 
       List jsonData = jsonDecode(resp.body);
 
-      for (var company in jsonData) {
-        http.Response response = await http.get(Uri.parse(
-            "https://kims.kebs.org:8006/api/v1/migration/anonymous/kebsWebsite/getAllAwardedPermitsByCompanyName?companyName=${company['companyName']}"));
-
-        var details = jsonDecode(response.body);
-
-        // debugPrint(details.toString());
-
-        if (details.length > 0) {
-          _companies.assignAll(
+      _companies.assignAll(
               jsonData.map((company) => Company.fromJson(company)).toList());
-        }
-      }
+
+      // for (var company in jsonData) {
+      //   http.Response response = await http.get(Uri.parse(
+      //       "https://kims.kebs.org:8006/api/v1/migration/anonymous/kebsWebsite/getAllAwardedPermitsByCompanyName?companyName=${company['companyName']}"));
+
+      //   var details = jsonDecode(response.body);
+
+      //   if (details.length > 0) {
+          
+      //   }
+      // }
 
       return _companies;
     } catch (err) {

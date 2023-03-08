@@ -73,7 +73,7 @@ class _VerifyStaffPageState extends State<VerifyStaffPage> {
                 splashColor: Colors.blue.withOpacity(.4),
                 child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 10),
-                    height: 50,
+                    height: 60,
                     width: 300,
                     decoration: BoxDecoration(
                       color: AppColors.primaryBlueColor,
@@ -83,6 +83,7 @@ class _VerifyStaffPageState extends State<VerifyStaffPage> {
                       () => Center(
                         child: verifyStaffController.loading
                             ? const CircularProgressIndicator(
+                                strokeWidth: 3,
                                 color: Colors.white,
                               )
                             : const Text(

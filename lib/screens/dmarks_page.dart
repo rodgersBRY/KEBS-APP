@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:kebs_app/utils/global_functions.dart';
 
 import '../controllers/dMark_controller.dart';
 import '../models/marks_model.dart';
@@ -16,11 +17,14 @@ class DiamondMarkPage extends StatefulWidget {
 
 class _DiamondMarkPageState extends State<DiamondMarkPage> {
   final DMarkController _dMarkController = Get.find();
+  GlobalFunctions globalFunctions = GlobalFunctions();
 
   late Future<List<MarkModel>> dMarkBuilder;
 
-  TextEditingController searchController = TextEditingController();
-  FocusNode searchNode = FocusNode();
+  final TextEditingController searchController = TextEditingController();
+  final TextEditingController searchPermitNoController =
+      TextEditingController();
+  final FocusNode searchNode = FocusNode();
 
   @override
   void initState() {
@@ -37,6 +41,33 @@ class _DiamondMarkPageState extends State<DiamondMarkPage> {
       return date.isAfter(today);
     } else {
       return false;
+    }
+  }
+
+  searchByPermitNo() {
+    List<MarkModel> result = globalFunctions.searchByPermitNumber();
+
+    if (result.isNotEmpty) {
+      // clear the textfield
+      GlobalFunctions.permitNoController.clear();
+      // close the dialog box
+      Navigator.of(context).pop();
+      // navigate to details page
+      Get.toNamed(
+        '/mark-details-page',
+        arguments: {
+          'detailsTitle': 'Diamond Mark Details',
+          'mark': result[0],
+          'imagePath': 'assets/dmark_logo.png',
+          "status": confirmValidity(result[0].expiryDate.toString()),
+        },
+      );
+    } else {
+      Get.snackbar(
+        backgroundColor: Colors.white,
+        "Not Found",
+        "No permit with that number",
+      );
     }
   }
 
@@ -124,8 +155,63 @@ class _DiamondMarkPageState extends State<DiamondMarkPage> {
               )
             ],
           ),
+          floatingActionButton: FloatingActionButton(
+            backgroundColor: Colors.lightBlueAccent,
+            onPressed: () {
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: const Text('Enter Permit Number'),
+                      content: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        decoration: BoxDecoration(
+                          color: AppColors.primaryBlueColor.withOpacity(.1),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: TextField(
+                          controller: GlobalFunctions.permitNoController,
+                          decoration: const InputDecoration(
+                            hintText: "e.g. DM#12345",
+                            border: InputBorder.none,
+                          ),
+                        ),
+                      ),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            GlobalFunctions.permitNoController.clear();
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text(
+                            'Cancel',
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: searchByPermitNo,
+                          child: Text(
+                            'Search',
+                            style: TextStyle(
+                              color: AppColors.primaryBlueColor,
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  });
+            },
+            child: const Icon(Icons.search),
+          ),
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    GlobalFunctions.permitNoController.dispose();
+    searchController.dispose();
+    super.dispose();
   }
 }

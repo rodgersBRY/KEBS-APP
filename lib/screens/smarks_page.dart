@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import '../controllers/sMark_controller.dart';
 import '../models/marks_model.dart';
 import '../utils/app_colors.dart';
+import '../utils/global_functions.dart';
 import '../widgets/widgets.dart';
 
 class SMarksPage extends StatefulWidget {
@@ -18,6 +19,7 @@ class SMarksPage extends StatefulWidget {
 
 class _SMarksPageState extends State<SMarksPage> {
   final SMarkController sMarkController = Get.find();
+  final GlobalFunctions globalFunctions = GlobalFunctions();
 
   // ignore: null_argument_to_non_null_type
   late Future<List<MarkModel>> sMarkFuture;
@@ -27,6 +29,40 @@ class _SMarksPageState extends State<SMarksPage> {
   final FocusNode searchNode = FocusNode();
 
   String _searchQuery = '';
+
+  bool confirmValidity(String expiryDate) {
+    DateTime today = DateTime.now();
+    DateTime date = DateTime.parse(expiryDate);
+
+    return date.isAfter(today);
+  }
+
+  searchByPermitNo() {
+    List<MarkModel> result = globalFunctions.searchByPermitNumber();
+
+    if (result.isNotEmpty) {
+      // clear the textfield
+      GlobalFunctions.permitNoController.clear();
+      // close the dialog box
+      Navigator.of(context).pop();
+      // navigate to details page
+      Get.toNamed(
+        '/mark-details-page',
+        arguments: {
+          'detailsTitle': 'Diamond Mark Details',
+          'mark': result[0],
+          'imagePath': 'assets/dmark_logo.png',
+          "status": confirmValidity(result[0].expiryDate.toString()),
+        },
+      );
+    } else {
+      Get.snackbar(
+        backgroundColor: Colors.white,
+        "Not Found",
+        "No permit with that number",
+      );
+    }
+  }
 
   @override
   void initState() {
@@ -124,6 +160,54 @@ class _SMarksPageState extends State<SMarksPage> {
                 )
               ],
             ),
+          ),
+          floatingActionButton: FloatingActionButton(
+            backgroundColor: AppColors.primaryBlueColor,
+            onPressed: () {
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: const Text('Enter Permit Number'),
+                      content: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        decoration: BoxDecoration(
+                          color: AppColors.primaryBlueColor.withOpacity(.1),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: TextField(
+                          controller: GlobalFunctions.permitNoController,
+                          decoration: const InputDecoration(
+                            hintText: "e.g. SM#12345",
+                            border: InputBorder.none,
+                          ),
+                        ),
+                      ),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            GlobalFunctions.permitNoController.clear();
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text(
+                            'Cancel',
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: searchByPermitNo,
+                          child: Text(
+                            'Search',
+                            style: TextStyle(
+                              color: AppColors.primaryBlueColor,
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  });
+            },
+            child: const Icon(Icons.search),
           ),
         ),
       ),
