@@ -39,7 +39,10 @@ class _CompanyDetailsPageState extends State<CompanyDetailsPage> {
     }
   }
 
-  String formatDate(String date) {
+  String formatDate(String? date) {
+    if (date == null || date == "null") {
+      return DateFormat.yMMMMd().format(DateTime.parse("2006-03-03"));
+    }
     return DateFormat.yMMMMd().format(DateTime.parse(date));
   }
 
@@ -140,7 +143,7 @@ class _CompanyDetailsPageState extends State<CompanyDetailsPage> {
                         productId: data[index]['product_id'],
                         expiryDate: data[index]['expiry_date'],
                         issueDate: data[index]['issue_date'],
-                        physicalAddress: data[index]['physical_address'],
+                        physicalAddress: data[index]['physical_address'] ?? '',
                       );
                     });
               },

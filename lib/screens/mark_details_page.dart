@@ -135,9 +135,13 @@ class MarkDetailsPage extends StatelessWidget {
                         _builtText(
                             'Expiry Date: ${formatDate(markArg.expiryDate)}'),
                         const Gap(10),
-                        _builtText('Standard Ref: ${markArg.ksNo}'),
+                        markArg.ksNo != ""
+                            ? _builtText('Standard Ref: ${markArg.ksNo}')
+                            : Container(),
                         const Gap(10),
-                        _builtText('Standard Title: ${markArg.ksTitle}')
+                        markArg.ksNo != ""
+                            ? _builtText('Standard Title: ${markArg.ksTitle}')
+                            : Container(),
                       ],
                     ),
                   ),
