@@ -18,17 +18,6 @@ class CompaniesController extends GetxController {
       _companies.assignAll(
               jsonData.map((company) => Company.fromJson(company)).toList());
 
-      // for (var company in jsonData) {
-      //   http.Response response = await http.get(Uri.parse(
-      //       "https://kims.kebs.org:8006/api/v1/migration/anonymous/kebsWebsite/getAllAwardedPermitsByCompanyName?companyName=${company['companyName']}"));
-
-      //   var details = jsonDecode(response.body);
-
-      //   if (details.length > 0) {
-          
-      //   }
-      // }
-
       return _companies;
     } catch (err) {
       throw Exception(err);

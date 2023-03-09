@@ -21,13 +21,8 @@ class DMarkController extends GetxController {
 
       List jsonData = jsonDecode(resp.body);
 
-      for (var mark in jsonData) {
-        _dMarks.add(MarkModel.fromJson(mark));
-      }
-
       _dMarks.assignAll(
-              jsonData.map((dMark) => MarkModel.fromJson(dMark)).toList());
-
+          jsonData.map((dMark) => MarkModel.fromJson(dMark)).toList());
 
       return _dMarks;
     } catch (err) {
