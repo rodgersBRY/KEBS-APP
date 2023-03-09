@@ -119,6 +119,9 @@ class DMarkDetailsPage extends StatelessWidget {
                       children: [
                         _builtText('Permit No: ${markArg.productId}'),
                         const Gap(10),
+                        _builtText(
+                            'Permit Status: ${status ? "Valid" : "Expired"}'),
+                        const Gap(10),
                         _builtText('Company Name: ${markArg.companyName}'),
                         const Gap(30),
                         _builtText(

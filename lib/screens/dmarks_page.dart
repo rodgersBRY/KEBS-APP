@@ -74,6 +74,11 @@ class _DiamondMarkPageState extends State<DiamondMarkPage> {
     }
   }
 
+  Future _refreshData() {
+    dMarkBuilder = _dMarkController.fetchDMarks();
+    return dMarkBuilder;
+  }
+
   String _searchQuery = "";
 
   @override
@@ -88,16 +93,9 @@ class _DiamondMarkPageState extends State<DiamondMarkPage> {
             backgroundColor: AppColors.primaryBlueColor,
             title: const Text('Diamond Marks'),
           ),
-          body: ConnectivityWidget(
-            onlineCallback: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  backgroundColor: Colors.green,
-                  content: Center(child: Text('Back Online')),
-                ),
-              );
-            },
-            builder: (context, isOnline) => Column(
+          body: RefreshIndicator(
+            onRefresh: _refreshData,
+            child: Column(
               children: [
                 const Gap(20),
                 Padding(
@@ -147,7 +145,7 @@ class _DiamondMarkPageState extends State<DiamondMarkPage> {
                               return const CustomErrorWidget();
                             } else {
                               List<MarkModel> data = snapshot.data!;
-
+          
                               if (_searchQuery.isNotEmpty) {
                                 data = data
                                     .where((dmark) =>

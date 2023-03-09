@@ -42,6 +42,12 @@ class _FortificationPageState extends State<FortificationPage> {
     return date.isAfter(today);
   }
 
+  // refresh data upon dragging down
+  Future _refreshData() {
+    fMarkFuture = _fMarkController.fetchFMarks();
+    return fMarkFuture;
+  }
+
   searchByPermitNo() {
     List<MarkModel> result =
         globalFunctions.searchByPermitNumber(_fMarkController.fMarks);
@@ -82,97 +88,85 @@ class _FortificationPageState extends State<FortificationPage> {
             backgroundColor: AppColors.primaryBlueColor,
             title: const Text('Fortification Marks'),
           ),
-          body: ConnectivityWidget(
-            onlineCallback: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  backgroundColor: Colors.green,
-                  content: Center(child: Text('Back Online')),
-                ),
-              );
-            },
-            builder: (context, isOnline) {
-              return Column(
-                children: [
-                  const Gap(20),
-                  Padding(
+          body: RefreshIndicator(
+            onRefresh: _refreshData,
+            child: Column(
+              children: [
+                const Gap(20),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+                  child: Container(
                     padding:
-                        const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 5),
-                      decoration: BoxDecoration(
-                        color: AppColors.primaryBlueColor.withOpacity(.1),
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: TextField(
-                        onChanged: (val) {
-                          setState(() {
-                            _searchQuery = val;
-                          });
-                        },
-                        controller: searchController,
-                        focusNode: searchNode,
-                        style: const TextStyle(fontSize: 20),
-                        decoration: const InputDecoration(
-                          prefixIcon: Icon(Icons.search),
-                          hintText:
-                              'Company Name, Permit No or Product Brand...',
-                          hintStyle: TextStyle(fontSize: 14),
-                          border: InputBorder.none,
-                        ),
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    decoration: BoxDecoration(
+                      color: AppColors.primaryBlueColor.withOpacity(.1),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: TextField(
+                      onChanged: (val) {
+                        setState(() {
+                          _searchQuery = val;
+                        });
+                      },
+                      controller: searchController,
+                      focusNode: searchNode,
+                      style: const TextStyle(fontSize: 20),
+                      decoration: const InputDecoration(
+                        prefixIcon: Icon(Icons.search),
+                        hintText: 'Company Name, Permit No or Product Brand...',
+                        hintStyle: TextStyle(fontSize: 14),
+                        border: InputBorder.none,
                       ),
                     ),
                   ),
-                  const Gap(20),
-                  Expanded(
-                    child: FutureBuilder<List<MarkModel>>(
-                        future: fMarkFuture,
-                        builder: (context, snapshot) {
-                          switch (snapshot.connectionState) {
-                            case ConnectionState.none:
-                            case ConnectionState.waiting:
-                              return Center(
-                                child: LoadingAnimationWidget.hexagonDots(
-                                  color: AppColors.primaryBlueColor,
-                                  size: 30,
-                                ),
-                              );
-                            default:
-                              if (snapshot.hasError) {
-                                return const CustomErrorWidget();
-                              } else {
-                                List<MarkModel> data = snapshot.data!;
+                ),
+                const Gap(20),
+                Expanded(
+                  child: FutureBuilder<List<MarkModel>>(
+                      future: fMarkFuture,
+                      builder: (context, snapshot) {
+                        switch (snapshot.connectionState) {
+                          case ConnectionState.none:
+                          case ConnectionState.waiting:
+                            return Center(
+                              child: LoadingAnimationWidget.hexagonDots(
+                                color: AppColors.primaryBlueColor,
+                                size: 30,
+                              ),
+                            );
+                          default:
+                            if (snapshot.hasError) {
+                              return const CustomErrorWidget();
+                            } else {
+                              List<MarkModel> data = snapshot.data!;
 
-                                if (_searchQuery.isNotEmpty) {
-                                  data = data
-                                      .where((fmark) =>
-                                          fmark.productId
-                                              .toLowerCase()
-                                              .contains(
-                                                  _searchQuery.toLowerCase()) ||
-                                          fmark.productBrand
-                                              .toLowerCase()
-                                              .contains(
-                                                  _searchQuery.toLowerCase()) ||
-                                          fmark.companyName
-                                              .toLowerCase()
-                                              .contains(
-                                                  _searchQuery.toLowerCase()))
-                                      .toList();
-                                }
-                                return CustomListView(
-                                  marks: data,
-                                  imagePath: 'assets/fmark_logo.png',
-                                  detailsTitle: 'Fortification Mark Details',
-                                );
+                              if (_searchQuery.isNotEmpty) {
+                                data = data
+                                    .where((fmark) =>
+                                        fmark.productId.toLowerCase().contains(
+                                            _searchQuery.toLowerCase()) ||
+                                        fmark.productBrand
+                                            .toLowerCase()
+                                            .contains(
+                                                _searchQuery.toLowerCase()) ||
+                                        fmark.companyName
+                                            .toLowerCase()
+                                            .contains(
+                                                _searchQuery.toLowerCase()))
+                                    .toList();
                               }
-                          }
-                        }),
-                  )
-                ],
-              );
-            },
+                              return CustomListView(
+                                marks: data,
+                                imagePath: 'assets/fmark_logo.png',
+                                detailsTitle: 'Fortification Mark Details',
+                              );
+                            }
+                        }
+                      }),
+                )
+              ],
+            ),
           ),
           floatingActionButton: FloatingActionButton(
             backgroundColor: AppColors.validGreenColor,

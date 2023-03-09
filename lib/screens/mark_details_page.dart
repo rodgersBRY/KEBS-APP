@@ -118,6 +118,9 @@ class MarkDetailsPage extends StatelessWidget {
                       children: [
                         _builtText('Permit No: ${markArg.productId}'),
                         const Gap(5),
+                        _builtText(
+                            'Permit Status: ${status ? "Valid" : "Expired"}'),
+                        const Gap(10),
                         _builtText('Product Name: ${markArg.productName}'),
                         const Gap(10),
                         _builtText('Product Brand: ${markArg.productBrand}'),
