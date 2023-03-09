@@ -22,14 +22,16 @@ class MarkModel {
   String ksNo;
 
   factory MarkModel.fromJson(Map<String, dynamic> json) => MarkModel(
-        companyName: json["companyName"] ?? '',
+        companyName: json["companyName"] ?? 'null',
         physicalAddress: json["physical_address"] ?? '',
         productId: json["product_id"] ?? "",
-        productName: json["product_name"] ?? "",
+        productName: json["product_name"] ?? "null",
         productBrand: json["product_brand"] ?? "",
         ksTitle: json["ks_title"] ?? "",
-        issueDate: json["issue_date"] ?? "2020-01-01",
-        expiryDate: json["expiry_date"] ?? "2020-01-01",
+        issueDate:
+            json["issue_date"] != "null" ? json['issue_date'] : "2000-01-01",
+        expiryDate:
+            json["expiry_date"] != 'null' ? json["expiry_date"] : "2000-01-01",
         ksNo: json["ks_NO"] ?? "",
       );
 }
