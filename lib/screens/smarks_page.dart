@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:connectivity_widget/connectivity_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
@@ -93,78 +94,98 @@ class _SMarksPageState extends State<SMarksPage> {
           ),
           body: RefreshIndicator(
             onRefresh: _refreshData,
-            child: Column(
-              children: [
-                const Gap(20),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10),
-                  child: Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                    decoration: BoxDecoration(
-                      color: AppColors.fadedBlueColor,
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: TextField(
-                      onChanged: (val) {
-                        setState(() {
-                          _searchQuery = val;
-                        });
-                      },
-                      controller: searchController,
-                      focusNode: searchNode,
-                      style: const TextStyle(fontSize: 20),
-                      decoration: const InputDecoration(
-                        prefixIcon: Icon(Icons.search),
-                        hintText: 'Company Name, Permit No or Product Brand...',
-                        hintStyle: TextStyle(fontSize: 14),
-                        border: InputBorder.none,
+            child: ConnectivityWidget(
+              onlineCallback: () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    backgroundColor: Colors.green,
+                    content: Center(child: Text('Back Online')),
+                  ),
+                );
+              },
+              builder: (context, isOnline) {
+                return Column(
+                  children: [
+                    const Gap(20),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 8.0, horizontal: 10),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 5),
+                        decoration: BoxDecoration(
+                          color: AppColors.fadedBlueColor,
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: TextField(
+                          onChanged: (val) {
+                            setState(() {
+                              _searchQuery = val;
+                            });
+                          },
+                          controller: searchController,
+                          focusNode: searchNode,
+                          style: const TextStyle(fontSize: 20),
+                          decoration: const InputDecoration(
+                            prefixIcon: Icon(Icons.search),
+                            hintText:
+                                'Company Name, Permit No or Product Brand...',
+                            hintStyle: TextStyle(fontSize: 14),
+                            border: InputBorder.none,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ),
-                const Gap(20),
-                Expanded(
-                  child: FutureBuilder<List<MarkModel>>(
-                      future: sMarkFuture,
-                      builder: (context, snapshot) {
-                        switch (snapshot.connectionState) {
-                          case ConnectionState.none:
-                          case ConnectionState.waiting:
-                            return Center(
-                              child: LoadingAnimationWidget.hexagonDots(
-                                color: AppColors.primaryBlueColor,
-                                size: 30,
-                              ),
-                            );
-                          default:
-                            if (snapshot.hasError) {
-                              return const CustomErrorWidget();
-                            } else {
-                              List<MarkModel> data = snapshot.data!;
+                    const Gap(20),
+                    Expanded(
+                      child: FutureBuilder<List<MarkModel>>(
+                          future: sMarkFuture,
+                          builder: (context, snapshot) {
+                            switch (snapshot.connectionState) {
+                              case ConnectionState.none:
+                              case ConnectionState.waiting:
+                                return Center(
+                                  child: LoadingAnimationWidget.hexagonDots(
+                                    color: AppColors.primaryBlueColor,
+                                    size: 30,
+                                  ),
+                                );
+                              default:
+                                if (snapshot.hasError) {
+                                  return const CustomErrorWidget();
+                                } else {
+                                  List<MarkModel> data = snapshot.data!;
 
-                              if (_searchQuery.isNotEmpty) {
-                                data = data
-                                    .where((std) =>
-                                        std.productId.toLowerCase().contains(
-                                            _searchQuery.toLowerCase()) ||
-                                        std.companyName.toLowerCase().contains(
-                                            _searchQuery.toLowerCase()) ||
-                                        std.productBrand.toLowerCase().contains(
-                                            _searchQuery.toLowerCase()))
-                                    .toList();
-                              }
-                              return CustomListView(
-                                marks: data,
-                                imagePath: 'assets/smark_logo.png',
-                                detailsTitle: 'Standardization Mark Details',
-                              );
+                                  if (_searchQuery.isNotEmpty) {
+                                    data = data
+                                        .where((std) =>
+                                            std.productId
+                                                .toLowerCase()
+                                                .contains(_searchQuery
+                                                    .toLowerCase()) ||
+                                            std.companyName
+                                                .toLowerCase()
+                                                .contains(_searchQuery
+                                                    .toLowerCase()) ||
+                                            std.productBrand
+                                                .toLowerCase()
+                                                .contains(
+                                                    _searchQuery.toLowerCase()))
+                                        .toList();
+                                  }
+                                  return CustomListView(
+                                    marks: data,
+                                    imagePath: 'assets/smark_logo.png',
+                                    detailsTitle:
+                                        'Standardization Mark Details',
+                                  );
+                                }
                             }
-                        }
-                      }),
-                )
-              ],
+                          }),
+                    )
+                  ],
+                );
+              },
             ),
           ),
           floatingActionButton: FloatingActionButton(
