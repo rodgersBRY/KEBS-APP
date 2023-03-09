@@ -8,8 +8,10 @@ class CompanyDetailsController extends GetxController {
 
   Future getCompanyDetails(String companyName) async {
     try {
-      http.Response resp = await http.get(Uri.parse(
-        'https://kims.kebs.org:8006/api/v1/migration/anonymous/kebsWebsite/getAllAwardedPermitsByCompanyName?companyName=$companyName'));
+      http.Response resp = await http.get(
+        Uri.parse(
+            'https://kimsint.kebs.org:8006/api/v1/migration/anonymous/mobile/company?companyName=$companyName'),
+      );
 
       var jsonData = jsonDecode(resp.body);
 

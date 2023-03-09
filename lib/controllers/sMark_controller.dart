@@ -17,7 +17,7 @@ class SMarkController extends GetxController {
     try {
       http.Response resp = await http.get(
         Uri.parse(
-            'https://kims.kebs.org:8006/api/v1/migration/anonymous/kebsWebsite/getAwardedSmarkPermits'),
+            'https://kimsint.kebs.org:8006/api/v1/migration/anonymous/mobile/Smarks'),
       );
 
       List jsonData = jsonDecode(resp.body);

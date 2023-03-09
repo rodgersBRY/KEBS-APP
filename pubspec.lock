@@ -159,7 +159,7 @@ packages:
     source: sdk
     version: "0.0.0"
   flutter_automation:
-    dependency: "direct main"
+    dependency: "direct dev"
     description:
       name: flutter_automation
       sha256: "68b53b5fb8287aa4c9707fc48db7247a69ba5878b38e2906c9296234573d77de"
@@ -167,7 +167,7 @@ packages:
     source: hosted
     version: "2.0.0"
   flutter_launcher_icons:
-    dependency: "direct main"
+    dependency: "direct dev"
     description:
       name: flutter_launcher_icons
       sha256: ce0e501cfc258907842238e4ca605e74b7fd1cdf04b3b43e86c43f3e40a1592c

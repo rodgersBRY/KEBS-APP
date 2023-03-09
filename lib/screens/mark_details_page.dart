@@ -28,7 +28,9 @@ class MarkDetailsPage extends StatelessWidget {
           decoration: const BoxDecoration(
             // color: Colors.white,
             image: DecorationImage(
-                image: AssetImage('assets/kebs_bg.jpg'), fit: BoxFit.cover),
+              image: AssetImage('assets/kebs_bg.jpg'),
+              fit: BoxFit.cover,
+            ),
           ),
           child: Column(
             // mainAxisAlignment: MainAxisAlignment.center,

@@ -11,7 +11,7 @@ class CompaniesController extends GetxController {
   Future<List<Company>> fetchCompanies() async {
     try {
       http.Response resp = await http.get(Uri.parse(
-          'https://kims.kebs.org:8006/api/v1/migration/anonymous/kebsWebsite/getAllCompanies'));
+          'https://kimsint.kebs.org:8006/api/v1/migration/anonymous/mobile/companies'));
 
       List jsonData = jsonDecode(resp.body);
 
