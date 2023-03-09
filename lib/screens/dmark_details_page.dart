@@ -22,17 +22,23 @@ class DMarkDetailsPage extends StatelessWidget {
 
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          elevation: 0,
-          foregroundColor: Colors.black,
-        ),
         body: Container(
           width: double.infinity,
-          color: Colors.white,
+          decoration: const BoxDecoration(
+            // color: Colors.white,
+            image: DecorationImage(
+              image: AssetImage('assets/kebs_bg.jpg'),
+              fit: BoxFit.cover,
+            ),
+          ),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            // mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              AppBar(
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                foregroundColor: Colors.black,
+              ),
               const Gap(10),
               SizedBox(
                 height: 90,
@@ -74,7 +80,7 @@ class DMarkDetailsPage extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
                 decoration: BoxDecoration(
-                  color: AppColors.primaryBlueColor.withOpacity(.1),
+                  color: AppColors.fadedBlueColor1,
                   borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(10),
                     topRight: Radius.circular(10),
@@ -101,7 +107,7 @@ class DMarkDetailsPage extends StatelessWidget {
                   width: MediaQuery.of(context).size.width * .9,
                   padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
-                    color: AppColors.primaryBlueColor.withOpacity(.1),
+                    color: AppColors.fadedBlueColor1,
                     borderRadius: const BorderRadius.only(
                       bottomLeft: Radius.circular(10),
                       bottomRight: Radius.circular(10),

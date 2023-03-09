@@ -103,7 +103,7 @@ class _SMarksPageState extends State<SMarksPage> {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                     decoration: BoxDecoration(
-                      color: AppColors.primaryBlueColor.withOpacity(.1),
+                      color: AppColors.fadedBlueColor,
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: TextField(
