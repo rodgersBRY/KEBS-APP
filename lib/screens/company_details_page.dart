@@ -231,6 +231,8 @@ class _CompanyDetailsPageState extends State<CompanyDetailsPage> {
                   children: [
                     Text('Permit No: $productId'),
                     const Gap(10),
+                    Text('Permit Status: ${status ? "Valid" : "Expired"}'),
+                    const Gap(10),
                     Text('Physical Address: $physicalAddress'),
                     const Gap(10),
                     Text('Date Issued: ${formatDate(issueDate)}'),
