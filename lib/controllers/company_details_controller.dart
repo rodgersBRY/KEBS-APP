@@ -13,11 +13,15 @@ class CompanyDetailsController extends GetxController {
             'https://kimsint.kebs.org:8006/api/v1/migration/anonymous/mobile/company?companyName=$companyName'),
       );
 
-      var jsonData = jsonDecode(resp.body);
+      if (resp.statusCode == 200) {
+        var jsonData = jsonDecode(resp.body);
 
-      companyDetails = jsonData;
+        companyDetails = jsonData;
 
-      return companyDetails;
+        return companyDetails;
+      } else {
+        throw Exception();
+      }
     } catch (err) {
       throw Exception(err);
     }
