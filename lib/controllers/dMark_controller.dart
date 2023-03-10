@@ -16,7 +16,7 @@ class DMarkController extends GetxController {
     try {
       http.Response resp = await http.get(
         Uri.parse(
-            'https://kimsint.kebs.org:8006/api/v1/migration/anonymous/mobile/Dmarks'),
+            'https://kims.kebs.org:8006/api/v1/migration/anonymous/mobile/Dmarks'),
       );
 
       List jsonData = jsonDecode(resp.body);

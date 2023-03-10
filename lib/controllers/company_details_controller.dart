@@ -10,7 +10,7 @@ class CompanyDetailsController extends GetxController {
     try {
       http.Response resp = await http.get(
         Uri.parse(
-            'https://kimsint.kebs.org:8006/api/v1/migration/anonymous/mobile/company?companyName=$companyName'),
+            'https://kims.kebs.org:8006/api/v1/migration/anonymous/mobile/company?companyName=$companyName'),
       );
 
       if (resp.statusCode == 200) {
