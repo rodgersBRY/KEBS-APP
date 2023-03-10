@@ -38,11 +38,11 @@ class Homepage extends StatelessWidget {
     //   "icon": "assets/testing_icon.png",
     //   "route": "/test-page"
     // },
-    // {
-    //   "title": "Complaints",
-    //   "icon": "assets/complaints_icon.png",
-    //   "route": "/complaints"
-    // },
+    {
+      "title": "Complaints",
+      "icon": "assets/complaints_icon.png",
+      "route": "/complaints"
+    },
     {
       "title": "Certified\nCompanies/Firms",
       "icon": "assets/companies_icon.png",
@@ -89,15 +89,18 @@ class Homepage extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
+          const Gap(20),
           Container(
             height: 300,
             padding: const EdgeInsets.symmetric(horizontal: 25.0),
             child: GridView.builder(
               itemCount: _quickActions.length,
+              scrollDirection: Axis.horizontal,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
                 crossAxisSpacing: 18.0,
                 mainAxisSpacing: 18.0,
+                childAspectRatio: 2 / 3,
               ),
               itemBuilder: (context, index) {
                 return GestureDetector(
