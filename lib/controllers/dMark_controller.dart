@@ -4,7 +4,6 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:kebs_app/models/companies_model.dart';
 
 import '../models/marks_model.dart';
 
@@ -34,7 +33,7 @@ class DMarkController extends GetxController {
     } catch (err) {
       throw Exception(err);
     }
-    
+
     return _dMarks;
   }
 }
