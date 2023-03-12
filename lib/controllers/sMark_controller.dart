@@ -9,7 +9,7 @@ import 'package:http/http.dart' as http;
 import '../models/marks_model.dart';
 
 class SMarkController extends GetxController {
-  final List<MarkModel> _sMarks = [];
+  List<MarkModel> _sMarks = [];
 
   List<MarkModel> get sMarks => _sMarks;
 
@@ -22,12 +22,15 @@ class SMarkController extends GetxController {
 
       List jsonData = jsonDecode(resp.body);
 
-      _sMarks.assignAll(
-          jsonData.map((sMark) => MarkModel.fromJson(sMark)).toList());
+      _sMarks =
+          List<MarkModel>.from(jsonData.map((m) => MarkModel.fromJson(m)));
 
-      return _sMarks;
+      // sort by companyName
+      _sMarks.sort((a, b) => a.companyName.compareTo(b.companyName));
     } catch (err) {
       throw Exception(err);
     }
+
+    return _sMarks;
   }
 }

@@ -8,7 +8,7 @@ import 'package:http/http.dart' as http;
 import '../models/marks_model.dart';
 
 class FMarkController extends GetxController {
-  final List<MarkModel> _fMarks = [];
+  List<MarkModel> _fMarks = [];
 
   List<MarkModel> get fMarks => _fMarks;
 
@@ -19,14 +19,21 @@ class FMarkController extends GetxController {
             'https://kims.kebs.org:8006/api/v1/migration/anonymous/mobile/Fmarks'),
       );
 
-      List jsonData = jsonDecode(resp.body);
+      if (resp.statusCode == 200) {
+        List jsonData = jsonDecode(resp.body);
 
-      _fMarks.assignAll(
-          jsonData.map((fMark) => MarkModel.fromJson(fMark)).toList());
+        _fMarks =
+            List<MarkModel>.from(jsonData.map((m) => MarkModel.fromJson(m)));
 
-      return _fMarks;
+        // sort by companyName
+        _fMarks.sort((a, b) => a.companyName.compareTo(b.companyName));
+      } else {
+        throw Exception('HTTP Error ${resp.statusCode}');
+      }
     } catch (err) {
       throw Exception(err);
     }
+
+    return _fMarks;
   }
 }

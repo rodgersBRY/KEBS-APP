@@ -4,11 +4,12 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:kebs_app/models/companies_model.dart';
 
 import '../models/marks_model.dart';
 
 class DMarkController extends GetxController {
-  final List<MarkModel> _dMarks = [];
+  List<MarkModel> _dMarks = [];
 
   List<MarkModel> get dMarks => _dMarks;
 
@@ -19,14 +20,21 @@ class DMarkController extends GetxController {
             'https://kims.kebs.org:8006/api/v1/migration/anonymous/mobile/Dmarks'),
       );
 
-      List jsonData = jsonDecode(resp.body);
+      if (resp.statusCode == 200) {
+        List jsonData = jsonDecode(resp.body);
 
-      _dMarks.assignAll(
-          jsonData.map((dMark) => MarkModel.fromJson(dMark)).toList());
+        _dMarks =
+            List<MarkModel>.from(jsonData.map((m) => MarkModel.fromJson(m)));
 
-      return _dMarks;
+        // sort by companyName
+        _dMarks.sort(((a, b) => a.companyName.compareTo(b.companyName)));
+      } else {
+        throw Exception('HTTP Error ${resp.statusCode}');
+      }
     } catch (err) {
       throw Exception(err);
     }
+    
+    return _dMarks;
   }
 }
