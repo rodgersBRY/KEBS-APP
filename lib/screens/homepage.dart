@@ -29,7 +29,7 @@ class Homepage extends StatelessWidget {
       "route": "/fortification-mark"
     },
     {
-      "title": "Verify KEBS Staff",
+      "title": "Verify\nKEBS Staff",
       "icon": "assets/verify_icon.png",
       "route": "/verify-staff"
     },
@@ -44,7 +44,7 @@ class Homepage extends StatelessWidget {
     //   "route": "/complaints"
     // },
     {
-      "title": "Certified\nCompanies/Firms",
+      "title": "Certified Products\nPer Company/Firm",
       "icon": "assets/companies_icon.png",
       "route": "/companies"
     },

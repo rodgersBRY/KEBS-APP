@@ -113,7 +113,7 @@ class _FortificationPageState extends State<FortificationPage> {
                       style: const TextStyle(fontSize: 20),
                       decoration: const InputDecoration(
                         prefixIcon: Icon(Icons.search),
-                        hintText: 'Company Name, Permit No or Product Brand...',
+                        hintText: 'Enter Product Name, Permit Number or Brand Name',
                         hintStyle: TextStyle(fontSize: 14),
                         border: InputBorder.none,
                       ),
@@ -149,7 +149,7 @@ class _FortificationPageState extends State<FortificationPage> {
                                             .toLowerCase()
                                             .contains(
                                                 _searchQuery.toLowerCase()) ||
-                                        fmark.companyName
+                                        fmark.productName
                                             .toLowerCase()
                                             .contains(
                                                 _searchQuery.toLowerCase()))
@@ -184,7 +184,7 @@ class _FortificationPageState extends State<FortificationPage> {
                         child: TextField(
                           controller: globalFunctions.permitNoController,
                           decoration: const InputDecoration(
-                            hintText: "e.g. FM#12345",
+                            hintText: "FM Permit Number",
                             border: InputBorder.none,
                           ),
                         ),

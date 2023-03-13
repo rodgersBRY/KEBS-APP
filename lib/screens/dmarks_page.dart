@@ -118,7 +118,7 @@ class _DiamondMarkPageState extends State<DiamondMarkPage> {
                       style: const TextStyle(fontSize: 20),
                       decoration: const InputDecoration(
                         prefixIcon: Icon(Icons.search),
-                        hintText: 'Company Name, Permit No or Product Brand...',
+                        hintText: 'Enter Product Name, Permit Number or Brand Name',
                         hintStyle: TextStyle(fontSize: 14),
                         border: InputBorder.none,
                       ),
@@ -154,7 +154,7 @@ class _DiamondMarkPageState extends State<DiamondMarkPage> {
                                             .toLowerCase()
                                             .contains(
                                                 _searchQuery.toLowerCase()) ||
-                                        dmark.companyName
+                                        dmark.productName
                                             .toLowerCase()
                                             .contains(
                                                 _searchQuery.toLowerCase()))
@@ -190,7 +190,7 @@ class _DiamondMarkPageState extends State<DiamondMarkPage> {
                         child: TextField(
                           controller: globalFunctions.permitNoController,
                           decoration: const InputDecoration(
-                            hintText: "e.g. DM#12345",
+                            hintText: "DM Permit Number",
                             border: InputBorder.none,
                           ),
                         ),

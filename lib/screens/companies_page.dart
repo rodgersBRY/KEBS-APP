@@ -64,7 +64,7 @@ class _CompaniesPageState extends State<CompaniesPage> {
                     style: const TextStyle(fontSize: 20),
                     decoration: const InputDecoration(
                       prefixIcon: Icon(Icons.search),
-                      hintText: 'Company Name',
+                      hintText: 'Enter Company Name',
                       hintStyle: TextStyle(fontSize: 14),
                       border: InputBorder.none,
                     ),

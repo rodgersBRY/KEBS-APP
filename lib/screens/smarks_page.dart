@@ -118,7 +118,7 @@ class _SMarksPageState extends State<SMarksPage> {
                       decoration: const InputDecoration(
                         prefixIcon: Icon(Icons.search),
                         hintText:
-                            'Company Name, Permit No or Product Brand...',
+                            'Enter Product Name, Permit Number or Brand Name',
                         hintStyle: TextStyle(fontSize: 14),
                         border: InputBorder.none,
                       ),
@@ -152,7 +152,7 @@ class _SMarksPageState extends State<SMarksPage> {
                                             .toLowerCase()
                                             .contains(_searchQuery
                                                 .toLowerCase()) ||
-                                        std.companyName
+                                        std.productName
                                             .toLowerCase()
                                             .contains(_searchQuery
                                                 .toLowerCase()) ||
@@ -192,7 +192,7 @@ class _SMarksPageState extends State<SMarksPage> {
                         child: TextField(
                           controller: globalFunctions.permitNoController,
                           decoration: const InputDecoration(
-                            hintText: "e.g. SM#12345",
+                            hintText: "SM Permit Number",
                             border: InputBorder.none,
                           ),
                         ),
